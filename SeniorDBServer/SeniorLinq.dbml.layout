@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.25, 8.5" name="SeniorLinq">
+  <DataContextMoniker Name="/SeniorLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="30d1912b-f137-452a-ae7f-d91f34a37a71" absoluteBounds="3.5, 3.25, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/SeniorLinqDataContext/Game" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a0928f42-ecbd-42cb-9b15-b09a49f60847" absoluteBounds="3.515, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="758407b6-47fd-4263-8973-192fb24f9b95" absoluteBounds="1, 2.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/SeniorLinqDataContext/GameFrame" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0719a6c-d587-4c2b-9132-93d8ebc0f1ef" absoluteBounds="1.0150000000000001, 3.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b230db04-00db-436e-a100-89ce1abe256f" absoluteBounds="5.75, 2.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/SeniorLinqDataContext/Gameplayer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="384ab3c3-e3a9-41f3-b8e1-b4bed638b1d0" absoluteBounds="5.765, 2.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0bd73f1b-9cb0-4b22-b05e-3bbb4e1ef30f" absoluteBounds="3.5, 5.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/SeniorLinqDataContext/GFStrategy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6ac9d9d-82ef-478e-a69f-662a5e53c0ea" absoluteBounds="3.515, 5.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9df1355d-586c-4227-a8cf-72af28f21409" absoluteBounds="9.5, 1.625, 2, 1.5785953776041668">
+      <DataClassMoniker Name="/SeniorLinqDataContext/NPPayoff" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc191b0f-b164-4b02-9600-733ee2908609" absoluteBounds="9.515, 2.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fbcacd39-3361-4d23-a6de-7a64294a5beb" absoluteBounds="9.875, 3.875, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/SeniorLinqDataContext/NPStrategy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eea6f96c-41cf-4e62-bdb1-f43bbdc4f8ab" absoluteBounds="9.89, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6c439b57-d966-4ff4-99e7-cd57fff53d84" absoluteBounds="2.75, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/SeniorLinqDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f6902ff-5e39-4ec2-9ea3-75c1b301ff62" absoluteBounds="2.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3 : 3.88544840494792); (3.5 : 3.88544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/GameFrame/GameFrame_Game" />
+      <nodes>
+        <classShapeMoniker Id="758407b6-47fd-4263-8973-192fb24f9b95" />
+        <classShapeMoniker Id="30d1912b-f137-452a-ae7f-d91f34a37a71" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 3.25); (4.5 : 2.81814697265625); (5.75 : 2.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/Game/Game_Gameplayer" />
+      <nodes>
+        <classShapeMoniker Id="30d1912b-f137-452a-ae7f-d91f34a37a71" />
+        <classShapeMoniker Id="b230db04-00db-436e-a100-89ce1abe256f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2 : 4.52089680989583); (2 : 6.06814697265625); (3.5 : 6.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/GameFrame/GameFrame_GFStrategy" />
+      <nodes>
+        <classShapeMoniker Id="758407b6-47fd-4263-8973-192fb24f9b95" />
+        <classShapeMoniker Id="0bd73f1b-9cb0-4b22-b05e-3bbb4e1ef30f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 2.72679768880208); (8.32291666666667 : 2.72679768880208 : JumpStart); (8.48958333333333 : 2.72679768880208 : JumpEnd); (9.5 : 2.72679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/Gameplayer/Gameplayer_NPPayoff" />
+      <nodes>
+        <classShapeMoniker Id="b230db04-00db-436e-a100-89ce1abe256f" />
+        <classShapeMoniker Id="9df1355d-586c-4227-a8cf-72af28f21409" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.44639322916667); (10.875 : 6.44639322916667); (10.875 : 5.2612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/GFStrategy/GFStrategy_NPStrategy" />
+      <nodes>
+        <classShapeMoniker Id="0bd73f1b-9cb0-4b22-b05e-3bbb4e1ef30f" />
+        <classShapeMoniker Id="fbcacd39-3361-4d23-a6de-7a64294a5beb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 3.3550439453125); (8.32291666666667 : 3.3550439453125 : JumpStart); (8.48958333333333 : 3.3550439453125 : JumpEnd); (11.71875 : 3.3550439453125); (11.71875 : 3.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/Gameplayer/Gameplayer_NPStrategy" />
+      <nodes>
+        <classShapeMoniker Id="b230db04-00db-436e-a100-89ce1abe256f" />
+        <classShapeMoniker Id="fbcacd39-3361-4d23-a6de-7a64294a5beb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.75 : 1.6249995); (6.75 : 1.6249995); (6.75 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/User/User_Gameplayer" />
+      <nodes>
+        <classShapeMoniker Id="6c439b57-d966-4ff4-99e7-cd57fff53d84" />
+        <classShapeMoniker Id="b230db04-00db-436e-a100-89ce1abe256f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="08ebd548-9794-4858-b558-7451398bfd68" absoluteBounds="7, 4.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/SeniorLinqDataContext/NashPointProfile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ae73eb9b-95e2-4060-861d-f5778d42ec08" absoluteBounds="7.0150000000000006, 5.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.40625 : 4.875); (8.40625 : 1.90625); (9.5 : 1.90625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/NashPointProfile/NashPointProfile_NPPayoff" />
+      <nodes>
+        <classShapeMoniker Id="08ebd548-9794-4858-b558-7451398bfd68" />
+        <classShapeMoniker Id="9df1355d-586c-4227-a8cf-72af28f21409" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9 : 5.06814697265625); (9.875 : 5.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/NashPointProfile/NashPointProfile_NPStrategy" />
+      <nodes>
+        <classShapeMoniker Id="08ebd548-9794-4858-b558-7451398bfd68" />
+        <classShapeMoniker Id="fbcacd39-3361-4d23-a6de-7a64294a5beb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.07139322916667); (8.0781225 : 4.07139322916667); (8.0781225 : 4.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SeniorLinqDataContext/Game/Game_NashPointProfile" />
+      <nodes>
+        <classShapeMoniker Id="30d1912b-f137-452a-ae7f-d91f34a37a71" />
+        <classShapeMoniker Id="08ebd548-9794-4858-b558-7451398bfd68" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

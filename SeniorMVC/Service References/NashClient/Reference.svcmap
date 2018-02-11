@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a8370f8d-f89c-4a3f-b291-4728e8b54330" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8999/SeniorServer.NashServices.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f3428746-ee7b-494a-a4c3-abb77c4cc6f9" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="41064a81-4b14-4543-88ff-bf63801cb2cb" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="40058dfe-a059-40c0-b116-3f5c6eb18bb8" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="6b93e0e3-5760-45f9-a10a-ef3a345e7a03" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+    <MetadataFile FileName="SeniorDBServer.xsd" MetadataType="Schema" ID="57ec22e3-56a3-45ec-9c55-d502558df4be" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

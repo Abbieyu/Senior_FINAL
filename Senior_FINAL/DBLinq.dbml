@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Final_Senior_DB" Class="DBLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(localdb)\ProjectsV13;Initial Catalog=Final_Senior_DB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Final_Senior_DBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.GameOutcomes" Member="GameOutcomes">
+    <Type Name="GameOutcome">
+      <Column Name="GameId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Outcome" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Game_GameOutcome" Member="Game" ThisKey="GameId" OtherKey="GiD" Type="Game" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Player" Member="Players">
+    <Type Name="Player">
+      <Column Name="PiD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Player_GamePlayer" Member="GamePlayers" ThisKey="PiD" OtherKey="PlayerId" Type="GamePlayer" />
+      <Association Name="Player_PlayerStrategy" Member="PlayerStrategies" ThisKey="PiD" OtherKey="PlayerId" Type="PlayerStrategy" />
+      <Association Name="User_Player" Member="User" ThisKey="UserName" OtherKey="Username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GamePlayers" Member="GamePlayers">
+    <Type Name="GamePlayer">
+      <Column Name="GameId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PlayerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Player_GamePlayer" Member="Player" ThisKey="PlayerId" OtherKey="PiD" Type="Player" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PlayerStrategies" Member="PlayerStrategies">
+    <Type Name="PlayerStrategy">
+      <Column Name="PlayerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StrategyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Player_PlayerStrategy" Member="Player" ThisKey="PlayerId" OtherKey="PiD" Type="Player" IsForeignKey="true" />
+      <Association Name="Strategy_PlayerStrategy" Member="Strategy" ThisKey="StrategyId" OtherKey="StratId" Type="Strategy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Username" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AdminFlag" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="User_Player" Member="Players" ThisKey="Username" OtherKey="UserName" Type="Player" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Strategy" Member="Strategies">
+    <Type Name="Strategy">
+      <Column Name="StratId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Strategy_PlayerStrategy" Member="PlayerStrategies" ThisKey="StratId" OtherKey="StrategyId" Type="PlayerStrategy" />
+      <Association Name="Strategy_GameStrategy" Member="GameStrategies" ThisKey="StratId" OtherKey="StrategyId" Type="GameStrategy" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GameStrategies" Member="GameStrategies">
+    <Type Name="GameStrategy">
+      <Column Name="GameId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StrategyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Strategy_GameStrategy" Member="Strategy" ThisKey="StrategyId" OtherKey="StratId" Type="Strategy" IsForeignKey="true" />
+      <Association Name="Game_GameStrategy" Member="Game" ThisKey="GameId" OtherKey="GiD" Type="Game" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GameFrame" Member="GameFrames">
+    <Type Name="GameFrame">
+      <Column Name="Title" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MinPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaxPlayer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="GameFrame_Game" Member="Games" ThisKey="Title" OtherKey="Title" Type="Game" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Game" Member="Games">
+    <Type Name="Game">
+      <Column Name="GiD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Game_GameOutcome" Member="GameOutcomes" ThisKey="GiD" OtherKey="GameId" Type="GameOutcome" />
+      <Association Name="Game_GameStrategy" Member="GameStrategies" ThisKey="GiD" OtherKey="GameId" Type="GameStrategy" />
+      <Association Name="GameFrame_Game" Member="GameFrame" ThisKey="Title" OtherKey="Title" Type="GameFrame" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

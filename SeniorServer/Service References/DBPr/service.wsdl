@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DBFunctions" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/SeniorDBServer" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDBFunctions_AddGameFrame_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGameFrame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGameFrame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGameFrameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGameFrame_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGameFrame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGameFrame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGameFrameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGameFrame_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGameFrame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGameFrame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGameFrameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGameFrame_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGameFrame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGameFrame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGameFrameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveUser" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGamePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGamePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGamePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGamePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGamePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGamePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGamePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGamePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGamePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGamePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGamePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGamePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGamePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGamePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGamePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGamePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGame" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGFStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGFStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddGFStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGFStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGFStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGFStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteGFStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGFStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGFStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGFStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveGFStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveGFStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGFStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGFStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateGFStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGFStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNPStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNPStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNPStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNPStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNPStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNPStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNPStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNPStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNPStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNPStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNPStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNPStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNPStrategy_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNPStrategy" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNPStrategy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNPStrategyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNashPointProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNashPointProfile" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNashPointProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNashPointProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNashPointProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNashPointProfile" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNashPointProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNashPointProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNashPointProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNashPointProfile" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNashPointProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNashPointProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNashPointProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNashPointProfile" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNashPointProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNashPointProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNPPayoff_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNPPayoff" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_AddNPPayoff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNPPayoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNPPayoff_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNPPayoff" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_DeleteNPPayoff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteNPPayoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNPPayoff_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNPPayoff" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_RetreiveNPPayoff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetreiveNPPayoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNPPayoff_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNPPayoff" />
+  </wsdl:message>
+  <wsdl:message name="IDBFunctions_UpdateNPPayoff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateNPPayoffResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDBFunctions">
+    <wsdl:operation name="AddGameFrame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddGameFrame" message="tns:IDBFunctions_AddGameFrame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddGameFrameResponse" message="tns:IDBFunctions_AddGameFrame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGameFrame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGameFrame" message="tns:IDBFunctions_DeleteGameFrame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGameFrameResponse" message="tns:IDBFunctions_DeleteGameFrame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGameFrame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGameFrame" message="tns:IDBFunctions_RetreiveGameFrame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGameFrameResponse" message="tns:IDBFunctions_RetreiveGameFrame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGameFrame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGameFrame" message="tns:IDBFunctions_UpdateGameFrame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGameFrameResponse" message="tns:IDBFunctions_UpdateGameFrame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddUser" message="tns:IDBFunctions_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddUserResponse" message="tns:IDBFunctions_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteUser" message="tns:IDBFunctions_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteUserResponse" message="tns:IDBFunctions_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveUser" message="tns:IDBFunctions_RetreiveUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveUserResponse" message="tns:IDBFunctions_RetreiveUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGamePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddGamePlayer" message="tns:IDBFunctions_AddGamePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddGamePlayerResponse" message="tns:IDBFunctions_AddGamePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGamePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGamePlayer" message="tns:IDBFunctions_DeleteGamePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGamePlayerResponse" message="tns:IDBFunctions_DeleteGamePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGamePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayer" message="tns:IDBFunctions_RetreiveGamePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayerResponse" message="tns:IDBFunctions_RetreiveGamePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGamePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGamePlayer" message="tns:IDBFunctions_UpdateGamePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGamePlayerResponse" message="tns:IDBFunctions_UpdateGamePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddGame" message="tns:IDBFunctions_AddGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddGameResponse" message="tns:IDBFunctions_AddGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGame" message="tns:IDBFunctions_DeleteGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGameResponse" message="tns:IDBFunctions_DeleteGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGame" message="tns:IDBFunctions_RetreiveGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGameResponse" message="tns:IDBFunctions_RetreiveGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGame" message="tns:IDBFunctions_UpdateGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGameResponse" message="tns:IDBFunctions_UpdateGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGFStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddGFStrategy" message="tns:IDBFunctions_AddGFStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddGFStrategyResponse" message="tns:IDBFunctions_AddGFStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGFStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGFStrategy" message="tns:IDBFunctions_DeleteGFStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteGFStrategyResponse" message="tns:IDBFunctions_DeleteGFStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGFStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGFStrategy" message="tns:IDBFunctions_RetreiveGFStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveGFStrategyResponse" message="tns:IDBFunctions_RetreiveGFStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGFStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGFStrategy" message="tns:IDBFunctions_UpdateGFStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateGFStrategyResponse" message="tns:IDBFunctions_UpdateGFStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNPStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddNPStrategy" message="tns:IDBFunctions_AddNPStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddNPStrategyResponse" message="tns:IDBFunctions_AddNPStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNPStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNPStrategy" message="tns:IDBFunctions_DeleteNPStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNPStrategyResponse" message="tns:IDBFunctions_DeleteNPStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNPStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNPStrategy" message="tns:IDBFunctions_RetreiveNPStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNPStrategyResponse" message="tns:IDBFunctions_RetreiveNPStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNPStrategy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNPStrategy" message="tns:IDBFunctions_UpdateNPStrategy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNPStrategyResponse" message="tns:IDBFunctions_UpdateNPStrategy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNashPointProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddNashPointProfile" message="tns:IDBFunctions_AddNashPointProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddNashPointProfileResponse" message="tns:IDBFunctions_AddNashPointProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNashPointProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNashPointProfile" message="tns:IDBFunctions_DeleteNashPointProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNashPointProfileResponse" message="tns:IDBFunctions_DeleteNashPointProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNashPointProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNashPointProfile" message="tns:IDBFunctions_RetreiveNashPointProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNashPointProfileResponse" message="tns:IDBFunctions_RetreiveNashPointProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNashPointProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNashPointProfile" message="tns:IDBFunctions_UpdateNashPointProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNashPointProfileResponse" message="tns:IDBFunctions_UpdateNashPointProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNPPayoff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/AddNPPayoff" message="tns:IDBFunctions_AddNPPayoff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/AddNPPayoffResponse" message="tns:IDBFunctions_AddNPPayoff_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNPPayoff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNPPayoff" message="tns:IDBFunctions_DeleteNPPayoff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/DeleteNPPayoffResponse" message="tns:IDBFunctions_DeleteNPPayoff_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNPPayoff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNPPayoff" message="tns:IDBFunctions_RetreiveNPPayoff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/RetreiveNPPayoffResponse" message="tns:IDBFunctions_RetreiveNPPayoff_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNPPayoff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNPPayoff" message="tns:IDBFunctions_UpdateNPPayoff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBFunctions/UpdateNPPayoffResponse" message="tns:IDBFunctions_UpdateNPPayoff_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDBFunctions" type="tns:IDBFunctions">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddGameFrame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddGameFrame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGameFrame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteGameFrame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGameFrame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveGameFrame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGameFrame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateGameFrame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveUser">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGamePlayer">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddGamePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGamePlayer">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteGamePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGamePlayer">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveGamePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGamePlayer">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateGamePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGame">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGFStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddGFStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGFStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteGFStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveGFStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveGFStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGFStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateGFStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNPStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddNPStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNPStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteNPStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNPStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveNPStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNPStrategy">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateNPStrategy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNashPointProfile">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddNashPointProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNashPointProfile">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteNashPointProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNashPointProfile">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveNashPointProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNashPointProfile">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateNashPointProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNPPayoff">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/AddNPPayoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNPPayoff">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/DeleteNPPayoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetreiveNPPayoff">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/RetreiveNPPayoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNPPayoff">
+      <soap:operation soapAction="http://tempuri.org/IDBFunctions/UpdateNPPayoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DBFunctions">
+    <wsdl:port name="BasicHttpBinding_IDBFunctions" binding="tns:BasicHttpBinding_IDBFunctions">
+      <soap:address location="http://localhost:8889/SeniorDBServer.DBFunctions.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.625, 8.5" name="DBLinq">
+  <DataContextMoniker Name="/DBLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d1f3ac8c-5d8c-49f5-8152-3e01078c063a" absoluteBounds="3.5, 2.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/GameOutcome" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d7759206-5c3d-412a-bd5a-83a6baf28bfc" absoluteBounds="3.5150000000000006, 3.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2366cb39-0e1b-45be-a15a-2f377fa39e65" absoluteBounds="9, 1, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/Player" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9c921fe7-7aba-40a7-9d91-3098a67077d6" absoluteBounds="9.015, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c4d4b1ea-37c3-4b1d-8a6b-64b91089cdf8" absoluteBounds="5.75, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/GamePlayer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="24f0ba13-ce6a-47e9-b7dc-c4705147ae66" absoluteBounds="5.765, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9 : 1.34699625651042); (7.75 : 1.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Player/Player_GamePlayer" />
+      <nodes>
+        <classShapeMoniker Id="2366cb39-0e1b-45be-a15a-2f377fa39e65" />
+        <classShapeMoniker Id="c4d4b1ea-37c3-4b1d-8a6b-64b91089cdf8" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6882be25-0b58-4f2f-95a4-f91615400845" absoluteBounds="5.875, 2.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/PlayerStrategy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7d515eed-70a2-4e27-9dcf-c6127f0dcbee" absoluteBounds="5.89, 2.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9 : 1.97524251302083); (7.84375 : 1.97524251302083); (7.84375 : 2.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Player/Player_PlayerStrategy" />
+      <nodes>
+        <classShapeMoniker Id="2366cb39-0e1b-45be-a15a-2f377fa39e65" />
+        <classShapeMoniker Id="6882be25-0b58-4f2f-95a4-f91615400845" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2c2376fa-2b08-495d-8455-8f4af55eb90b" absoluteBounds="9.375, 3.25, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBLinqDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3cf887be-f081-4cfb-8492-e98bd0379c4e" absoluteBounds="9.39, 3.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.1875 : 3.25); (10.1875 : 2.19399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/User/User_Player" />
+      <nodes>
+        <classShapeMoniker Id="2c2376fa-2b08-495d-8455-8f4af55eb90b" />
+        <classShapeMoniker Id="2366cb39-0e1b-45be-a15a-2f377fa39e65" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="60a289b0-c7f6-4d1f-9606-cbea0bcc50dc" absoluteBounds="5.75, 4.125, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/Strategy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="28e17a08-670b-4fcb-9177-e8e4f2982180" absoluteBounds="5.765, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.8125 : 4.125); (6.8125 : 3.69399251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Strategy/Strategy_PlayerStrategy" />
+      <nodes>
+        <classShapeMoniker Id="60a289b0-c7f6-4d1f-9606-cbea0bcc50dc" />
+        <classShapeMoniker Id="6882be25-0b58-4f2f-95a4-f91615400845" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="dcca8fa2-414b-4a27-b8d0-e4fafb98c83c" absoluteBounds="1.25, 1.375, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/GameStrategy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="da2d0ae7-3ab1-4bc8-a14a-a50d9c7796c0" absoluteBounds="1.2650000000000001, 1.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.75 : 4.82139322916667); (2.96875 : 4.82139322916667); (2.96875 : 2.56899251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Strategy/Strategy_GameStrategy" />
+      <nodes>
+        <classShapeMoniker Id="60a289b0-c7f6-4d1f-9606-cbea0bcc50dc" />
+        <classShapeMoniker Id="dcca8fa2-414b-4a27-b8d0-e4fafb98c83c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2485807f-d29c-43dd-95bf-f59f87200e95" absoluteBounds="0.625, 2.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBLinqDataContext/GameFrame" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7798434e-f9c4-4876-8b18-1adc7e3c8021" absoluteBounds="0.64000000000000012, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2d436520-64a1-42e2-9e7e-01ed7556cfd7" absoluteBounds="3.625, 0.75, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBLinqDataContext/Game" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c07fa952-4238-4111-9cec-0db2b6f7dac0" absoluteBounds="3.6399999999999997, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.5625 : 1.94399251302083); (4.5625 : 2.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Game/Game_GameOutcome" />
+      <nodes>
+        <classShapeMoniker Id="2d436520-64a1-42e2-9e7e-01ed7556cfd7" />
+        <classShapeMoniker Id="d1f3ac8c-5d8c-49f5-8152-3e01078c063a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.625 : 1.65949625651042); (3.25 : 1.65949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/Game/Game_GameStrategy" />
+      <nodes>
+        <classShapeMoniker Id="2d436520-64a1-42e2-9e7e-01ed7556cfd7" />
+        <classShapeMoniker Id="dcca8fa2-414b-4a27-b8d0-e4fafb98c83c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(0.90625 : 2.875); (0.90625 : 1.03125); (3.625 : 1.03125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBLinqDataContext/GameFrame/GameFrame_Game" />
+      <nodes>
+        <classShapeMoniker Id="2485807f-d29c-43dd-95bf-f59f87200e95" />
+        <classShapeMoniker Id="2d436520-64a1-42e2-9e7e-01ed7556cfd7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

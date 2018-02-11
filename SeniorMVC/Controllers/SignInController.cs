@@ -15,17 +15,20 @@ namespace SeniorMVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult LogIn(string username , string password)
+        public ActionResult LogIn()
         {
             NashClient.NsashServicesClient nash= new NashClient.NsashServicesClient();
             var NashObj = new NashClient.NsashServicesClient();
            // UserMVC user = new UserMVC();
             UserModel user = new UserModel();
-            user = nash.SignIn(username, password);
+            UserModel s = new UserModel();
+            s.Username = Request["Username"].ToString();
+            s.Password = Request["Password"].ToString();
+            user = nash.SignIn(s);
             if (user != null)// this means that there is a user with those creditentials
             {
                // if(user.AdminFlag=='N')
-                return View(username);
+                return View();
             }
             else return View();
         }

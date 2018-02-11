@@ -44,7 +44,7 @@ namespace SeniorServer
         #region User Functions
         // SignIn();
         [OperationContract]
-        UserModel SignIn(string username , string password);
+        UserModel SignIn(UserModel s);
         [OperationContract]
         string Register(UserModel usermodel);
         #endregion

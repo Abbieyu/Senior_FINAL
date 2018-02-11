@@ -579,11 +579,11 @@ namespace SeniorServer
 
         #region User Functions
         
-        public UserModel SignIn(string username, string password)
+        public UserModel SignIn(UserModel user)
         {
             var prox = new DBPr.DBFunctionsClient();
-            UserModel user = prox.RetreiveUser(username, password);
-            return user;
+            UserModel usern = prox.RetreiveUser(user.Username, user.Password);
+            return usern;
         }
 
         public string Register(UserModel us)

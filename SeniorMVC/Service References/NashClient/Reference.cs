@@ -113,10 +113,10 @@ namespace SeniorMVC.NashClient {
         System.Threading.Tasks.Task<int[]> Three_PlayerWrapperAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/SignIn", ReplyAction="http://tempuri.org/INsashServices/SignInResponse")]
-        SeniorMVC.NashClient.UserModel SignIn(string username, string password);
+        SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/SignIn", ReplyAction="http://tempuri.org/INsashServices/SignInResponse")]
-        System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(string username, string password);
+        System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(SeniorMVC.NashClient.UserModel s);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Register", ReplyAction="http://tempuri.org/INsashServices/RegisterResponse")]
         string Register(SeniorMVC.NashClient.UserModel usermodel);
@@ -176,12 +176,12 @@ namespace SeniorMVC.NashClient {
             return base.Channel.Three_PlayerWrapperAsync();
         }
         
-        public SeniorMVC.NashClient.UserModel SignIn(string username, string password) {
-            return base.Channel.SignIn(username, password);
+        public SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s) {
+            return base.Channel.SignIn(s);
         }
         
-        public System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(string username, string password) {
-            return base.Channel.SignInAsync(username, password);
+        public System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(SeniorMVC.NashClient.UserModel s) {
+            return base.Channel.SignInAsync(s);
         }
         
         public string Register(SeniorMVC.NashClient.UserModel usermodel) {

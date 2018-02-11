@@ -147,6 +147,7 @@
     </Content>
     <Content Include="Views\SignIn\Error.cshtml" />
     <Content Include="Views\SignIn\Register.cshtml" />
+    <Content Include="Views\SignIn\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />

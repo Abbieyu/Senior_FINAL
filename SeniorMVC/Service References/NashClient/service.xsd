@@ -41,22 +41,21 @@
   <xs:element name="SignIn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="s" nillable="true" type="q4:UserModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SignInResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="SignInResult" nillable="true" type="q4:UserModel" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="SignInResult" nillable="true" type="q5:UserModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="usermodel" nillable="true" type="q5:UserModel" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="usermodel" nillable="true" type="q6:UserModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

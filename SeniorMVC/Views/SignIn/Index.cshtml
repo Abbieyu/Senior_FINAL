@@ -198,9 +198,9 @@
                                 <fieldset>
                                     <legend>Login Below:</legend>
                                     <label>Email Address</label>
-                                    <input type="text" placeholder="Enter your E-mail ID" class="input-block-level">
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
                                     <label>Password</label>
-                                    <input type="password" placeholder="Enter Password" class="input-block-level">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
 
                                     <button type="submit" class="btn-style">Submit</button>
                                 </fieldset>
@@ -226,7 +226,7 @@
                                     <div class="row-fluid">
                                         <div class="span6">
                                             @Html.LabelFor(m => m.Username)
-                                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                            @Html.PasswordFor(m => m.Username, new { @class = "form-control" })
                                         </div>
                                         <div class="span6">
                                             <label>Last Name</label>

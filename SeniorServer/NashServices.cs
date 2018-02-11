@@ -588,9 +588,22 @@ namespace SeniorServer
 
         public string Register(UserModel us)
         {
-            var prox = new DBPr.DBFunctionsClient();
-            prox.AddUser(us);
-            return "done!";
+            var prox = new DBFunctionsClient();
+            var pro = new DBPr.DBFunctionsClient();
+            DBPr.DBFunctionsClient p = new DBFunctionsClient();
+            try
+            {
+                pro.Open();
+                pro.AddUser(us);
+                pro.Close();
+            }
+            catch(ProtocolException ex)
+            {
+                return ex.ToString();
+            }
+
+                return "done!";
+            
         }
         #endregion
     }

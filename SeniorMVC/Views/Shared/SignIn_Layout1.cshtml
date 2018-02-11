@@ -71,7 +71,7 @@
         <script type="text/javascript" charset="UTF-8" src=@Url.Content("/Content/Education_Signin_files/stats.js.download")></script>
         <script type="text/javascript" charset="UTF-8" src=@Url.Content("/Content/Education_Signin_files/QuotaService.RecordEvent")></script>
     </head>
-    <body  style="height: 2114px;">
+    @*<body  style="height: 2114px;">
         <!--WRAPPER START-->
         <div class="wrapper">
             <!--HEADER START-->
@@ -286,7 +286,7 @@
                         </div>
                         <div class="span6">
                             <div class="form-box">
-                                <form  method="Post">
+                                <form  method="Post" action="@Url.Action("Register","SignIn")">
                                     <div class="form-body">
                                         <fieldset>
                                             <legend>First time here? Sign up now!</legend>
@@ -598,5 +598,6 @@
         <script src=@Url.Content("/Content/Education_Signin_files/functions.js.download")></script>
 
         @RenderBody();
-    </body>
+    @*</body>*@
+
 </html>

@@ -33,23 +33,41 @@ namespace SeniorServer.DBPr {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGameFrame", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGameFrameResponse")]
         System.Threading.Tasks.Task<SeniorDBServer.GameFrameModel> RetreiveGameFrameAsync(string T);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrame", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameResponse")]
-        int UpdateGameFrame(int gfid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMinPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMinPlayersResponse")]
+        int UpdateGameFrameMinPlayers(string title, int min);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrame", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameResponse")]
-        System.Threading.Tasks.Task<int> UpdateGameFrameAsync(int gfid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMinPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMinPlayersResponse")]
+        System.Threading.Tasks.Task<int> UpdateGameFrameMinPlayersAsync(string title, int min);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxPlayersResponse")]
+        int UpdateGameFrameMaxPlayers(string title, int max);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxPlayersResponse")]
+        System.Threading.Tasks.Task<int> UpdateGameFrameMaxPlayersAsync(string title, int max);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMinStrategies", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMinStrategiesResponse")]
+        int UpdateGameFrameMinStrategies(string title, int min);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMinStrategies", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMinStrategiesResponse")]
+        System.Threading.Tasks.Task<int> UpdateGameFrameMinStrategiesAsync(string title, int min);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxStrategies", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxStrategiesResponse")]
+        int UpdateGameFrameMaxStrategies(string title, int max);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxStrategies", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameFrameMaxStrategiesResponse")]
+        System.Threading.Tasks.Task<int> UpdateGameFrameMaxStrategiesAsync(string title, int max);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveAllGameFrames", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveAllGameFramesResponse")]
+        SeniorDBServer.GameFrameModel[] RetreiveAllGameFrames();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveAllGameFrames", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveAllGameFramesResponse")]
+        System.Threading.Tasks.Task<SeniorDBServer.GameFrameModel[]> RetreiveAllGameFramesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddUser", ReplyAction="http://tempuri.org/IDBFunctions/AddUserResponse")]
         int AddUser(SeniorDBServer.UserModel user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddUser", ReplyAction="http://tempuri.org/IDBFunctions/AddUserResponse")]
         System.Threading.Tasks.Task<int> AddUserAsync(SeniorDBServer.UserModel user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteUser", ReplyAction="http://tempuri.org/IDBFunctions/DeleteUserResponse")]
-        int DeleteUser(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteUser", ReplyAction="http://tempuri.org/IDBFunctions/DeleteUserResponse")]
-        System.Threading.Tasks.Task<int> DeleteUserAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveUser", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveUserResponse")]
         SeniorDBServer.UserModel RetreiveUser(string username, string password);
@@ -63,17 +81,11 @@ namespace SeniorServer.DBPr {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/AddGamePlayerResponse")]
         System.Threading.Tasks.Task<int> AddGamePlayerAsync(SeniorDBServer.GamePlayerModel player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/DeleteGamePlayerResponse")]
-        int DeleteGamePlayer(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayers", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGamePlayersResponse")]
+        SeniorDBServer.GamePlayerModel[] RetreiveGamePlayers(int gid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/DeleteGamePlayerResponse")]
-        System.Threading.Tasks.Task<int> DeleteGamePlayerAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGamePlayerResponse")]
-        SeniorDBServer.GamePlayerModel RetreiveGamePlayer(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGamePlayerResponse")]
-        System.Threading.Tasks.Task<SeniorDBServer.GamePlayerModel> RetreiveGamePlayerAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGamePlayers", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGamePlayersResponse")]
+        System.Threading.Tasks.Task<SeniorDBServer.GamePlayerModel[]> RetreiveGamePlayersAsync(int gid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGamePlayerResponse")]
         int UpdateGamePlayer(string username);
@@ -99,23 +111,23 @@ namespace SeniorServer.DBPr {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGame", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGameResponse")]
         System.Threading.Tasks.Task<SeniorDBServer.GameModel> RetreiveGameAsync(int gameid);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGame", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameResponse")]
-        int UpdateGame(int gameid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveAllGames", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveAllGamesResponse")]
+        SeniorDBServer.GameModel[] RetreiveAllGames();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGame", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameResponse")]
-        System.Threading.Tasks.Task<int> UpdateGameAsync(int gameid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveAllGames", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveAllGamesResponse")]
+        System.Threading.Tasks.Task<SeniorDBServer.GameModel[]> RetreiveAllGamesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameNumofPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameNumofPlayersResponse")]
+        int UpdateGameNumofPlayers(int gid, int nop);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateGameNumofPlayers", ReplyAction="http://tempuri.org/IDBFunctions/UpdateGameNumofPlayersResponse")]
+        System.Threading.Tasks.Task<int> UpdateGameNumofPlayersAsync(int gid, int nop);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddGFStrategy", ReplyAction="http://tempuri.org/IDBFunctions/AddGFStrategyResponse")]
         int AddGFStrategy(SeniorDBServer.GFStrategyModel gfstrategy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddGFStrategy", ReplyAction="http://tempuri.org/IDBFunctions/AddGFStrategyResponse")]
         System.Threading.Tasks.Task<int> AddGFStrategyAsync(SeniorDBServer.GFStrategyModel gfstrategy);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteGFStrategy", ReplyAction="http://tempuri.org/IDBFunctions/DeleteGFStrategyResponse")]
-        int DeleteGFStrategy(int gstrategy);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteGFStrategy", ReplyAction="http://tempuri.org/IDBFunctions/DeleteGFStrategyResponse")]
-        System.Threading.Tasks.Task<int> DeleteGFStrategyAsync(int gstrategy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveGFStrategy", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveGFStrategyResponse")]
         SeniorDBServer.GFStrategyModel RetreiveGFStrategy(int gfstrategyid);
@@ -135,12 +147,6 @@ namespace SeniorServer.DBPr {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddNPStrategy", ReplyAction="http://tempuri.org/IDBFunctions/AddNPStrategyResponse")]
         System.Threading.Tasks.Task<int> AddNPStrategyAsync(SeniorDBServer.NPStrategyModel npstrategy);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNPStrategy", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNPStrategyResponse")]
-        int DeleteNPStrategy(int nptrategy, string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNPStrategy", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNPStrategyResponse")]
-        System.Threading.Tasks.Task<int> DeleteNPStrategyAsync(int nptrategy, string username);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveNPStrategy", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveNPStrategyResponse")]
         SeniorDBServer.NPStrategyModel RetreiveNPStrategy(int npstrategyid, string username);
         
@@ -159,12 +165,6 @@ namespace SeniorServer.DBPr {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddNashPointProfile", ReplyAction="http://tempuri.org/IDBFunctions/AddNashPointProfileResponse")]
         System.Threading.Tasks.Task<int> AddNashPointProfileAsync(SeniorDBServer.NashPointProfileModel NP);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNashPointProfile", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNashPointProfileResponse")]
-        int DeleteNashPointProfile(int NPID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNashPointProfile", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNashPointProfileResponse")]
-        System.Threading.Tasks.Task<int> DeleteNashPointProfileAsync(int NPID);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveNashPointProfile", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveNashPointProfileResponse")]
         SeniorDBServer.NashPointProfileModel RetreiveNashPointProfile(int NPID);
         
@@ -182,12 +182,6 @@ namespace SeniorServer.DBPr {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddNPPayoff", ReplyAction="http://tempuri.org/IDBFunctions/AddNPPayoffResponse")]
         System.Threading.Tasks.Task<int> AddNPPayoffAsync(SeniorDBServer.NPPayoffModel payoff);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNPPayoff", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNPPayoffResponse")]
-        int DeleteNPPayoff(int payoffid, string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/DeleteNPPayoff", ReplyAction="http://tempuri.org/IDBFunctions/DeleteNPPayoffResponse")]
-        System.Threading.Tasks.Task<int> DeleteNPPayoffAsync(int payoffid, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveNPPayoff", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveNPPayoffResponse")]
         SeniorDBServer.NPPayoffModel RetreiveNPPayoff(int payoffid, string username);
@@ -253,12 +247,44 @@ namespace SeniorServer.DBPr {
             return base.Channel.RetreiveGameFrameAsync(T);
         }
         
-        public int UpdateGameFrame(int gfid) {
-            return base.Channel.UpdateGameFrame(gfid);
+        public int UpdateGameFrameMinPlayers(string title, int min) {
+            return base.Channel.UpdateGameFrameMinPlayers(title, min);
         }
         
-        public System.Threading.Tasks.Task<int> UpdateGameFrameAsync(int gfid) {
-            return base.Channel.UpdateGameFrameAsync(gfid);
+        public System.Threading.Tasks.Task<int> UpdateGameFrameMinPlayersAsync(string title, int min) {
+            return base.Channel.UpdateGameFrameMinPlayersAsync(title, min);
+        }
+        
+        public int UpdateGameFrameMaxPlayers(string title, int max) {
+            return base.Channel.UpdateGameFrameMaxPlayers(title, max);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateGameFrameMaxPlayersAsync(string title, int max) {
+            return base.Channel.UpdateGameFrameMaxPlayersAsync(title, max);
+        }
+        
+        public int UpdateGameFrameMinStrategies(string title, int min) {
+            return base.Channel.UpdateGameFrameMinStrategies(title, min);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateGameFrameMinStrategiesAsync(string title, int min) {
+            return base.Channel.UpdateGameFrameMinStrategiesAsync(title, min);
+        }
+        
+        public int UpdateGameFrameMaxStrategies(string title, int max) {
+            return base.Channel.UpdateGameFrameMaxStrategies(title, max);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateGameFrameMaxStrategiesAsync(string title, int max) {
+            return base.Channel.UpdateGameFrameMaxStrategiesAsync(title, max);
+        }
+        
+        public SeniorDBServer.GameFrameModel[] RetreiveAllGameFrames() {
+            return base.Channel.RetreiveAllGameFrames();
+        }
+        
+        public System.Threading.Tasks.Task<SeniorDBServer.GameFrameModel[]> RetreiveAllGameFramesAsync() {
+            return base.Channel.RetreiveAllGameFramesAsync();
         }
         
         public int AddUser(SeniorDBServer.UserModel user) {
@@ -267,14 +293,6 @@ namespace SeniorServer.DBPr {
         
         public System.Threading.Tasks.Task<int> AddUserAsync(SeniorDBServer.UserModel user) {
             return base.Channel.AddUserAsync(user);
-        }
-        
-        public int DeleteUser(string username) {
-            return base.Channel.DeleteUser(username);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeleteUserAsync(string username) {
-            return base.Channel.DeleteUserAsync(username);
         }
         
         public SeniorDBServer.UserModel RetreiveUser(string username, string password) {
@@ -293,20 +311,12 @@ namespace SeniorServer.DBPr {
             return base.Channel.AddGamePlayerAsync(player);
         }
         
-        public int DeleteGamePlayer(string username) {
-            return base.Channel.DeleteGamePlayer(username);
+        public SeniorDBServer.GamePlayerModel[] RetreiveGamePlayers(int gid) {
+            return base.Channel.RetreiveGamePlayers(gid);
         }
         
-        public System.Threading.Tasks.Task<int> DeleteGamePlayerAsync(string username) {
-            return base.Channel.DeleteGamePlayerAsync(username);
-        }
-        
-        public SeniorDBServer.GamePlayerModel RetreiveGamePlayer(string username) {
-            return base.Channel.RetreiveGamePlayer(username);
-        }
-        
-        public System.Threading.Tasks.Task<SeniorDBServer.GamePlayerModel> RetreiveGamePlayerAsync(string username) {
-            return base.Channel.RetreiveGamePlayerAsync(username);
+        public System.Threading.Tasks.Task<SeniorDBServer.GamePlayerModel[]> RetreiveGamePlayersAsync(int gid) {
+            return base.Channel.RetreiveGamePlayersAsync(gid);
         }
         
         public int UpdateGamePlayer(string username) {
@@ -341,12 +351,20 @@ namespace SeniorServer.DBPr {
             return base.Channel.RetreiveGameAsync(gameid);
         }
         
-        public int UpdateGame(int gameid) {
-            return base.Channel.UpdateGame(gameid);
+        public SeniorDBServer.GameModel[] RetreiveAllGames() {
+            return base.Channel.RetreiveAllGames();
         }
         
-        public System.Threading.Tasks.Task<int> UpdateGameAsync(int gameid) {
-            return base.Channel.UpdateGameAsync(gameid);
+        public System.Threading.Tasks.Task<SeniorDBServer.GameModel[]> RetreiveAllGamesAsync() {
+            return base.Channel.RetreiveAllGamesAsync();
+        }
+        
+        public int UpdateGameNumofPlayers(int gid, int nop) {
+            return base.Channel.UpdateGameNumofPlayers(gid, nop);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateGameNumofPlayersAsync(int gid, int nop) {
+            return base.Channel.UpdateGameNumofPlayersAsync(gid, nop);
         }
         
         public int AddGFStrategy(SeniorDBServer.GFStrategyModel gfstrategy) {
@@ -355,14 +373,6 @@ namespace SeniorServer.DBPr {
         
         public System.Threading.Tasks.Task<int> AddGFStrategyAsync(SeniorDBServer.GFStrategyModel gfstrategy) {
             return base.Channel.AddGFStrategyAsync(gfstrategy);
-        }
-        
-        public int DeleteGFStrategy(int gstrategy) {
-            return base.Channel.DeleteGFStrategy(gstrategy);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeleteGFStrategyAsync(int gstrategy) {
-            return base.Channel.DeleteGFStrategyAsync(gstrategy);
         }
         
         public SeniorDBServer.GFStrategyModel RetreiveGFStrategy(int gfstrategyid) {
@@ -389,14 +399,6 @@ namespace SeniorServer.DBPr {
             return base.Channel.AddNPStrategyAsync(npstrategy);
         }
         
-        public int DeleteNPStrategy(int nptrategy, string username) {
-            return base.Channel.DeleteNPStrategy(nptrategy, username);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeleteNPStrategyAsync(int nptrategy, string username) {
-            return base.Channel.DeleteNPStrategyAsync(nptrategy, username);
-        }
-        
         public SeniorDBServer.NPStrategyModel RetreiveNPStrategy(int npstrategyid, string username) {
             return base.Channel.RetreiveNPStrategy(npstrategyid, username);
         }
@@ -421,14 +423,6 @@ namespace SeniorServer.DBPr {
             return base.Channel.AddNashPointProfileAsync(NP);
         }
         
-        public int DeleteNashPointProfile(int NPID) {
-            return base.Channel.DeleteNashPointProfile(NPID);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeleteNashPointProfileAsync(int NPID) {
-            return base.Channel.DeleteNashPointProfileAsync(NPID);
-        }
-        
         public SeniorDBServer.NashPointProfileModel RetreiveNashPointProfile(int NPID) {
             return base.Channel.RetreiveNashPointProfile(NPID);
         }
@@ -451,14 +445,6 @@ namespace SeniorServer.DBPr {
         
         public System.Threading.Tasks.Task<int> AddNPPayoffAsync(SeniorDBServer.NPPayoffModel payoff) {
             return base.Channel.AddNPPayoffAsync(payoff);
-        }
-        
-        public int DeleteNPPayoff(int payoffid, string username) {
-            return base.Channel.DeleteNPPayoff(payoffid, username);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeleteNPPayoffAsync(int payoffid, string username) {
-            return base.Channel.DeleteNPPayoffAsync(payoffid, username);
         }
         
         public SeniorDBServer.NPPayoffModel RetreiveNPPayoff(int payoffid, string username) {

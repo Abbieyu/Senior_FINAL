@@ -6,10 +6,17 @@
       <xs:element minOccurs="0" name="MaxPlayers" type="xs:int" />
       <xs:element minOccurs="0" name="MaxStrategies" type="xs:int" />
       <xs:element minOccurs="0" name="MinPlayers" type="xs:int" />
+      <xs:element minOccurs="0" name="MinStrategies" type="xs:int" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameFrameModel" nillable="true" type="tns:GameFrameModel" />
+  <xs:complexType name="ArrayOfGameFrameModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameFrameModel" nillable="true" type="tns:GameFrameModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameFrameModel" nillable="true" type="tns:ArrayOfGameFrameModel" />
   <xs:complexType name="UserModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="AdminFlag" type="ser:char" />
@@ -25,27 +32,56 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GamePlayerModel" nillable="true" type="tns:GamePlayerModel" />
+  <xs:complexType name="ArrayOfGamePlayerModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GamePlayerModel" nillable="true" type="tns:GamePlayerModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGamePlayerModel" nillable="true" type="tns:ArrayOfGamePlayerModel" />
   <xs:complexType name="GameModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="GID" type="xs:int" />
+      <xs:element minOccurs="0" name="NPlayers" type="xs:int" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameModel" nillable="true" type="tns:GameModel" />
+  <xs:complexType name="ArrayOfGameModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameModel" nillable="true" type="tns:GameModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameModel" nillable="true" type="tns:ArrayOfGameModel" />
   <xs:complexType name="GFStrategyModel">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StrategyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="GFStrategyModel" nillable="true" type="tns:GFStrategyModel" />
   <xs:complexType name="NPStrategyModel">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NPID" type="xs:int" />
+      <xs:element minOccurs="0" name="StrategyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="NPStrategyModel" nillable="true" type="tns:NPStrategyModel" />
   <xs:complexType name="NashPointProfileModel">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GID" type="xs:int" />
+      <xs:element minOccurs="0" name="NPID" type="xs:int" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="NashPointProfileModel" nillable="true" type="tns:NashPointProfileModel" />
   <xs:complexType name="NPPayoffModel">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NPID" type="xs:int" />
+      <xs:element minOccurs="0" name="Payoff" type="xs:int" />
+      <xs:element minOccurs="0" name="PayoffId" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="NPPayoffModel" nillable="true" type="tns:NPPayoffModel" />
 </xs:schema>

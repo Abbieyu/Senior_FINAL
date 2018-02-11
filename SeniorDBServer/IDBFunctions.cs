@@ -122,9 +122,9 @@ namespace SeniorDBServer
     public class UserModel
     {
         [DataMember]
-        public String Username { set; get; }
+        public string Username { set; get; }
         [DataMember]
-        public String Password { set; get; }
+        public string Password { set; get; }
         [DataMember]
         public char AdminFlag { set; get; }
     }

@@ -119,10 +119,10 @@ namespace SeniorMVC.NashClient {
         System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Register", ReplyAction="http://tempuri.org/INsashServices/RegisterResponse")]
-        string Register(SeniorMVC.NashClient.UserModel nn);
+        string Register(SeniorMVC.NashClient.UserModel usermodel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Register", ReplyAction="http://tempuri.org/INsashServices/RegisterResponse")]
-        System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel nn);
+        System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel usermodel);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -184,12 +184,12 @@ namespace SeniorMVC.NashClient {
             return base.Channel.SignInAsync(username, password);
         }
         
-        public string Register(SeniorMVC.NashClient.UserModel nn) {
-            return base.Channel.Register(nn);
+        public string Register(SeniorMVC.NashClient.UserModel usermodel) {
+            return base.Channel.Register(usermodel);
         }
         
-        public System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel nn) {
-            return base.Channel.RegisterAsync(nn);
+        public System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel usermodel) {
+            return base.Channel.RegisterAsync(usermodel);
         }
     }
 }

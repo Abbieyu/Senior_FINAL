@@ -46,7 +46,7 @@ namespace SeniorServer
         [OperationContract]
         UserModel SignIn(string username , string password);
         [OperationContract]
-        string Register(UserModel nn);
+        string Register(UserModel usermodel);
         #endregion
     }
 

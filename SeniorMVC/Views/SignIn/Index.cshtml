@@ -1,8 +1,532 @@
-﻿
+﻿@model SeniorMVC.Models.UserMVC
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/SignIn_Layout1.cshtml";
 }
 
 <h2>Index</h2>
+  <!--WRAPPER START-->
+<div class="wrapper">
+    <!--HEADER START-->
+    <header>
+        <!--TOP STRIP START-->
+        <div class="top-strip">
+            <div class="container">
+                <!--LANGUAGE SECTION START-->
+                <div class="language">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="dLabel1" role="button" data-toggle="dropdown" data-target="#" href="http://crunchpress.com/page.html">
+                            Language
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel1">
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">English</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Spenish</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Turkish</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Arabic</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="currency" role="button" data-toggle="dropdown" data-target="#" href="http://crunchpress.com/page.html">
+                            Currency
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="currency">
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Dollar</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Euro</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Dirham</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Rupees</a></li>
+                            <li><a href="http://crunchpress.com/html/iknow/signin.html#">Dinar</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--LANGUAGE SECTION END-->
+                <!--ACCOUNT SECTION START-->
+                <div class="account">
+                    <ul>
+                        <li><a href="http://crunchpress.com/html/iknow/signin.html#">Subscribe</a></li>
+                        <li><a href="http://crunchpress.com/html/iknow/signin.html#">Sign Out</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="account" role="button" data-toggle="dropdown" data-target="#" href="http://crunchpress.com/page.html">
+                                    My Account
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="account">
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Profile</a></li>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Account Setting</a></li>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Privacy Setting</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--ACCOUNT SECTION START-->
+            </div>
+        </div>
+        <!--TOP STRIP END-->
+        <!--NAVIGATION START-->
+        <div class="navigation-bar">
+            <div class="container">
+                <div class="logo">
+                    <a href="http://crunchpress.com/html/iknow/index.html"><img src=@Url.Content("/Content/Education_Signin_files/logo.png") alt=""></a>
+                </div>
+                <div class="cart">
+                    <ul>
+                        <li>
+                            <div class="search-bar"><i class="fa fa-search"></i></div>
+                            <div class="search-box">
+                                <input type="text" class="input-block-level">
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="http://crunchpress.com/page.html">
+                                <i class="fa fa-briefcase"></i><span>€0</span>
+                            </a>
+                            <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <p>0 items in shopping bag</p>
+                                <p class="color">Unfortunately, your shopping bag is emtpy.</p>
+                                <a href="http://crunchpress.com/html/iknow/signin.html#" class="return">Return to the Shop</a>
+                            </div>
+                        </li>
+                        <li><i class="fa fa-star"></i><span>3</span></li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="container">
+                                <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="nav-collapse collapse">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)">Home</a>
+                                            <ul>
+                                                <li><a href="http://crunchpress.com/html/iknow/index.html">Home Page Default</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/index-1.html">Home Page 1</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/index-2.html">Home Page 2</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/index-3.html">Home Page 3</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/index-4.html">Home Page 4</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/index-sidemenu.html">Home Page 5</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Blog</a>
+                                            <ul>
+                                                <li><a href="http://crunchpress.com/html/iknow/blog.html">Blog</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/blog-detail.html">Blog Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="http://crunchpress.com/html/iknow/services.html">Services</a></li>
+                                        <li>
+                                            <a href="javascript:void(0)">Events</a>
+                                            <ul>
+                                                <li><a href="http://crunchpress.com/html/iknow/events.html">Events</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/events-detail.html">Event Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Courses</a>
+                                            <ul>
+                                                <li><a href="http://crunchpress.com/html/iknow/courses.html">Courses</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/courses-detail.html">Course Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Pages</a>
+                                            <ul>
+                                                <li><a href="http://crunchpress.com/html/iknow/about-us.html">About us</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/404.html">Error 404</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/faq.html">FAQs</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/gallery.html">Gallery</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/news.html">News</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/our-lessons.html">Our Lessons</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/search-result.html">Search Result</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/signin.html">Sign In</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/student-login.html">Student Login</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/student-profile.html">Student Profile</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/teacher-profile.html">Teacher Profile</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/team.html">Our Team</a></li>
+                                                <li><a href="http://crunchpress.com/html/iknow/edit-profile.html">Edit Your Profile</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="http://crunchpress.com/html/iknow/contact-us.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--NAVIGATION END-->
+    </header>
+    <!--HEADER END-->
+    <!--BANNER START-->
+    <div class="page-heading">
+        <div class="container">
+            <h2>Sign In</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr</p>
+        </div>
+    </div>
+    <!--BANNER END-->
+    <!--CONTANT START-->
+    <div class="contant">
+        <div class="container">
+            <div class="buttons">
+                <button class="btn1 login-btn"><i class="fa fa-facebook"></i>Login with Facebook</button>
+
+                <button class="btn2 login-btn"><i class="fa fa-google-plus"></i>Login with Google</button>
+
+                <button class="btn3 login-btn"><i class="fa fa-yahoo"></i>Login with Yahoo</button>
+
+                <button class="btn4 login-btn"><i class="fa fa-linkedin"></i>Login with Linkein</button>
+
+                <button class="btn5 login-btn"><i class="fa fa-windows"></i>Login with Window Live</button>
+
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <div class="form-box">
+                        <form action="@Url.Action("LogIn", "SignIn")" method="post">
+
+                            <div class="form-body">
+                                <fieldset>
+                                    <legend>Login Below:</legend>
+                                    <label>Email Address</label>
+                                    <input type="text" placeholder="Enter your E-mail ID" class="input-block-level">
+                                    <label>Password</label>
+                                    <input type="password" placeholder="Enter Password" class="input-block-level">
+
+                                    <button type="submit" class="btn-style">Submit</button>
+                                </fieldset>
+                            </div>
+                            <div class="footer">
+                                <ul>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">I Forgot My Password</a></li>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Re-send Confirmation Email</a></li>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Sign up Today for Free!</a></li>
+                                    <li><a href="http://crunchpress.com/html/iknow/signin.html#">Terms of Use</a></li>
+                                </ul>
+                                <button class="btn-style">Register</button>
+                            </div>}
+                        </form>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="form-box">
+                        <form method="Post" action="@Url.Action("Register","SignIn")">
+                            <div class="form-body">
+                                <fieldset>
+                                    <legend>First time here? Sign up now!</legend>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            @Html.LabelFor(m => m.Username)
+                                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                        </div>
+                                        <div class="span6">
+                                            <label>Last Name</label>
+                                            <input type="text" placeholder="Last Name" class="input-block-level">
+                                        </div>
+                                    </div>
+                                    <label>Email Address</label>
+                                    <input type="text" placeholder="Enter your E-mail ID" class="input-block-level">
+                                    @Html.LabelFor(m => m.Password)
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                                    <button type="submit" class="btn-style">Sign Up</button>
+                                </fieldset>
+                            </div>
+                            <div class="footer">
+                                <p>By Registering, You Accept Terms &amp; Conditions</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FOLLOW US SECTION START-->
+        <section class="follow-us">
+            <div class="container">
+                <div class="row">
+                    <div class="span4">
+                        <div class="follow">
+                            <a href="http://crunchpress.com/html/iknow/signin.html#">
+                                <i class="fa fa-facebook"></i>
+                                <div class="text">
+                                    <h4>Follow us on Facebook</h4>
+                                    <p>Faucibus toroot menuts</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="follow">
+                            <a href="http://crunchpress.com/html/iknow/signin.html#">
+                                <i class="fa fa-google"></i>
+                                <div class="text">
+                                    <h4>Follow us on Google Plus</h4>
+                                    <p>Faucibus toroot menuts</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="follow">
+                            <a href="http://crunchpress.com/html/iknow/signin.html#">
+                                <i class="fa fa-linkedin"></i>
+                                <div class="text">
+                                    <h4>Follow us on Linkedin</h4>
+                                    <p>Faucibus toroot menuts</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--FOLLOW US SECTION END-->
+    </div>
+    <!--CONTANT END-->
+    <!--FOOTER START-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <!--OUR ARTICLE WIDGET START-->
+                <div class="span3">
+                    <div class="widget widget-article">
+                        <h2>Our Articles</h2>
+                        <div class="bx-wrapper" style="max-width: 100%;">
+                            <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 226px;">
+                                <ul class="bxslider" style="width: auto; position: relative;">
+                                    <li style="float: none; list-style: none; position: absolute; display: none; width: 270px; z-index: 0;">
+                                        <div class="thumb">
+                                            <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("Education_Signin_files/article.jpg") alt=""></a>
+                                        </div>
+                                        <div class="text">
+                                            <p class="color">Duis semper nuncid</p>
+                                            <p>Semper nunc id metus sagittis nec ullamcorper justo qondimentum mattis.</p>
+                                        </div>
+                                    </li>
+                                    <li style="float: none; list-style: none; position: absolute; width: 270px; display: list-item; z-index: 50;">
+                                        <div class="thumb">
+                                            <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("Education_Signin_files/article(1).jpg") alt=""></a>
+                                        </div>
+                                        <div class="text">
+                                            <p class="color">Duis semper nuncid</p>
+                                            <p>Semper nunc id metus sagittis nec ullamcorper justo qondimentum mattis.</p>
+                                        </div>
+                                    </li>
+                                    <li style="float: none; list-style: none; position: absolute; width: 270px; display: none; z-index: 0;">
+                                        <div class="thumb">
+                                            <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("Education_Signin_files/article(1).jpg") alt=""></a>
+                                        </div>
+                                        <div class="text">
+                                            <p class="color">Duis semper nuncid</p>
+                                            <p>Semper nunc id metus sagittis nec ullamcorper justo qondimentum mattis.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><div class="bx-controls bx-has-pager bx-has-controls-direction"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="0" class="bx-pager-link">1</a></div><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="1" class="bx-pager-link active">2</a></div><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="2" class="bx-pager-link">3</a></div></div><div class="bx-controls-direction"><a class="bx-prev" href="http://crunchpress.com/html/iknow/signin.html"></a><a class="bx-next" href="http://crunchpress.com/html/iknow/signin.html"></a></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!--OUR ARTICLE WIDGET END-->
+                <!--TOP RATED WIDGET START-->
+                <div class="span3">
+                    <div class="widget widget-top-rated">
+                        <h2>Top Rated Courses</h2>
+                        <ul>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>Business Plan Buil a Business Plan..</p>
+                                    <span>$17.5</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>Business Plan Buil a Business Plan..</p>
+                                    <span>$127.5</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>Business Plan Buil a Business Plan..</p>
+                                    <span>$150.5</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--TOP RATED WIDGET END-->
+                <!--RECENT REVIES WIDGET START-->
+                <div class="span3">
+                    <div class="widget widget-top-rated">
+                        <h2>Recent Reviews</h2>
+                        <ul>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>Trusted Certificate</p>
+                                    <span>By Demo User</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>1200 Video Lessons</p>
+                                    <span>By the Retailer</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <a href="http://crunchpress.com/html/iknow/signin.html#"><img src=@Url.Content("/Content/Education_Signin_files/toprated.jpg") alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <p>1200 Video Lessons</p>
+                                    <span>By the Retailer</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--RECENT REVIES WIDGET END-->
+                <!--RECENT POSTS WIDGET START-->
+                <div class="span3">
+                    <div class="widget widget-posts">
+                        <h2>Recent Posts</h2>
+                        <ul>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                            <li><p>User On <a href="http://crunchpress.com/html/iknow/signin.html#">First post Name</a></p></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--RECENT POSTS WIDGET END-->
+            </div>
+
+        </div>
+        <div class="tweets">
+            <div class="container">
+                <div class="tweet-contant">
+                    <i class="fa fa-twitter"></i>
+                    <h4>Weekly Updates</h4>
+                    <div class="bx-wrapper" style="max-width: 100%;">
+                        <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 30px;">
+                            <ul class="bxslider" style="width: auto; position: relative;">
+                                <li style="float: none; list-style: none; position: absolute; display: none; width: 1170px; z-index: 0;">
+                                    <p>Are you a morning person or is the night time the right time? Interesting perspectives on the forum - <a href="http://crunchpress.com/html/iknow/signin.html#">http://t.co/tdEHlbZf</a></p>
+                                </li>
+                                <li style="float: none; list-style: none; position: absolute; width: 1170px; display: list-item; z-index: 50;">
+                                    <p>Dolor donec sagittis sapien. Ante aptent feugiat adipisicing. Duis int. - <a href="http://crunchpress.com/html/iknow/signin.html#">http://t.co/tdEHlbZf</a></p>
+                                </li>
+                                <li style="float: none; list-style: none; position: absolute; width: 1170px; display: none; z-index: 0;">
+                                    <p>Duis interdum olor donec sagittis sapien. Ante aptent feugiat adipisicing - <a href="http://crunchpress.com/html/iknow/signin.html#">http://t.co/tdEHlbZf</a></p>
+                                </li>
+
+                            </ul>
+                        </div><div class="bx-controls bx-has-pager bx-has-controls-direction"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="0" class="bx-pager-link">1</a></div><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="1" class="bx-pager-link active">2</a></div><div class="bx-pager-item"><a href="http://crunchpress.com/html/iknow/signin.html" data-slide-index="2" class="bx-pager-link">3</a></div></div><div class="bx-controls-direction"><a class="bx-prev" href="http://crunchpress.com/html/iknow/signin.html"></a><a class="bx-next" href="http://crunchpress.com/html/iknow/signin.html"></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer">
+            <div class="container">
+                <div class="row">
+                    <!--OUR ARTICLE WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-categories">
+                            <h2>Course Categories</h2>
+                            <ul>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Site Style Changer</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Bredcrums</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Bottom Sidebar</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Right Sidebar</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Left Sidebar</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Sitemap Page Setting</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Site Style Changer</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Bredcrums</a></li>
+                                <li><a href="http://crunchpress.com/html/iknow/signin.html#">Bottom Sidebar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--OUR ARTICLE WIDGET END-->
+                    <!--TOP RATED WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-facebook">
+                            <h2>Fcebook</h2>
+                            <div class="pull-left">
+                                <img src=@Url.Content("/Content/Education_Signin_files/facebook-widget.jpg") alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!--TOP RATED WIDGET END-->
+                    <!--RECENT REVIES WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-newsletter">
+                            <h2>Newsletters</h2>
+                            <div class="newsletter-contant">
+                                <p>Subscribe to be the first to know about best deals and exclusive offers!</p>
+                                <p><input type="text" class="input-block-level"></p>
+                                <p><button>Subscribe</button></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--RECENT REVIES WIDGET END-->
+                    <!--RECENT POSTS WIDGET START-->
+                    <div class="span3">
+                        <div class="widget widget-map">
+                            <h2>Where we are?</h2>
+                            <div class="location-map">
+                                @*<div id="map-canvas" style="position: relative; overflow: hidden;">
+                                    <div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
+                                        <div class="gm-style" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
+                                        <div tabindex="0" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default;"><div style="z-index: 1; position: absolute; top: 0px; left: 0px; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: -37px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: 219px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: -37px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: 219px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: -37px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: 219px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: -37px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: 219px;"></div></div></div></div><div style="position: absolute; z-index: 0; left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="position: absolute; left: -35px; top: -37px; transition: opacity 200ms ease-out;"><img draggable="false" alt="" src="./Education_Signin_files/vt" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -35px; top: 219px; transition: opacity 200ms ease-out;"><img draggable="false" alt="" src="./Education_Signin_files/vt(1)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 221px; top: -37px; transition: opacity 200ms ease-out;"><img draggable="false" alt="" src="./Education_Signin_files/vt(2)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 221px; top: 219px; transition: opacity 200ms ease-out;"><img draggable="false" alt="" src="./Education_Signin_files/vt(3)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div style="z-index: 2; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;" class="gm-style-pbc"><p class="gm-style-pbt"></p></div><div style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px;"><div style="z-index: 1; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px;"></div></div><div style="z-index: 4; position: absolute; top: 0px; left: 0px; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=40.674389,-73.9455&amp;z=12&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="./Education_Signin_files/google_white5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 216px; height: 148px; position: absolute; left: 5px; top: 25px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">Map data ©2018 Google</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img alt="" src="./Education_Signin_files/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 71px; bottom: 0px; width: 121px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>Map data ©2018 Google</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">Map data ©2018 Google</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><button draggable="false" title="Toggle fullscreen view" aria-label="Toggle fullscreen view" type="button" style="background: none; border: 0px; margin: 10px 14px; padding: 0px; position: absolute; cursor: pointer; user-select: none; width: 25px; height: 25px; overflow: hidden; top: 0px; right: 0px;"><img alt="" src="./Education_Signin_files/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: -52px; top: -86px; width: 164px; height: 175px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></button><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; display: none; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@40.674389,-73.9455,12z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="28" controlheight="93" style="margin: 10px; user-select: none; position: absolute; bottom: 107px; right: 28px;"><div class="gmnoprint" controlwidth="28" controlheight="55" style="position: absolute; left: 0px; top: 38px;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255); width: 28px; height: 55px;"><button draggable="false" title="Zoom in" aria-label="Zoom in" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./Education_Signin_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(230, 230, 230); top: 0px;"></div><button draggable="false" title="Zoom out" aria-label="Zoom out" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./Education_Signin_files/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: -15px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button></div></div><div class="gm-svpc" controlwidth="28" controlheight="28" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; width: 28px; height: 28px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 1px; top: 1px;"></div><div style="position: absolute; left: 1px; top: 1px;"><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px;"><img alt="" src="./Education_Signin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -26px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Pegman is on top of the Map" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img alt="" src="./Education_Signin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -52px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img alt="" src="./Education_Signin_files/cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -78px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; display: none;"><img alt="" src="./Education_Signin_files/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 28px; height: 28px; overflow: hidden; position: absolute; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; top: 0px; cursor: pointer;"><img alt="" src="./Education_Signin_files/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; left: 0px; top: 0px;"><div class="gm-style-mtc" style="float: left; position: relative;"><div role="button" tabindex="0" title="Show street map" aria-label="Show street map" aria-pressed="false" draggable="false" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 22px;">Map</div></div><div class="gm-style-mtc" style="float: left; position: relative;"><div role="button" tabindex="0" title="" aria-label="" aria-pressed="true" draggable="false" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 65px; border-left: 0px; font-weight: 500;">Custom Style</div></div></div></div></div></div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!--RECENT POSTS WIDGET END-->
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>© Copyrights 2014-15. All Rights Reserved <a href="http://crunchpress.com/html/iknow/signin.html#">CrunchPress</a></p>
+            </div>
+        </div>
+    </footer>
+    <!--FOOTER END-->
+</div>
+<!--WRAPPER END-->
+<!-- Jquery Lib -->
+<script src=@Url.Content("Education_Signin_files/jquery-1.11.0.min.js.download")></script>
+<!-- Bootstrap -->
+<script src=@Url.Content("/Content/Education_Signin_files/bootstrap.min.js.download")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/jquery.bxslider.min.js.download")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/js")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/owl.carousel.js.download")></script>
+<script type="text/javascript" src=@Url.Content("/Content/Education_Signin_files/jquery.easy-pie-chart.js.download")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/jquery.prettyPhoto.js.download")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/modernizr.js.download")></script>
+<script type="text/javascript" src=@Url.Content("/Content/Education_Signin_files/skrollr.min.js.download")></script>
+<script src=@Url.Content("/Content/Education_Signin_files/functions.js.download")></script>
 

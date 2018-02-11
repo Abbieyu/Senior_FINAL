@@ -56,7 +56,7 @@
   <xs:element name="Register">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="nn" nillable="true" type="q5:UserModel" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="usermodel" nillable="true" type="q5:UserModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

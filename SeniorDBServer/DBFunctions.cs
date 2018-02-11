@@ -477,16 +477,16 @@ namespace SeniorDBServer
             var cont = new SeniorLinqDataContext();
             User temp = new User();
             temp.Username = user.Username;
-            string tp = user.Password;
-            temp.Password = tp;
+            //string tp = user.Password;
+           // temp.Password = tp;
             temp.Password = user.Password;// % 10).ToString();
             temp.AdminFlag = user.AdminFlag;
             cont.Users.InsertOnSubmit(temp);
             cont.SubmitChanges();
             var query = (from u in cont.Users where temp.Username == u.Username select u.Username).SingleOrDefault();
-            if (query != null)
+          //  if (query != null)
                 return 1;
-            return -1;
+           // return -1;
         }
         //public int DeleteUser(string username)
         //{

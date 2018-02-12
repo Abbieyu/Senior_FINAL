@@ -274,6 +274,43 @@ namespace SeniorDBServer
             return gfmodels;
             
         }
+        public List<GameFrameModel> GameByNumPlayer(int nop)
+        {
+            var cont = new SeniorLinqDataContext();
+            List<GameFrameModel> gameframemodels = new List<GameFrameModel>();
+            if (nop < 4)
+            {
+                var query = (from gf in cont.GameFrames where gf.MinPlayers == gf.MaxPlayers && gf.MinPlayers == nop select gf).ToList();// all gameframes with nop players
+                List<GameFrameModel> gamemodels = new List<GameFrameModel>();
+                for (int i = 0; i < query.Count; i++)
+                {
+                    GameFrameModel Model1 = new GameFrameModel();
+                    Model1.Title = query[i].Title;
+                    Model1.MaxPlayers = query[i].MaxPlayers;
+                    Model1.MaxStrategies = query[i].MaxStrategies;
+                    Model1.MinPlayers = query[i].MinPlayers;
+                    Model1.MinStrategies = query[i].MinStrategies;
+                    gamemodels.Add(Model1);
+                }
+
+            }
+            else
+            {
+                var query = (from gf in cont.GameFrames where gf.MaxPlayers > 3 select gf).ToList();//all N gameframes
+                for (int i = 0; i < query.Count; i++)
+                {
+                    GameFrameModel Model1 = new GameFrameModel();
+                    Model1.Title = query[i].Title;
+                    Model1.MaxPlayers = query[i].MaxPlayers;
+                    Model1.MaxStrategies = query[i].MaxStrategies;
+                    Model1.MinPlayers = query[i].MinPlayers;
+                    Model1.MinStrategies = query[i].MinStrategies;
+                    gameframemodels.Add(Model1);
+                }
+            }
+            return gameframemodels;
+
+        }
 
         #endregion
         #region GamePlayer
@@ -325,6 +362,23 @@ namespace SeniorDBServer
                 return gpm;
             }
             return null;
+        }
+        public List<int> RetreivePlayerGames(string username)//returns null if no games/players were found//a list of all Gids associated to this player when successful//checked
+        {
+            var cont = new SeniorLinqDataContext();
+            var usercheck = (from user in cont.Users where user.Username == username select user).SingleOrDefault();
+            if(usercheck==null)
+                return null;
+            var query = (from games in cont.Gameplayers where games.Username == username select games).ToList();//returns all games with associated username
+            if (query == null)
+                return null;
+            List<int> Gids = new List<int>();
+            for(int i=0;i<query.Count();i++)
+            {
+                Gids.Add(query[i].GID);
+            }
+            return Gids;
+            
         }
         #endregion
         #region GFStrategy
@@ -526,55 +580,67 @@ namespace SeniorDBServer
   
         
 
-        public int UpdateGamePlayer(int gameplayerid)
+        //public int UpdateGamePlayer(int gameplayerid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public int UpdateGFStrategy(int gfstrategyid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public int UpdateNashPointProfile(int NPID)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public int UpdateNPPayoff(int payoffid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public int UpdateNPStrategy(int npstrategyid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public int UpdateUser(string username , string password)//returns 1 on success // -2 if the user was not found // -1 on failure//checked
         {
-            throw new NotImplementedException();
+            var cont = new SeniorLinqDataContext();
+            var query = (from user in cont.Users where user.Username == username select user).SingleOrDefault();
+            var temp = new UserModel();
+            if (query != null)
+            {
+                query.Password = password;
+                cont.SubmitChanges();
+            }
+            else return -2;
+            var query2 = (from user in cont.Users where user.Username == username select user).SingleOrDefault();
+            if (query2.Password == password)
+                return 1;
+            return -1;
         }
 
-        public int UpdateGFStrategy(int gfstrategyid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateNashPointProfile(int NPID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateNPPayoff(int payoffid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateNPStrategy(int npstrategyid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateUser(int userid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateGamePlayer(string username)
-        {
-            throw new NotImplementedException();
-        }
+        //public int UpdateGamePlayer(string username)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public int DeleteNPStrategy(int nptrategy, string username)
-        {
+        {   
             throw new NotImplementedException();
         }
 
-        public int UpdateNPStrategy(int npstrategyid, string username)
-        {
-            throw new NotImplementedException();
-        }
+        //public int UpdateNPStrategy(int npstrategyid, string username)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public int UpdateNPPayoff(int payoffid, string username)
-        {
-            throw new NotImplementedException();
-        }
+        //public int UpdateNPPayoff(int payoffid, string username)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
        
         

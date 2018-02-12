@@ -48,7 +48,7 @@
     <Compile Include="INsashServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NashServices.cs" />
-    <Compile Include="Service References\DBPr\Reference.cs">
+    <Compile Include="Service References\SeniorDBServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -64,14 +64,17 @@
     <None Include="Properties\DataSources\SeniorDBServer.NPPayoffModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.NPStrategyModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.UserModel.datasource" />
-    <None Include="Service References\DBPr\SeniorDBServer.xsd">
+    <None Include="Service References\SeniorDBServiceRef\DBFunctions.wsdl" />
+    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DBPr\service.wsdl" />
-    <None Include="Service References\DBPr\service.xsd">
+    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DBPr\service1.xsd">
+    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer3.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -79,25 +82,28 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DBPr\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DBPr\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DBPr\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DBPr\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SeniorDBServer\SeniorDBServer.csproj">
       <Project>{916C8089-4D1A-41C9-8252-49DC4E89F718}</Project>
       <Name>SeniorDBServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SeniorDBServiceRef\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SeniorDBServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SeniorDBServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SeniorDBServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

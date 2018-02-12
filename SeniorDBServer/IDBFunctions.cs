@@ -18,13 +18,13 @@ namespace SeniorDBServer
         [OperationContract]
         GameFrameModel RetreiveGameFrame(string T);
         [OperationContract]
-        int UpdateGameFrameMinPlayers(string title , int min);
+        int UpdateGameFrameMinPlayers(string title, int min);
         [OperationContract]
-        int UpdateGameFrameMaxPlayers(string title , int max);
+        int UpdateGameFrameMaxPlayers(string title, int max);
         [OperationContract]
-        int UpdateGameFrameMinStrategies(string title , int min );
+        int UpdateGameFrameMinStrategies(string title, int min);
         [OperationContract]
-        int UpdateGameFrameMaxStrategies(string title , int max);
+        int UpdateGameFrameMaxStrategies(string title, int max);
         [OperationContract]
         List<GameFrameModel> RetreiveAllGameFrames();
         #endregion
@@ -34,8 +34,9 @@ namespace SeniorDBServer
         //[OperationContract]
         //int DeleteUser(string username);
         [OperationContract]
-        UserModel RetreiveUser(string username , string password);
-        int UpdateUser(int userid);
+        UserModel RetreiveUser(string username, string password);
+        [OperationContract]
+        int UpdateUser(string username, string password);
         #endregion
         #region GamePlayer
         [OperationContract]
@@ -44,10 +45,12 @@ namespace SeniorDBServer
         //int DeleteGamePlayer(string username);
         [OperationContract]
         List<GamePlayerModel> RetreiveGamePlayers(int gid);
-      //  [OperationContract]
-        //GameFrameModel RetreiveGamePlayer(string username);
         [OperationContract]
-        int UpdateGamePlayer(string username);
+        List<int> RetreivePlayerGames(string username);
+        //  [OperationContract]
+        //GameFrameModel RetreiveGamePlayer(string username);
+        // [OperationContract]
+        //  int UpdateGamePlayer(string username);
 
         #endregion
         #region Game
@@ -61,6 +64,9 @@ namespace SeniorDBServer
         List<GameModel> RetreiveAllGames();
         [OperationContract]
         int UpdateGameNumofPlayers(int gid, int nop);
+
+        [OperationContract]
+        List<GameFrameModel> GameByNumPlayer(int nop);
         #endregion
         #region GFStrategy
         [OperationContract]
@@ -69,8 +75,8 @@ namespace SeniorDBServer
         //int DeleteGFStrategy(int gstrategy);
         [OperationContract]
         GFStrategyModel RetreiveGFStrategy(int gfstrategyid);
-        [OperationContract]
-        int UpdateGFStrategy(int gfstrategyid);
+        //[OperationContract]
+        //int UpdateGFStrategy(int gfstrategyid);
         #endregion
         #region NPStrategy
         [OperationContract]
@@ -78,9 +84,9 @@ namespace SeniorDBServer
         //[OperationContract]
         //int DeleteNPStrategy(int nptrategy,string username);
         [OperationContract]
-        NPStrategyModel RetreiveNPStrategy(int npstrategyid,string username);
-        [OperationContract]
-        int UpdateNPStrategy(int npstrategyid,string username);
+        NPStrategyModel RetreiveNPStrategy(int npstrategyid, string username);
+        //[OperationContract]
+        //int UpdateNPStrategy(int npstrategyid,string username);
         #endregion
         #region NashPointProfile
         [OperationContract]
@@ -89,8 +95,8 @@ namespace SeniorDBServer
         //int DeleteNashPointProfile(int NPID);
         [OperationContract]
         NashPointProfileModel RetreiveNashPointProfile(int NPID);
-        [OperationContract]
-        int UpdateNashPointProfile(int NPID);
+        //[OperationContract]
+        //int UpdateNashPointProfile(int NPID);
         #endregion
         #region NPPayoff
         [OperationContract]
@@ -98,12 +104,18 @@ namespace SeniorDBServer
         //[OperationContract]
         //int DeleteNPPayoff(int payoffid , string username);
         [OperationContract]
-        NPPayoffModel RetreiveNPPayoff(int payoffid , string username);
-        [OperationContract]
-        int UpdateNPPayoff(int payoffid , string username);
+        NPPayoffModel RetreiveNPPayoff(int payoffid, string username);
+        //[OperationContract]
+        //int UpdateNPPayoff(int payoffid , string username);
         #endregion
     }
-    
+
+    [DataContract]
+    public class TEST
+    {
+        public int test { get; set; }
+    }
+
     [DataContract]
     public class GameFrameModel
     {

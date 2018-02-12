@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using SeniorServer.DBPr;
+using SeniorServer.SeniorDBServiceRef;
 using SeniorDBServer;
-using SeniorServer;
+
 namespace SeniorServer
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
@@ -581,16 +581,16 @@ namespace SeniorServer
         
         public UserModel SignIn(UserModel user)
         {
-            var prox = new DBPr.DBFunctionsClient();
+            var prox = new SeniorDBServiceRef.DBFunctionsClient();
             UserModel usern = prox.RetreiveUser(user.Username, user.Password);
             return usern;
         }
 
         public string Register(UserModel us)
         {
-            var prox = new DBFunctionsClient();
-            var pro = new DBPr.DBFunctionsClient();
-            DBPr.DBFunctionsClient p = new DBFunctionsClient();
+         //   var prox = new DBFunctionsClient();
+            var pro = new SeniorDBServiceRef.DBFunctionsClient();
+            SeniorDBServiceRef.DBFunctionsClient p = new DBFunctionsClient();
             try
             {
                 pro.Open();
@@ -603,6 +603,13 @@ namespace SeniorServer
             }
 
                 return "done!";
+            
+        }
+
+        public void ChooseGame(int nop)
+        {
+            List<GameFrameModel> availableGFs = new List<GameFrameModel>();
+            var cont = SeniorDBServiceRef.DBFunctionsClient();
             
         }
         #endregion

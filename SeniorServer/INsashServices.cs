@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using SeniorDBServer;
+using SeniorServer.SeniorDBServiceRef;
 namespace SeniorServer
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
@@ -47,6 +48,8 @@ namespace SeniorServer
         UserModel SignIn(UserModel s);
         [OperationContract]
         string Register(UserModel usermodel);
+        [OperationContract]
+        void ChooseGame(int nop);
         #endregion
     }
 

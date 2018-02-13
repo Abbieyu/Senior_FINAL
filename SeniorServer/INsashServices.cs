@@ -128,7 +128,7 @@ namespace SeniorServer
         public List<string> strategies { set; get; }
         public List<string> preferences { set; get; }
         public List<List<string>> CP { set; get; }
-
+        public List<NE_Profile> P { set; get; }
 
     }
     #region NPlayer

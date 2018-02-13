@@ -17,6 +17,7 @@ namespace SeniorServer
         public Dictionary<string, List<string>> Strategies = new Dictionary<string, List<string>>();//Dictionary (player.usrname , list<userstrategies>)
   //    public Dictionary<int, int> StrategiesPointer = new Dictionary<int, int>();//index , GID
         List<PF> playerInfo = new List<PF>();
+        List<NE_Profile> neprofiles = new List<NE_Profile>();
         #region 2Players
         public List<int> Two_PlayerWrapper(string desiredGame , int GID)//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
         {
@@ -110,7 +111,32 @@ namespace SeniorServer
             }
             return temp;
         }
+        //public void P2Preferences(List<PF> pf , List<NE_Profile> nep)
+        //{
+        //    List<string> players_preferences = new List<string>();
+        //    PayOffs_generater(players_preferences, neprofiles);
+        //    List<NE_Profile> Max_Payoff = new List<NE_Profile>();//Max payyoffs
+        //    List<string> usernames = new List<string>();
+        //    int u = 0;
+        //    foreach(string us in usernames)
+        //    {
+        //        usernames.Add(pf[u++].username);
+        //    }
 
+        //    for (int i = 0; i < p1_numStrategy; i++)//loop: rows/p2
+        //    {
+        //        for (int j = 0; j < p2_numStrategy * p3_numStrategy; j = j + p2_numStrategy)
+        //        {
+        //            List<NE_Profile> tempRes = P2search_Max_Row(j, i, p2_numStrategy, p); // calls function and get MaxPayoff_row
+        //            Max_Payoff.AddRange(tempRes); // merging the results of the called function with Max_Payoff matrix
+        //        }
+        //    }
+        //    for (int j = 0; j < p2_numStrategy * p3_numStrategy; j++)//loop col/p1
+        //    {
+        //        List<NE_Profile> tempRes = P1search_Max_Col(j, p1_numStrategy, p);// calls function and get MaxPayoff_col
+        //        Max_Payoff.AddRange(tempRes);// merging the results of the called function with Max_Payoff matrix
+        //    }
+        //}
         #endregion
         #region 3Players
         public List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies)
@@ -696,6 +722,17 @@ namespace SeniorServer
             //allstrats.AddRange(Strategies.Values);
             List<string> usernames = Strategies.Keys.ToList();
             List<string> strategies = new List<string>();
+            int i = 0;
+            foreach(List<string> currstratlist in Strategies.Values)
+            {
+
+                strategies[i++] = currstratlist[i++];
+            }
+            for(int j=0;j<usernames.Count;j++)
+            {
+                if(usernames[i] == username)
+                    allstrats[i] =strategies[i];
+            }
             //for (int i = 0; i < strategies.Count; i++)
             //{ if (usernames[i] == username)
             // //       allstrats.Add();
@@ -737,6 +774,7 @@ namespace SeniorServer
                     newGame.Title = desiredgame;
                     GID = prox.AddGame(newGame);//add the new game 
                     List<List<string>> strategies = new List<List<string>>();
+                    List<string> tempstrategies = new List<string>();
                     for (int i=0;i<maxplayers;i++)// search the queue to add the players
                     {
                         GamePlayerModel player = new GamePlayerModel();
@@ -744,13 +782,16 @@ namespace SeniorServer
                         player.UserName = opengames[i];
                         player.GID = GID;
                         prox.AddGamePlayer(player);
-                        strategies.Add(FindPlayerStrategies(player.UserName));
-                        ppp.GID = player.GID;
-                        ppp.strategies = FindPlayerStrategies(player.UserName);
                         ppp.username = player.UserName;
+                        Strategies.TryGetValue(ppp.username, out tempstrategies);
+                        strategies.Add(tempstrategies);
+                        ppp.GID = player.GID;
+                       // ppp.strategies = FindPlayerStrategies(player.UserName);
+                        ppp.strategies = tempstrategies;
                         playerInfo.Add(ppp);
                     }
-                    List<List<string>> cp = Cartisian_Product(strategies, new List<NE_Profile>());
+                    
+                    List<List<string>> cp = Cartisian_Product(strategies,neprofiles);
                     foreach (PF p in playerInfo)
                     {
                         p.CP = cp;

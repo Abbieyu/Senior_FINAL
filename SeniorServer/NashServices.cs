@@ -9,9 +9,11 @@ using SeniorDBServer;
 
 namespace SeniorServer
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)]
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class NashServices : INsashServices
     {
+        public Dictionary<string, string> Player_GameFrame_Queue = new Dictionary<string, string>();
         #region 2Players
         public List<int> Two_PlayerWrapper()//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
         {
@@ -104,7 +106,7 @@ namespace SeniorServer
             }
             return temp;
         }
-       
+
         #endregion
         #region 3Players
         public List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies)
@@ -172,7 +174,7 @@ namespace SeniorServer
 
             return results;
         }
-        
+
         public List<int> Three_PlayerWrapper()
         {
             #region Input Exercises
@@ -249,7 +251,7 @@ namespace SeniorServer
             NE_Profile element_maxPayoff;//temp for the first element of maxpayoff
             List<NE_Profile> Paired_p1_p2 = new List<NE_Profile>();//to be used to find the max for p3
             List<NE_Profile> Finale = new List<NE_Profile>();//NASH EQUILIBRIUM PRIFLES ARE STORED HERE
-             while (Max_Payoff.Count > 0)//pairing the results
+            while (Max_Payoff.Count > 0)//pairing the results
             {
                 element_maxPayoff = new NE_Profile(Max_Payoff[k].payoff1, Max_Payoff[k].payoff2, Max_Payoff[k].payoff3, Max_Payoff[k].row, Max_Payoff[k].col);//first node in list
                 PairedMax = Max_Payoff.FindAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row)).ToList<NE_Profile>();//Finding all matching profiles
@@ -266,7 +268,7 @@ namespace SeniorServer
                 List<int> ErrorList = new List<int>();
                 ErrorList.Add(0);
                 return ErrorList;
-            } 
+            }
             else
             {
 
@@ -573,22 +575,65 @@ namespace SeniorServer
 
 
         #endregion
-
         #region Admin Functions
-        #endregion
+        public string AddGameFrame(GameFrameModel gf)
+        {
+            var pro = new SeniorDBServiceRef.DBFunctionsClient();
+            try
+            {
+                int result = pro.AddGameFrame(gf);
+                if (result == 1)
+                    return "success";
+                else if (result == -1)
+                    return "parameteres are incoherent";
+                else if (result == -2)
+                    return "this GF already exists";
+                else return "error";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+        public List<GameFrameModel> DisplayFreeGameFrames()
+        {
+            var prox = new DBFunctionsClient();
+            prox.Open();
+            var GameFrames = prox.RetreiveFreeGameFrame().ToList();
+            return GameFrames;
+        }
+        public string DeleteGameFrame(string title)
+        {
+            var cont = new DBFunctionsClient();
+            cont.Open();
+            List<GameFrameModel> unlinkedGF = new List<GameFrameModel>();
 
+            int result = cont.DeleteGameFrame(title);
+            if (result == 1)
+                return "sucess";
+            else return "error";
+        }
+        public string EditGameFrame(GameFrameModel edited)
+        {
+            var prox = new DBFunctionsClient();
+            prox.Open();
+            int result = prox.UpdateGameFrame(edited);
+            if (result == 1)
+                return "success";
+            else return "error";
+        }
+        #endregion
         #region User Functions
-        
         public UserModel SignIn(UserModel user)
         {
             var prox = new SeniorDBServiceRef.DBFunctionsClient();
             UserModel usern = prox.RetreiveUser(user.Username, user.Password);
             return usern;
-        }
 
+        }
         public string Register(UserModel us)
         {
-         //   var prox = new DBFunctionsClient();
+            //   var prox = new DBFunctionsClient();
             var pro = new SeniorDBServiceRef.DBFunctionsClient();
             SeniorDBServiceRef.DBFunctionsClient p = new DBFunctionsClient();
             try
@@ -597,20 +642,91 @@ namespace SeniorServer
                 pro.AddUser(us);
                 pro.Close();
             }
-            catch(ProtocolException ex)
+            catch (ProtocolException ex)
             {
                 return ex.ToString();
             }
 
-                return "done!";
-            
-        }
+            return "done!";
 
-        public void ChooseGame(int nop)
+        }
+        public List<GameFrameModel> ChooseGame(int nop)//returns a list of all possibel GFs with a certain number of players
         {
             List<GameFrameModel> availableGFs = new List<GameFrameModel>();
-            var cont = SeniorDBServiceRef.DBFunctionsClient();
-            
+            var cont = new DBFunctionsClient();
+            try
+            {
+                cont.Open();
+                List<GameFrameModel> gfmodels = cont.GameByNumPlayer(nop).ToList();
+                cont.Close();
+                return gfmodels;
+                
+            }
+            catch (ProtocolException ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            // this method then displays the gfs to the user
+            return null;
+        }
+        public List<string> findKeyforValue(Dictionary<string, String> keyval, string value)
+        {
+            List<string> PA = new List<string>();
+            foreach (KeyValuePair<string, string> keyforval in keyval)
+            {
+                if (keyforval.Value == value)
+                    PA.Add(keyforval.Key);
+            }
+            return PA;
+        }
+        public int JoinGame(string desiredgame, string username)//return GID if a game is created // return index of player
+        {
+            int countofqueue = Player_GameFrame_Queue.Count();
+            Player_GameFrame_Queue.Add(username, desiredgame);//add the player/game pair to the queue
+            return countofqueue + 1;
+        }
+        public int CheckGameStatus(string desiredgame, string username)//1 if the min num required is reached // -1 if still waiting
+        {
+            int GID=0;
+            var prox = new DBFunctionsClient();
+            bool isInQueue = Player_GameFrame_Queue.ContainsKey(username);
+            if (!isInQueue)//if the player is not in the queue , this means that the game is already created
+            {
+                List<GamePlayerModel> games = prox.RetreiveAllGamePlayersByPlayer(username).ToList();
+                GamePlayerModel gp = games.ElementAt(games.Count - 1);//last gameplayer
+                return gp.GID;
+            }
+            else
+            {
+                //get the min num required for the games , then check if the nop is sufficient
+                List<string> opengames = findKeyforValue(Player_GameFrame_Queue, desiredgame);//players in this game
+                
+                    prox.Open();   
+                    int minplayers = prox.RetreiveMinPlayers(desiredgame);//get the min nop required in the desired game
+                 //   prox.Close();
+               
+                if (opengames.Count < minplayers)//if the required number of players is not reached
+                    return -1;
+                if (opengames.Count >= minplayers)//if the opengames count equals the number of players required for the game then add a new game and return the ID
+                {
+                    GameModel newGame = new GameModel();
+                    newGame.NPlayers = minplayers;
+                    newGame.Title = desiredgame;
+                    GID = prox.AddGame(newGame);//add the new game 
+                    foreach (string playerusername in opengames)//search the queue to add the players 
+                    {
+                        GamePlayerModel player = new GamePlayerModel();
+                        player.UserName = playerusername;
+                        player.GID = GID;
+                        prox.AddGamePlayer(player);
+                    }
+                    foreach (string playerusername in opengames)//remove the players from the queue
+                    {
+                        Player_GameFrame_Queue.Remove(playerusername);
+                    }
+                }
+                return GID;
+            }
         }
         #endregion
     }

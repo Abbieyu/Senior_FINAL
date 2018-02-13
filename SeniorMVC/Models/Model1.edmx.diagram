@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2bfd836c17b4869a95f5a7636690e32" Name="Diagram1">
+        <EntityTypeShape EntityType="Final_Senior_DBModel.Game" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.GameFrame" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.GFStrategy" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.NashPointProfile" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.NPPayoff" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.NPStrategy" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Final_Senior_DBModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__Game__Title__6FB49575" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__NashPointPr__GID__7C1A6C5A" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__GFStrateg__Title__7755B73D" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__NPStrateg__Strat__1F63A897" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__NPPayoff__NPID__1A9EF37A" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.FK__NPStrategy__NPID__1D7B6025" ManuallyRouted="false" />
+        <AssociationConnector Association="Final_Senior_DBModel.Gameplayer" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

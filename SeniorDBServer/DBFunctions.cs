@@ -130,7 +130,6 @@ namespace SeniorDBServer
             return -1;
 
         }
-
         public int DeleteGameFrame(string T)// returns -1 if the GF was not found // -2 if it is linked to games // 1 success//checked
         {
             var cont = new SeniorLinqDataContext();
@@ -165,94 +164,6 @@ namespace SeniorDBServer
             }
             return null;
         }
-        public int UpdateGameFrameMinPlayers(string title , int min)//returns -1 if the GF was not found // -2 if the GF is linked to games // -3 error in cohesion between parameters//-4 parameter is illogical// 1 success
-        {
-            if (min < 0)
-                return -4;
-            var cont = new SeniorLinqDataContext();
-            var query = (from gf in cont.GameFrames where gf.Title == title select gf).SingleOrDefault();
-            if (query!=null)// if the gf was not found
-            {
-                var gamechecker = (from games in cont.Games where games.Title == query.Title select games).ToList();
-                if (gamechecker.Count > 0)// if it was linked to games
-                    return -2;                
-            }
-            else return -1;
-            if (query.MaxPlayers >= min)//if min >max
-            {
-                query.MinPlayers = min;
-                cont.SubmitChanges();
-                return 1;
-            }
-                
-            return -3;
-        }//checked
-        public int UpdateGameFrameMaxPlayers(string title, int max)//returns -1 if the GF was not found // -2 if the GF is linked to games // -3 error in cohesion between parameters//1 success
-        {
-            if (max < 0)
-                return -4;
-            var cont = new SeniorLinqDataContext();
-            var query = (from gf in cont.GameFrames where gf.Title == title select gf).SingleOrDefault();
-            if (query != null)// if the gf was not found
-            {
-                var gamechecker = (from games in cont.Games where games.Title == query.Title select games).ToList();
-                if (gamechecker.Count > 0)// if it was linked to games
-                    return -2;
-            }
-            else return -1;
-            if (query.MinPlayers <= max)//if min >max
-            {
-                query.MaxPlayers = max;
-                cont.SubmitChanges();
-                return 1;
-            }
-            return -3;
-            
-        }//checked
-
-        public int UpdateGameFrameMinStrategies(string title, int min)
-        {
-            if (min <0)
-                return -4;
-            var cont = new SeniorLinqDataContext();
-            var query = (from gf in cont.GameFrames where gf.Title == title select gf).SingleOrDefault();
-            if (query != null)// if the gf was not found
-            {
-                var gamechecker = (from games in cont.Games where games.Title == query.Title select games).ToList();
-                if (gamechecker.Count > 0)// if it was linked to games
-                    return -2;
-            }
-            else return -1;
-            if (query.MaxStrategies >= min)//if min <max
-            {
-                query.MinStrategies = min;
-                cont.SubmitChanges();
-                return 1;
-            }
-            return -3;
-        }//checked
-
-        public int UpdateGameFrameMaxStrategies(string title, int max)
-        {
-            if (max < 0)
-                return -4;
-            var cont = new SeniorLinqDataContext();
-            var query = (from gf in cont.GameFrames where gf.Title == title select gf).SingleOrDefault();
-            if (query != null)// if the gf was not found
-            {
-                var gamechecker = (from games in cont.Games where games.Title == query.Title select games).ToList();
-                if (gamechecker.Count > 0)// if it was linked to games
-                    return -2;
-            }
-            else return -1;
-            if (query.MinStrategies <= max)//if min <max
-            {
-                query.MaxStrategies = max;
-                cont.SubmitChanges();
-                return 1;
-            }
-            return -3;
-        }//checked
 
         public List<GameFrameModel> RetreiveAllGameFrames()// returns a list of all gameframes // null if the list is empty//checked
         {
@@ -290,9 +201,8 @@ namespace SeniorDBServer
                     Model1.MaxStrategies = query[i].MaxStrategies;
                     Model1.MinPlayers = query[i].MinPlayers;
                     Model1.MinStrategies = query[i].MinStrategies;
-                    gamemodels.Add(Model1);
+                    gameframemodels.Add(Model1);
                 }
-
             }
             else
             {
@@ -310,6 +220,59 @@ namespace SeniorDBServer
             }
             return gameframemodels;
 
+        }
+
+        public int RetreiveMinPlayers(string title)//return -1 if no GF was found // number of min players if success
+        {
+            var cont = new SeniorLinqDataContext();
+            var query = (from gfs in cont.GameFrames where gfs.Title == title select gfs).SingleOrDefault();
+            if (query == null)
+                return -1;
+            return (from gfs in cont.GameFrames where gfs.Title == title select gfs.MinPlayers).SingleOrDefault();
+        }
+
+        public int RetreiveMaxPlayers(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<GameFrameModel> RetreiveFreeGameFrame()
+        {
+            var cont = new SeniorLinqDataContext();
+            var allGFs = (from gfs in cont.GameFrames select gfs.Title).ToList();
+            var allGames = (from games in cont.Games select games.Title).ToList();
+            var result = allGFs.Except(allGames);
+            List<GameFrameModel> result2 = new List<GameFrameModel>();
+            foreach(string title in result)
+            {
+                GameFrameModel temp = new GameFrameModel();
+                var x = (from gfs in cont.GameFrames where gfs.Title == title select gfs).SingleOrDefault();
+                temp.Title = x.Title;
+                temp.MinStrategies = x.MinStrategies;
+                temp.MinPlayers = x.MinPlayers;
+                temp.MaxPlayers = x.MaxPlayers;
+                temp.MaxStrategies = x.MaxStrategies;
+                result2.Add(temp);
+            }
+            return result2;
+        }
+        public int UpdateGameFrame(GameFrameModel edited)
+        {
+            if (edited.MinPlayers > edited.MaxPlayers && edited.MinStrategies > edited.MaxStrategies)
+                return -1;
+            var cont = new SeniorLinqDataContext();
+            var query = (from gfs in cont.GameFrames where gfs.Title == edited.Title select gfs).SingleOrDefault();
+            if(query!=null)
+            {
+                GameFrameModel temp = new GameFrameModel();
+                query.MaxPlayers = edited.MaxPlayers;
+                query.MaxStrategies = edited.MaxStrategies;
+                query.MinPlayers = edited.MinPlayers;
+                query.MinStrategies = edited.MinStrategies;
+                cont.SubmitChanges();
+                return 1;
+            }
+            return -1;
         }
 
         #endregion
@@ -379,6 +342,34 @@ namespace SeniorDBServer
             }
             return Gids;
             
+        }
+        public List<GamePlayerModel> RetreiveAllGamePlayers()
+        {
+            var cont = new SeniorLinqDataContext();
+            List<GamePlayerModel> gameplayers = new List<GamePlayerModel>();
+            var query = (from gp in cont.Gameplayers select gp).ToList();
+            for(int i=0;i<query.Count;i++)
+            {
+                GamePlayerModel gpm = new GamePlayerModel();
+                gpm.GID = query[i].GID;
+                gpm.UserName = query[i].Username;
+                gameplayers.Add(gpm);
+            }
+            return gameplayers;
+        }
+        public List<GamePlayerModel> RetreiveAllGamePlayersByPlayer(string usrname)
+        {
+            var cont = new SeniorLinqDataContext();
+            List<GamePlayerModel> gameplayers = new List<GamePlayerModel>();
+            var query = (from gp in cont.Gameplayers where gp.Username==usrname select gp).ToList();
+            for (int i = 0; i < query.Count; i++)
+            {
+                GamePlayerModel gpm = new GamePlayerModel();
+                gpm.GID = query[i].GID;
+                gpm.UserName = query[i].Username;
+                gameplayers.Add(gpm);
+            }
+            return gameplayers;
         }
         #endregion
         #region GFStrategy
@@ -632,6 +623,9 @@ namespace SeniorDBServer
             throw new NotImplementedException();
         }
 
+       
+
+
         //public int UpdateNPStrategy(int npstrategyid, string username)
         //{
         //    throw new NotImplementedException();
@@ -642,8 +636,8 @@ namespace SeniorDBServer
         //    throw new NotImplementedException();
         //}
 
-       
-        
+
+
     }
     }
 

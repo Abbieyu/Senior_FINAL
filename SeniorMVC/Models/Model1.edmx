@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Final_Senior_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="NPlayers" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GameFrame">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="MinPlayers" Type="int" Nullable="false" />
+          <Property Name="MaxPlayers" Type="int" Nullable="false" />
+          <Property Name="MinStrategies" Type="int" Nullable="false" />
+          <Property Name="MaxStrategies" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gameplayer">
+          <Key>
+            <PropertyRef Name="GID" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="GID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GFStrategy">
+          <Key>
+            <PropertyRef Name="StrategyId" />
+          </Key>
+          <Property Name="Title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="StrategyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NashPointProfile">
+          <Key>
+            <PropertyRef Name="NPID" />
+          </Key>
+          <Property Name="GID" Type="int" Nullable="false" />
+          <Property Name="NPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NPPayoff">
+          <Key>
+            <PropertyRef Name="PayoffId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="NPID" Type="int" Nullable="false" />
+          <Property Name="PayoffId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Payoff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NPStrategy">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="StrategyId" />
+          </Key>
+          <Property Name="NPID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="StrategyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="AdminFlag" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__Game__Title__6FB49575">
+          <End Role="GameFrame" Type="Self.GameFrame" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameFrame">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gameplaye__Usern__73852659">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Gameplayer" Type="Self.Gameplayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Gameplayer">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Gameplayer__GID__72910220">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="Gameplayer" Type="Self.Gameplayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GID" />
+            </Principal>
+            <Dependent Role="Gameplayer">
+              <PropertyRef Name="GID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GFStrateg__Title__7755B73D">
+          <End Role="GameFrame" Type="Self.GameFrame" Multiplicity="1" />
+          <End Role="GFStrategy" Type="Self.GFStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameFrame">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="GFStrategy">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NashPointPr__GID__7C1A6C5A">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GID" />
+            </Principal>
+            <Dependent Role="NashPointProfile">
+              <PropertyRef Name="GID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NPPayoff__NPID__1A9EF37A">
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="1" />
+          <End Role="NPPayoff" Type="Self.NPPayoff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NashPointProfile">
+              <PropertyRef Name="NPID" />
+            </Principal>
+            <Dependent Role="NPPayoff">
+              <PropertyRef Name="NPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__NPPayoff__Userna__19AACF41' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__NPPayoff__Userna__19AACF41" />-->
+        <Association Name="FK__NPStrateg__Strat__1F63A897">
+          <End Role="GFStrategy" Type="Self.GFStrategy" Multiplicity="1" />
+          <End Role="NPStrategy" Type="Self.NPStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GFStrategy">
+              <PropertyRef Name="StrategyId" />
+            </Principal>
+            <Dependent Role="NPStrategy">
+              <PropertyRef Name="StrategyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__NPStrateg__Usern__1E6F845E' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__NPStrateg__Usern__1E6F845E" />-->
+        <Association Name="FK__NPStrategy__NPID__1D7B6025">
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="1" />
+          <End Role="NPStrategy" Type="Self.NPStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NashPointProfile">
+              <PropertyRef Name="NPID" />
+            </Principal>
+            <Dependent Role="NPStrategy">
+              <PropertyRef Name="NPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Final_Senior_DBModelStoreContainer">
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameFrame" EntityType="Self.GameFrame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gameplayer" EntityType="Self.Gameplayer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GFStrategy" EntityType="Self.GFStrategy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NashPointProfile" EntityType="Self.NashPointProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NPPayoff" EntityType="Self.NPPayoff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NPStrategy" EntityType="Self.NPStrategy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Game__Title__6FB49575" Association="Self.FK__Game__Title__6FB49575">
+            <End Role="GameFrame" EntitySet="GameFrame" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gameplaye__Usern__73852659" Association="Self.FK__Gameplaye__Usern__73852659">
+            <End Role="User" EntitySet="User" />
+            <End Role="Gameplayer" EntitySet="Gameplayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Gameplayer__GID__72910220" Association="Self.FK__Gameplayer__GID__72910220">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Gameplayer" EntitySet="Gameplayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GFStrateg__Title__7755B73D" Association="Self.FK__GFStrateg__Title__7755B73D">
+            <End Role="GameFrame" EntitySet="GameFrame" />
+            <End Role="GFStrategy" EntitySet="GFStrategy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NashPointPr__GID__7C1A6C5A" Association="Self.FK__NashPointPr__GID__7C1A6C5A">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="NashPointProfile" EntitySet="NashPointProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPPayoff__NPID__1A9EF37A" Association="Self.FK__NPPayoff__NPID__1A9EF37A">
+            <End Role="NashPointProfile" EntitySet="NashPointProfile" />
+            <End Role="NPPayoff" EntitySet="NPPayoff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPStrateg__Strat__1F63A897" Association="Self.FK__NPStrateg__Strat__1F63A897">
+            <End Role="GFStrategy" EntitySet="GFStrategy" />
+            <End Role="NPStrategy" EntitySet="NPStrategy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPStrategy__NPID__1D7B6025" Association="Self.FK__NPStrategy__NPID__1D7B6025">
+            <End Role="NashPointProfile" EntitySet="NashPointProfile" />
+            <End Role="NPStrategy" EntitySet="NPStrategy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Final_Senior_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NPlayers" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GameFrame" Relationship="Self.FK__Game__Title__6FB49575" FromRole="Game" ToRole="GameFrame" />
+          <NavigationProperty Name="NashPointProfiles" Relationship="Self.FK__NashPointPr__GID__7C1A6C5A" FromRole="Game" ToRole="NashPointProfile" />
+          <NavigationProperty Name="Users" Relationship="Self.Gameplayer" FromRole="Game" ToRole="User" />
+        </EntityType>
+        <EntityType Name="GameFrame">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MinPlayers" Type="Int32" Nullable="false" />
+          <Property Name="MaxPlayers" Type="Int32" Nullable="false" />
+          <Property Name="MinStrategies" Type="Int32" Nullable="false" />
+          <Property Name="MaxStrategies" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK__Game__Title__6FB49575" FromRole="GameFrame" ToRole="Game" />
+          <NavigationProperty Name="GFStrategies" Relationship="Self.FK__GFStrateg__Title__7755B73D" FromRole="GameFrame" ToRole="GFStrategy" />
+        </EntityType>
+        <EntityType Name="GFStrategy">
+          <Key>
+            <PropertyRef Name="StrategyId" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StrategyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GameFrame" Relationship="Self.FK__GFStrateg__Title__7755B73D" FromRole="GFStrategy" ToRole="GameFrame" />
+          <NavigationProperty Name="NPStrategies" Relationship="Self.FK__NPStrateg__Strat__1F63A897" FromRole="GFStrategy" ToRole="NPStrategy" />
+        </EntityType>
+        <EntityType Name="NashPointProfile">
+          <Key>
+            <PropertyRef Name="NPID" />
+          </Key>
+          <Property Name="GID" Type="Int32" Nullable="false" />
+          <Property Name="NPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Game" Relationship="Self.FK__NashPointPr__GID__7C1A6C5A" FromRole="NashPointProfile" ToRole="Game" />
+          <NavigationProperty Name="NPPayoffs" Relationship="Self.FK__NPPayoff__NPID__1A9EF37A" FromRole="NashPointProfile" ToRole="NPPayoff" />
+          <NavigationProperty Name="NPStrategies" Relationship="Self.FK__NPStrategy__NPID__1D7B6025" FromRole="NashPointProfile" ToRole="NPStrategy" />
+        </EntityType>
+        <EntityType Name="NPPayoff">
+          <Key>
+            <PropertyRef Name="PayoffId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="NPID" Type="Int32" Nullable="false" />
+          <Property Name="PayoffId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Payoff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NashPointProfile" Relationship="Self.FK__NPPayoff__NPID__1A9EF37A" FromRole="NPPayoff" ToRole="NashPointProfile" />
+        </EntityType>
+        <EntityType Name="NPStrategy">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="StrategyId" />
+          </Key>
+          <Property Name="NPID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StrategyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GFStrategy" Relationship="Self.FK__NPStrateg__Strat__1F63A897" FromRole="NPStrategy" ToRole="GFStrategy" />
+          <NavigationProperty Name="NashPointProfile" Relationship="Self.FK__NPStrategy__NPID__1D7B6025" FromRole="NPStrategy" ToRole="NashPointProfile" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AdminFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="Self.Gameplayer" FromRole="User" ToRole="Game" />
+        </EntityType>
+        <Association Name="FK__Game__Title__6FB49575">
+          <End Role="GameFrame" Type="Self.GameFrame" Multiplicity="1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameFrame">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NashPointPr__GID__7C1A6C5A">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GID" />
+            </Principal>
+            <Dependent Role="NashPointProfile">
+              <PropertyRef Name="GID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GFStrateg__Title__7755B73D">
+          <End Role="GameFrame" Type="Self.GameFrame" Multiplicity="1" />
+          <End Role="GFStrategy" Type="Self.GFStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameFrame">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="GFStrategy">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NPStrateg__Strat__1F63A897">
+          <End Role="GFStrategy" Type="Self.GFStrategy" Multiplicity="1" />
+          <End Role="NPStrategy" Type="Self.NPStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GFStrategy">
+              <PropertyRef Name="StrategyId" />
+            </Principal>
+            <Dependent Role="NPStrategy">
+              <PropertyRef Name="StrategyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NPPayoff__NPID__1A9EF37A">
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="1" />
+          <End Role="NPPayoff" Type="Self.NPPayoff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NashPointProfile">
+              <PropertyRef Name="NPID" />
+            </Principal>
+            <Dependent Role="NPPayoff">
+              <PropertyRef Name="NPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NPStrategy__NPID__1D7B6025">
+          <End Role="NashPointProfile" Type="Self.NashPointProfile" Multiplicity="1" />
+          <End Role="NPStrategy" Type="Self.NPStrategy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NashPointProfile">
+              <PropertyRef Name="NPID" />
+            </Principal>
+            <Dependent Role="NPStrategy">
+              <PropertyRef Name="NPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Gameplayer">
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Final_Senior_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="GameFrames" EntityType="Self.GameFrame" />
+          <EntitySet Name="GFStrategies" EntityType="Self.GFStrategy" />
+          <EntitySet Name="NashPointProfiles" EntityType="Self.NashPointProfile" />
+          <EntitySet Name="NPPayoffs" EntityType="Self.NPPayoff" />
+          <EntitySet Name="NPStrategies" EntityType="Self.NPStrategy" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Game__Title__6FB49575" Association="Self.FK__Game__Title__6FB49575">
+            <End Role="GameFrame" EntitySet="GameFrames" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NashPointPr__GID__7C1A6C5A" Association="Self.FK__NashPointPr__GID__7C1A6C5A">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="NashPointProfile" EntitySet="NashPointProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GFStrateg__Title__7755B73D" Association="Self.FK__GFStrateg__Title__7755B73D">
+            <End Role="GameFrame" EntitySet="GameFrames" />
+            <End Role="GFStrategy" EntitySet="GFStrategies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPStrateg__Strat__1F63A897" Association="Self.FK__NPStrateg__Strat__1F63A897">
+            <End Role="GFStrategy" EntitySet="GFStrategies" />
+            <End Role="NPStrategy" EntitySet="NPStrategies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPPayoff__NPID__1A9EF37A" Association="Self.FK__NPPayoff__NPID__1A9EF37A">
+            <End Role="NashPointProfile" EntitySet="NashPointProfiles" />
+            <End Role="NPPayoff" EntitySet="NPPayoffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NPStrategy__NPID__1D7B6025" Association="Self.FK__NPStrategy__NPID__1D7B6025">
+            <End Role="NashPointProfile" EntitySet="NashPointProfiles" />
+            <End Role="NPStrategy" EntitySet="NPStrategies" />
+          </AssociationSet>
+          <AssociationSet Name="Gameplayer" Association="Self.Gameplayer">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Final_Senior_DBModelStoreContainer" CdmEntityContainer="Final_Senior_DBEntities">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="GID" ColumnName="GID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NPlayers" ColumnName="NPlayers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameFrames">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.GameFrame">
+              <MappingFragment StoreEntitySet="GameFrame">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MinPlayers" ColumnName="MinPlayers" />
+                <ScalarProperty Name="MaxPlayers" ColumnName="MaxPlayers" />
+                <ScalarProperty Name="MinStrategies" ColumnName="MinStrategies" />
+                <ScalarProperty Name="MaxStrategies" ColumnName="MaxStrategies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GFStrategies">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.GFStrategy">
+              <MappingFragment StoreEntitySet="GFStrategy">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StrategyId" ColumnName="StrategyId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NashPointProfiles">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.NashPointProfile">
+              <MappingFragment StoreEntitySet="NashPointProfile">
+                <ScalarProperty Name="GID" ColumnName="GID" />
+                <ScalarProperty Name="NPID" ColumnName="NPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NPPayoffs">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.NPPayoff">
+              <MappingFragment StoreEntitySet="NPPayoff">
+                <ScalarProperty Name="NPID" ColumnName="NPID" />
+                <ScalarProperty Name="PayoffId" ColumnName="PayoffId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Payoff" ColumnName="Payoff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NPStrategies">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.NPStrategy">
+              <MappingFragment StoreEntitySet="NPStrategy">
+                <ScalarProperty Name="NPID" ColumnName="NPID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="StrategyId" ColumnName="StrategyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Final_Senior_DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AdminFlag" ColumnName="AdminFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Gameplayer" TypeName="Final_Senior_DBModel.Gameplayer" StoreEntitySet="Gameplayer">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Username" ColumnName="Username" />
+            </EndProperty>
+            <EndProperty Name="Game">
+              <ScalarProperty Name="GID" ColumnName="GID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

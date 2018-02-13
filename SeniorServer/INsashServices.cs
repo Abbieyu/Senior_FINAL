@@ -12,12 +12,10 @@ namespace SeniorServer
     [ServiceContract]
     public interface INsashServices
     {
-
         #region NPlayer
         [OperationContract]
         List<String> NPlayerWrapper();
         #endregion
-
         #region Common Region Between 2P and 3P
         void Swap(List<List<string>> list1, List<List<string>> list2);
         List<List<string>> Cartisian_Product(List<List<string>> Players_Strategies, List<NE_Profile> p);
@@ -37,11 +35,16 @@ namespace SeniorServer
         [OperationContract]
         List<int> Three_PlayerWrapper();
         #endregion
-
         #region Admin Functions
-
+        [OperationContract]
+        string DeleteGameFrame(string title);
+        [OperationContract]
+        string AddGameFrame(GameFrameModel gf);
+        [OperationContract]
+        List<GameFrameModel> DisplayFreeGameFrames();
+        [OperationContract]
+        string EditGameFrame(GameFrameModel edited);
         #endregion
-
         #region User Functions
         // SignIn();
         [OperationContract]
@@ -49,7 +52,11 @@ namespace SeniorServer
         [OperationContract]
         string Register(UserModel usermodel);
         [OperationContract]
-        void ChooseGame(int nop);
+        List<GameFrameModel> ChooseGame(int nop);
+        [OperationContract]
+        int CheckGameStatus(string desiredgame, string username);
+        [OperationContract]
+        int JoinGame(string desiredgame, string username);
         #endregion
     }
 
@@ -433,4 +440,19 @@ namespace SeniorServer
         }
     }
     #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -50,6 +50,12 @@
   <wsdl:message name="INsashServices_CheckGameStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckGameStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="INsashServices_JoinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGame" />
+  </wsdl:message>
+  <wsdl:message name="INsashServices_JoinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinGameResponse" />
+  </wsdl:message>
   <wsdl:portType name="INsashServices">
     <wsdl:operation name="NPlayerWrapper">
       <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/NPlayerWrapper" message="tns:INsashServices_NPlayerWrapper_InputMessage" />
@@ -78,6 +84,10 @@
     <wsdl:operation name="CheckGameStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/CheckGameStatus" message="tns:INsashServices_CheckGameStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INsashServices/CheckGameStatusResponse" message="tns:INsashServices_CheckGameStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/JoinGame" message="tns:INsashServices_JoinGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INsashServices/JoinGameResponse" message="tns:INsashServices_JoinGame_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INsashServices" type="tns:INsashServices">
@@ -138,6 +148,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckGameStatus">
       <soap:operation soapAction="http://tempuri.org/INsashServices/CheckGameStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinGame">
+      <soap:operation soapAction="http://tempuri.org/INsashServices/JoinGame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

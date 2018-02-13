@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeniorMVC.NashClient {
+namespace SeniorTester.ConTester {
     using System.Runtime.Serialization;
     using System;
     
@@ -200,7 +200,7 @@ namespace SeniorMVC.NashClient {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NashClient.INsashServices")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConTester.INsashServices")]
     public interface INsashServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/NPlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/NPlayerWrapperResponse")]
@@ -222,37 +222,43 @@ namespace SeniorMVC.NashClient {
         System.Threading.Tasks.Task<int[]> Three_PlayerWrapperAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/SignIn", ReplyAction="http://tempuri.org/INsashServices/SignInResponse")]
-        SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s);
+        SeniorTester.ConTester.UserModel SignIn(SeniorTester.ConTester.UserModel s);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/SignIn", ReplyAction="http://tempuri.org/INsashServices/SignInResponse")]
-        System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(SeniorMVC.NashClient.UserModel s);
+        System.Threading.Tasks.Task<SeniorTester.ConTester.UserModel> SignInAsync(SeniorTester.ConTester.UserModel s);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Register", ReplyAction="http://tempuri.org/INsashServices/RegisterResponse")]
-        string Register(SeniorMVC.NashClient.UserModel usermodel);
+        string Register(SeniorTester.ConTester.UserModel usermodel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Register", ReplyAction="http://tempuri.org/INsashServices/RegisterResponse")]
-        System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel usermodel);
+        System.Threading.Tasks.Task<string> RegisterAsync(SeniorTester.ConTester.UserModel usermodel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/ChooseGame", ReplyAction="http://tempuri.org/INsashServices/ChooseGameResponse")]
-        SeniorMVC.NashClient.GameFrameModel[] ChooseGame(int nop);
+        SeniorTester.ConTester.GameFrameModel[] ChooseGame(int nop);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/ChooseGame", ReplyAction="http://tempuri.org/INsashServices/ChooseGameResponse")]
-        System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrameModel[]> ChooseGameAsync(int nop);
+        System.Threading.Tasks.Task<SeniorTester.ConTester.GameFrameModel[]> ChooseGameAsync(int nop);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/CheckGameStatus", ReplyAction="http://tempuri.org/INsashServices/CheckGameStatusResponse")]
         int CheckGameStatus(string desiredgame, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/CheckGameStatus", ReplyAction="http://tempuri.org/INsashServices/CheckGameStatusResponse")]
         System.Threading.Tasks.Task<int> CheckGameStatusAsync(string desiredgame, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/JoinGame", ReplyAction="http://tempuri.org/INsashServices/JoinGameResponse")]
+        int JoinGame(string desiredgame, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/JoinGame", ReplyAction="http://tempuri.org/INsashServices/JoinGameResponse")]
+        System.Threading.Tasks.Task<int> JoinGameAsync(string desiredgame, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface INsashServicesChannel : SeniorMVC.NashClient.INsashServices, System.ServiceModel.IClientChannel {
+    public interface INsashServicesChannel : SeniorTester.ConTester.INsashServices, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class NsashServicesClient : System.ServiceModel.ClientBase<SeniorMVC.NashClient.INsashServices>, SeniorMVC.NashClient.INsashServices {
+    public partial class NsashServicesClient : System.ServiceModel.ClientBase<SeniorTester.ConTester.INsashServices>, SeniorTester.ConTester.INsashServices {
         
         public NsashServicesClient() {
         }
@@ -297,27 +303,27 @@ namespace SeniorMVC.NashClient {
             return base.Channel.Three_PlayerWrapperAsync();
         }
         
-        public SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s) {
+        public SeniorTester.ConTester.UserModel SignIn(SeniorTester.ConTester.UserModel s) {
             return base.Channel.SignIn(s);
         }
         
-        public System.Threading.Tasks.Task<SeniorMVC.NashClient.UserModel> SignInAsync(SeniorMVC.NashClient.UserModel s) {
+        public System.Threading.Tasks.Task<SeniorTester.ConTester.UserModel> SignInAsync(SeniorTester.ConTester.UserModel s) {
             return base.Channel.SignInAsync(s);
         }
         
-        public string Register(SeniorMVC.NashClient.UserModel usermodel) {
+        public string Register(SeniorTester.ConTester.UserModel usermodel) {
             return base.Channel.Register(usermodel);
         }
         
-        public System.Threading.Tasks.Task<string> RegisterAsync(SeniorMVC.NashClient.UserModel usermodel) {
+        public System.Threading.Tasks.Task<string> RegisterAsync(SeniorTester.ConTester.UserModel usermodel) {
             return base.Channel.RegisterAsync(usermodel);
         }
         
-        public SeniorMVC.NashClient.GameFrameModel[] ChooseGame(int nop) {
+        public SeniorTester.ConTester.GameFrameModel[] ChooseGame(int nop) {
             return base.Channel.ChooseGame(nop);
         }
         
-        public System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrameModel[]> ChooseGameAsync(int nop) {
+        public System.Threading.Tasks.Task<SeniorTester.ConTester.GameFrameModel[]> ChooseGameAsync(int nop) {
             return base.Channel.ChooseGameAsync(nop);
         }
         
@@ -327,6 +333,14 @@ namespace SeniorMVC.NashClient {
         
         public System.Threading.Tasks.Task<int> CheckGameStatusAsync(string desiredgame, string username) {
             return base.Channel.CheckGameStatusAsync(desiredgame, username);
+        }
+        
+        public int JoinGame(string desiredgame, string username) {
+            return base.Channel.JoinGame(desiredgame, username);
+        }
+        
+        public System.Threading.Tasks.Task<int> JoinGameAsync(string desiredgame, string username) {
+            return base.Channel.JoinGameAsync(desiredgame, username);
         }
     }
 }

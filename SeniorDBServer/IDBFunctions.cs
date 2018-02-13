@@ -18,15 +18,17 @@ namespace SeniorDBServer
         [OperationContract]
         GameFrameModel RetreiveGameFrame(string T);
         [OperationContract]
-        int UpdateGameFrameMinPlayers(string title, int min);
-        [OperationContract]
-        int UpdateGameFrameMaxPlayers(string title, int max);
-        [OperationContract]
-        int UpdateGameFrameMinStrategies(string title, int min);
-        [OperationContract]
-        int UpdateGameFrameMaxStrategies(string title, int max);
+        int UpdateGameFrame(GameFrameModel edited);
         [OperationContract]
         List<GameFrameModel> RetreiveAllGameFrames();
+        [OperationContract]
+        List<GameFrameModel> GameByNumPlayer(int nop);
+        [OperationContract]
+        List<GameFrameModel> RetreiveFreeGameFrame();
+        [OperationContract]
+        int RetreiveMinPlayers(string title);
+        [OperationContract]
+        int RetreiveMaxPlayers(string title);
         #endregion
         #region User
         [OperationContract]
@@ -51,7 +53,10 @@ namespace SeniorDBServer
         //GameFrameModel RetreiveGamePlayer(string username);
         // [OperationContract]
         //  int UpdateGamePlayer(string username);
-
+        [OperationContract]
+        List<GamePlayerModel> RetreiveAllGamePlayers();
+        [OperationContract]
+        List<GamePlayerModel> RetreiveAllGamePlayersByPlayer(string usrname);
         #endregion
         #region Game
         [OperationContract]
@@ -65,8 +70,8 @@ namespace SeniorDBServer
         [OperationContract]
         int UpdateGameNumofPlayers(int gid, int nop);
 
-        [OperationContract]
-        List<GameFrameModel> GameByNumPlayer(int nop);
+      
+       
         #endregion
         #region GFStrategy
         [OperationContract]

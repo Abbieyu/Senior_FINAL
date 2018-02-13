@@ -28,7 +28,7 @@ namespace SeniorServer
         #endregion
         #region 2Players
         [OperationContract]
-        List<int> Two_PlayerWrapper();//List<int> dummy, List<int> dummy2, int strat1, int strat2);
+        List<int> Two_PlayerWrapper(string desiredGame, int GID);//List<int> dummy, List<int> dummy2, int strat1, int strat2);
         #endregion
         #region 3Players
         List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies);
@@ -54,9 +54,9 @@ namespace SeniorServer
         [OperationContract]
         List<GameFrameModel> ChooseGame(int nop);
         [OperationContract]
-        int CheckGameStatus(string desiredgame, string username);
+        PF CheckGameStatus(string desiredgame, string username);
         [OperationContract]
-        int JoinGame(string desiredgame, string username);
+        int JoinGame(string desiredgame, string username, List<string> strategies);
         #endregion
     }
 
@@ -117,7 +117,20 @@ namespace SeniorServer
             this.row = r;
         }
     }
+    public class PF
+    {
+        public string username
+        {
+            set;get;
+        }
+        public int GID
+        { set; get; }
+        public List<string> strategies { set; get; }
+        public List<string> preferences { set; get; }
+        public List<List<string>> CP { set; get; }
 
+
+    }
     #region NPlayer
     [DataContract]
     public class GameFrame

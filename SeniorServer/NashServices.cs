@@ -13,9 +13,12 @@ namespace SeniorServer
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class NashServices : INsashServices
     {
-        public Dictionary<string, string> Player_GameFrame_Queue = new Dictionary<string, string>();
+        public Dictionary<string, string> Player_GameFrame_Queue = new Dictionary<string, string>();//queue of (Player.username,Game.title)
+        public Dictionary<string, List<string>> Strategies = new Dictionary<string, List<string>>();//Dictionary (player.usrname , list<userstrategies>)
+  //    public Dictionary<int, int> StrategiesPointer = new Dictionary<int, int>();//index , GID
+        List<PF> playerInfo = new List<PF>();
         #region 2Players
-        public List<int> Two_PlayerWrapper()//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
+        public List<int> Two_PlayerWrapper(string desiredGame , int GID)//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
         {
             #region OLD CODE //To be deleted at last
             //List<int> dummy = new List<int>{ 2, 0, 3, 0 };
@@ -40,7 +43,7 @@ namespace SeniorServer
             //{
             //
             #endregion
-            List<List<string>> strategiesp = new List<List<string>>();
+            List<List<string>> strategiesp = new List<List<string>>();//
             strategiesp.Add(new List<string> { "split1", "steal1" });
             strategiesp.Add(new List<string> { "split2", "steal2" });
             //page67,exc1.15
@@ -52,9 +55,10 @@ namespace SeniorServer
             List<List<string>> CP = Cartisian_Product(strategiesp, p);
 
             List<string> players_preferences = new List<string>();
-            //2p
-            players_preferences.Add("o3 > o1 > o2 = o4");//p1
-            players_preferences.Add("o2 > o1 > o3 = o4");//p2
+
+            ////2p
+            //players_preferences.Add("o3 > o1 > o2 = o4");//p1
+            //players_preferences.Add("o2 > o1 > o3 = o4");//p2
 
             PayOffs_generater(players_preferences, p);
 
@@ -679,22 +683,40 @@ namespace SeniorServer
             }
             return PA;
         }
-        public int JoinGame(string desiredgame, string username)//return GID if a game is created // return index of player
+        public int JoinGame(string desiredgame, string username , List<string> strategies)//return GID if a game is created // return index of player
         {
             int countofqueue = Player_GameFrame_Queue.Count();
             Player_GameFrame_Queue.Add(username, desiredgame);//add the player/game pair to the queue
+            Strategies.Add(username, strategies);
             return countofqueue + 1;
         }
-        public int CheckGameStatus(string desiredgame, string username)//1 if the min num required is reached // -1 if still waiting
+        public List<string> FindPlayerStrategies(string username)//returns a list of all the strategies of a player
+        {
+            List<string> allstrats = new List<string>();
+            //allstrats.AddRange(Strategies.Values);
+            List<string> usernames = Strategies.Keys.ToList();
+            List<string> strategies = new List<string>();
+            //for (int i = 0; i < strategies.Count; i++)
+            //{ if (usernames[i] == username)
+            // //       allstrats.Add();
+            //}
+            return allstrats;
+        }
+        public PF CheckGameStatus(string desiredgame, string username)//1 if the min num required is reached // -1 if still waiting
         {
             int GID=0;
-            var prox = new DBFunctionsClient();
+            var prox = new DBFunctionsClient();   
             bool isInQueue = Player_GameFrame_Queue.ContainsKey(username);
             if (!isInQueue)//if the player is not in the queue , this means that the game is already created
             {
                 List<GamePlayerModel> games = prox.RetreiveAllGamePlayersByPlayer(username).ToList();
                 GamePlayerModel gp = games.ElementAt(games.Count - 1);//last gameplayer
-                return gp.GID;
+                foreach (PF p in playerInfo)
+                {
+                    if (p.username == username)
+                        return p;
+                }
+                return null;
             }
             else
             {
@@ -703,29 +725,47 @@ namespace SeniorServer
                 
                     prox.Open();   
                     int minplayers = prox.RetreiveMinPlayers(desiredgame);//get the min nop required in the desired game
+                    int maxplayers = prox.RetreiveMaxPlayers(desiredgame);//get the max nop of the game
                  //   prox.Close();
                
                 if (opengames.Count < minplayers)//if the required number of players is not reached
-                    return -1;
+                    return null;
                 if (opengames.Count >= minplayers)//if the opengames count equals the number of players required for the game then add a new game and return the ID
                 {
                     GameModel newGame = new GameModel();
                     newGame.NPlayers = minplayers;
                     newGame.Title = desiredgame;
                     GID = prox.AddGame(newGame);//add the new game 
-                    foreach (string playerusername in opengames)//search the queue to add the players 
+                    List<List<string>> strategies = new List<List<string>>();
+                    for (int i=0;i<maxplayers;i++)// search the queue to add the players
                     {
                         GamePlayerModel player = new GamePlayerModel();
-                        player.UserName = playerusername;
+                        PF ppp = new PF();
+                        player.UserName = opengames[i];
                         player.GID = GID;
                         prox.AddGamePlayer(player);
+                        strategies.Add(FindPlayerStrategies(player.UserName));
+                        ppp.GID = player.GID;
+                        ppp.strategies = FindPlayerStrategies(player.UserName);
+                        ppp.username = player.UserName;
+                        playerInfo.Add(ppp);
                     }
-                    foreach (string playerusername in opengames)//remove the players from the queue
+                    List<List<string>> cp = Cartisian_Product(strategies, new List<NE_Profile>());
+                    foreach (PF p in playerInfo)
                     {
-                        Player_GameFrame_Queue.Remove(playerusername);
+                        p.CP = cp;
+                    }
+                    for (int i = 0; i < maxplayers; i++)//remove the players from the queue
+                    {
+                        Player_GameFrame_Queue.Remove(opengames[i]);
                     }
                 }
-                return GID;
+                foreach(PF p in playerInfo)
+                {
+                    if (p.username == username)
+                        return p;
+                }
+                return new PF();
             }
         }
         #endregion

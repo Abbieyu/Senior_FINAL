@@ -233,7 +233,11 @@ namespace SeniorDBServer
 
         public int RetreiveMaxPlayers(string title)
         {
-            throw new NotImplementedException();
+            var cont = new SeniorLinqDataContext();
+            var query = (from gfs in cont.GameFrames where gfs.Title == title select gfs).SingleOrDefault();
+            if (query == null)
+                return -1;
+            return (from gfs in cont.GameFrames where gfs.Title == title select gfs.MaxPlayers).SingleOrDefault();
         }
 
         public List<GameFrameModel> RetreiveFreeGameFrame()

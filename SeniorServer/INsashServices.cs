@@ -27,8 +27,8 @@ namespace SeniorServer
         List<NE_Profile> P2search_Max_Row(int StartCol, int rowIndex, int Numcols, List<NE_Profile> p);
         #endregion
         #region 2Players
-        [OperationContract]
-        List<int> Two_PlayerWrapper(string desiredGame, int GID);//List<int> dummy, List<int> dummy2, int strat1, int strat2);
+        //[OperationContract]
+        //List<int> Two_PlayerWrapper(string desiredGame, int GID);//List<int> dummy, List<int> dummy2, int strat1, int strat2);
         #endregion
         #region 3Players
         List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies);
@@ -57,6 +57,8 @@ namespace SeniorServer
         PF CheckGameStatus(string desiredgame, string username);
         [OperationContract]
         int JoinGame(string desiredgame, string username, List<string> strategies);
+        [OperationContract]
+        List<NE_Profile> PreferencesGetter(string preferences, string username, List<NE_Profile> Max_Payoff);
         #endregion
     }
 
@@ -123,13 +125,25 @@ namespace SeniorServer
         {
             set;get;
         }
+        public PF()
+        {
+            GID = 0;
+            username = "";
+            strategies = new List<string>();
+            preferences = "";
+            orderInGame = 0;
+            CP = new List<List<string>>();
+            foreach(List<string> s in CP)
+            {
+                 CP.Add(new List<string>());
+            }
+        }
         public int GID
         { set; get; }
         public List<string> strategies { set; get; }
-        public List<string> preferences { set; get; }
+        public string preferences { set; get; }
         public List<List<string>> CP { set; get; }
-        public List<NE_Profile> P { set; get; }
-
+        public int orderInGame { set; get; }
     }
     #region NPlayer
     [DataContract]

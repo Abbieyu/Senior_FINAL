@@ -53,11 +53,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Two_Three.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram3.cd" />
     <None Include="Properties\DataSources\SeniorDBServer.GameFrameModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.GameModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.GamePlayerModel.datasource" />

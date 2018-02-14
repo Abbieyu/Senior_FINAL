@@ -13,115 +13,54 @@ namespace SeniorServer
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class NashServices : INsashServices
     {
-        public Dictionary<string, string> Player_GameFrame_Queue = new Dictionary<string, string>();//queue of (Player.username,Game.title)
-        public Dictionary<string, List<string>> Strategies = new Dictionary<string, List<string>>();//Dictionary (player.usrname , list<userstrategies>)
-  //    public Dictionary<int, int> StrategiesPointer = new Dictionary<int, int>();//index , GID
-        List<PF> playerInfo = new List<PF>();
-        List<NE_Profile> neprofiles = new List<NE_Profile>();
+        Two_Three wrapper_TwoThree = new Two_Three();
+
         #region 2Players
-        public List<int> Two_PlayerWrapper(string desiredGame , int GID)//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
-        {
-            #region OLD CODE //To be deleted at last
-            //List<int> dummy = new List<int>{ 2, 0, 3, 0 };
-            //List<int> dummy2 = new List<int>{ 2, 3, 0, 0 };
-            //int strat1 = 2;
-            //int strat2 = 2;
-            //List<NE_Profile> NEDummy = new List<NE_Profile>();
-            //int rowCounter = 0;
-            //int colCounter = 0;
-            //for (int j = 0; j < dummy.Count; j++)
-            //{
-            //    NEDummy.Add(new NE_Profile(dummy[j], rowCounter, colCounter, dummy2[j]));
-            //    colCounter++;
-            //    if (colCounter % strat2==0 && colCounter!= 0)
-            //    {
-            //        rowCounter++;
-            //        colCounter = 0;
-            //    }
-            //}
-            //            List<NE_Profile> resulT = CallNash2PNS(strat1, strat2, NEDummy);
-            //for (int i = 0; i < resulT.Count;i++)
-            //{
-            //
-            #endregion
-            List<List<string>> strategiesp = new List<List<string>>();//
-            strategiesp.Add(new List<string> { "split1", "steal1" });
-            strategiesp.Add(new List<string> { "split2", "steal2" });
-            //page67,exc1.15
-            int p1_numStrategy = 2;//rows
-            int p2_numStrategy = 2;//cols
-            int p3_numStrategy = 1;//matrix
-            List<NE_Profile> p = new List<NE_Profile>();
-
-            List<List<string>> CP = Cartisian_Product(strategiesp, p);
-
-            List<string> players_preferences = new List<string>();
-
-            ////2p
-            //players_preferences.Add("o3 > o1 > o2 = o4");//p1
-            //players_preferences.Add("o2 > o1 > o3 = o4");//p2
-
-            PayOffs_generater(players_preferences, p);
-
-            List<NE_Profile> Max_Payoff = new List<NE_Profile>();//Max payyoffs
-
-            for (int i = 0; i < p1_numStrategy; i++)//loop: rows/p2
-            {
-                for (int j = 0; j < p2_numStrategy * p3_numStrategy; j = j + p2_numStrategy)
-                {
-                    List<NE_Profile> tempRes = P2search_Max_Row(j, i, p2_numStrategy, p); // calls function and get MaxPayoff_row
-                    Max_Payoff.AddRange(tempRes); // merging the results of the called function with Max_Payoff matrix
-                }
-            }
-            for (int j = 0; j < p2_numStrategy * p3_numStrategy; j++)//loop col/p1
-            {
-                List<NE_Profile> tempRes = P1search_Max_Col(j, p1_numStrategy, p);// calls function and get MaxPayoff_col
-                Max_Payoff.AddRange(tempRes);// merging the results of the called function with Max_Payoff matrix
-            }
-
-            int k = 0;// k is the index of the first element in the list and it's unchangable //NO TASTE
-            bool flag_pair = false; // indicates if there is at least one Nash
-            List<NE_Profile> PairedMax;//for p1_p12 results
-            NE_Profile element_maxPayoff;//temp for the first element of maxpayoff
-            List<NE_Profile> Paired_p1_p2 = new List<NE_Profile>();//to be used to find the max for p3
-                                                                   //List<NE_Profile> Finale = new List<NE_Profile>();//NASH EQUILIBRIUM PRIFLES ARE STORED HERE
-            while (Max_Payoff.Count > 0)//pairing the results
-            {
-                element_maxPayoff = new NE_Profile(Max_Payoff[k].payoff1, Max_Payoff[k].payoff2, /*Max_Payoff[k].payoff3,*/ Max_Payoff[k].row, Max_Payoff[k].col);//first node in list
-                PairedMax = Max_Payoff.FindAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row)).ToList<NE_Profile>();//Finding all matching profiles
-                Max_Payoff.RemoveAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row));//removed paired nodes
-                if (PairedMax.Count > 1)
-                {
-                    Paired_p1_p2.Add(PairedMax[0]);//NOOO Duplication
-                    flag_pair = true;//at least one Nash was found
-                }
-            }
-            List<int> temp = new List<int>();
-            if (!flag_pair)// no NE
-                Console.WriteLine("There is no Nash Equilibrium for the game.");
-            else //
-            {
-                //Finale = P3search_Max_Cell(GameProfiles, Paired_p1_p2, p2_numStrategy, p3_numStrategy);
-                if (Paired_p1_p2.Count > 0)
-                    for (int i = 0; i < Paired_p1_p2.Count; i++)
-                    {
-                        temp.Add(Paired_p1_p2[i].payoff1);
-                        temp.Add(Paired_p1_p2[i].payoff2);
-                    }
-            }
-            return temp;
-        }
-        //public void P2Preferences(List<PF> pf , List<NE_Profile> nep)
+        //public List<int> Two_PlayerWrapper(string desiredGame , int GID)//List<int> dummy , List<int> dummy2,int strat1 , int strat2)//dummy is the value of payoffs
         //{
+        //    #region OLD CODE //To be deleted at last
+        //    //List<int> dummy = new List<int>{ 2, 0, 3, 0 };
+        //    //List<int> dummy2 = new List<int>{ 2, 3, 0, 0 };
+        //    //int strat1 = 2;
+        //    //int strat2 = 2;
+        //    //List<NE_Profile> NEDummy = new List<NE_Profile>();
+        //    //int rowCounter = 0;
+        //    //int colCounter = 0;
+        //    //for (int j = 0; j < dummy.Count; j++)
+        //    //{
+        //    //    NEDummy.Add(new NE_Profile(dummy[j], rowCounter, colCounter, dummy2[j]));
+        //    //    colCounter++;
+        //    //    if (colCounter % strat2==0 && colCounter!= 0)
+        //    //    {
+        //    //        rowCounter++;
+        //    //        colCounter = 0;
+        //    //    }
+        //    //}
+        //    //            List<NE_Profile> resulT = CallNash2PNS(strat1, strat2, NEDummy);
+        //    //for (int i = 0; i < resulT.Count;i++)
+        //    //{
+        //    //
+        //    #endregion
+        //    //List<List<string>> strategiesp = new List<List<string>>();//
+        //    //strategiesp.Add(new List<string> { "split1", "steal1" });
+        //    //strategiesp.Add(new List<string> { "split2", "steal2" });
+        //    ////page67,exc1.15
+        //    //int p1_numStrategy = 2;//rows
+        //    //int p2_numStrategy = 2;//cols
+        //    //int p3_numStrategy = 1;//matrix
+        //    List<NE_Profile> p = new List<NE_Profile>();
+
+        //    //List<List<string>> CP = Cartisian_Product(strategiesp, p);
+
         //    List<string> players_preferences = new List<string>();
-        //    PayOffs_generater(players_preferences, neprofiles);
+
+        //    ////2p
+        //    //players_preferences.Add("o3 > o1 > o2 = o4");//p1
+        //    //players_preferences.Add("o2 > o1 > o3 = o4");//p2
+
+        //    PayOffs_generater(players_preferences, p);
+
         //    List<NE_Profile> Max_Payoff = new List<NE_Profile>();//Max payyoffs
-        //    List<string> usernames = new List<string>();
-        //    int u = 0;
-        //    foreach(string us in usernames)
-        //    {
-        //        usernames.Add(pf[u++].username);
-        //    }
 
         //    for (int i = 0; i < p1_numStrategy; i++)//loop: rows/p2
         //    {
@@ -136,7 +75,40 @@ namespace SeniorServer
         //        List<NE_Profile> tempRes = P1search_Max_Col(j, p1_numStrategy, p);// calls function and get MaxPayoff_col
         //        Max_Payoff.AddRange(tempRes);// merging the results of the called function with Max_Payoff matrix
         //    }
+
+        //    int k = 0;// k is the index of the first element in the list and it's unchangable //NO TASTE
+        //    bool flag_pair = false; // indicates if there is at least one Nash
+        //    List<NE_Profile> PairedMax;//for p1_p12 results
+        //    NE_Profile element_maxPayoff;//temp for the first element of maxpayoff
+        //    List<NE_Profile> Paired_p1_p2 = new List<NE_Profile>();//to be used to find the max for p3
+        //                                                           //List<NE_Profile> Finale = new List<NE_Profile>();//NASH EQUILIBRIUM PRIFLES ARE STORED HERE
+        //    while (Max_Payoff.Count > 0)//pairing the results
+        //    {
+        //        element_maxPayoff = new NE_Profile(Max_Payoff[k].payoff1, Max_Payoff[k].payoff2, /*Max_Payoff[k].payoff3,*/ Max_Payoff[k].row, Max_Payoff[k].col);//first node in list
+        //        PairedMax = Max_Payoff.FindAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row)).ToList<NE_Profile>();//Finding all matching profiles
+        //        Max_Payoff.RemoveAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row));//removed paired nodes
+        //        if (PairedMax.Count > 1)
+        //        {
+        //            Paired_p1_p2.Add(PairedMax[0]);//NOOO Duplication
+        //            flag_pair = true;//at least one Nash was found
+        //        }
+        //    }
+        //    List<int> temp = new List<int>();
+        //    if (!flag_pair)// no NE
+        //        Console.WriteLine("There is no Nash Equilibrium for the game.");
+        //    else //
+        //    {
+        //        //Finale = P3search_Max_Cell(GameProfiles, Paired_p1_p2, p2_numStrategy, p3_numStrategy);
+        //        if (Paired_p1_p2.Count > 0)
+        //            for (int i = 0; i < Paired_p1_p2.Count; i++)
+        //            {
+        //                temp.Add(Paired_p1_p2[i].payoff1);
+        //                temp.Add(Paired_p1_p2[i].payoff2);
+        //            }
+        //    }
+        //    return temp;
         //}
+       
         #endregion
         #region 3Players
         public List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies)
@@ -711,19 +683,19 @@ namespace SeniorServer
         }
         public int JoinGame(string desiredgame, string username , List<string> strategies)//return GID if a game is created // return index of player
         {
-            int countofqueue = Player_GameFrame_Queue.Count();
-            Player_GameFrame_Queue.Add(username, desiredgame);//add the player/game pair to the queue
-            Strategies.Add(username, strategies);
+            int countofqueue = wrapper_TwoThree.Player_GameFrame_Queue.Count();
+            wrapper_TwoThree.Player_GameFrame_Queue.Add(username, desiredgame);//add the player/game pair to the queue
+            wrapper_TwoThree.Strategies.Add(username, strategies);
             return countofqueue + 1;
         }
         public List<string> FindPlayerStrategies(string username)//returns a list of all the strategies of a player
         {
             List<string> allstrats = new List<string>();
             //allstrats.AddRange(Strategies.Values);
-            List<string> usernames = Strategies.Keys.ToList();
+            List<string> usernames = wrapper_TwoThree.Strategies.Keys.ToList();
             List<string> strategies = new List<string>();
             int i = 0;
-            foreach(List<string> currstratlist in Strategies.Values)
+            foreach(List<string> currstratlist in wrapper_TwoThree.Strategies.Values)
             {
 
                 strategies[i++] = currstratlist[i++];
@@ -733,22 +705,18 @@ namespace SeniorServer
                 if(usernames[i] == username)
                     allstrats[i] =strategies[i];
             }
-            //for (int i = 0; i < strategies.Count; i++)
-            //{ if (usernames[i] == username)
-            // //       allstrats.Add();
-            //}
             return allstrats;
         }
         public PF CheckGameStatus(string desiredgame, string username)//1 if the min num required is reached // -1 if still waiting
         {
             int GID=0;
             var prox = new DBFunctionsClient();   
-            bool isInQueue = Player_GameFrame_Queue.ContainsKey(username);
+            bool isInQueue = wrapper_TwoThree.Player_GameFrame_Queue.ContainsKey(username);
             if (!isInQueue)//if the player is not in the queue , this means that the game is already created
             {
                 List<GamePlayerModel> games = prox.RetreiveAllGamePlayersByPlayer(username).ToList();
                 GamePlayerModel gp = games.ElementAt(games.Count - 1);//last gameplayer
-                foreach (PF p in playerInfo)
+                foreach (PF p in wrapper_TwoThree.playerInfo)
                 {
                     if (p.username == username)
                         return p;
@@ -758,7 +726,7 @@ namespace SeniorServer
             else
             {
                 //get the min num required for the games , then check if the nop is sufficient
-                List<string> opengames = findKeyforValue(Player_GameFrame_Queue, desiredgame);//players in this game
+                List<string> opengames = findKeyforValue(wrapper_TwoThree.Player_GameFrame_Queue, desiredgame);//players in this game
                 
                     prox.Open();   
                     int minplayers = prox.RetreiveMinPlayers(desiredgame);//get the min nop required in the desired game
@@ -775,6 +743,7 @@ namespace SeniorServer
                     GID = prox.AddGame(newGame);//add the new game 
                     List<List<string>> strategies = new List<List<string>>();
                     List<string> tempstrategies = new List<string>();
+                    int counterfororderofplayers = 0;
                     for (int i=0;i<maxplayers;i++)// search the queue to add the players
                     {
                         GamePlayerModel player = new GamePlayerModel();
@@ -783,31 +752,109 @@ namespace SeniorServer
                         player.GID = GID;
                         prox.AddGamePlayer(player);
                         ppp.username = player.UserName;
-                        Strategies.TryGetValue(ppp.username, out tempstrategies);
+                        wrapper_TwoThree.Strategies.TryGetValue(ppp.username, out tempstrategies);
                         strategies.Add(tempstrategies);
                         ppp.GID = player.GID;
-                       // ppp.strategies = FindPlayerStrategies(player.UserName);
-                        ppp.strategies = tempstrategies;
-                        playerInfo.Add(ppp);
+                        ppp.orderInGame = counterfororderofplayers++;
+                        ppp.strategies.AddRange(tempstrategies);
+                        wrapper_TwoThree.playerInfo.Add(ppp);
                     }
                     
-                    List<List<string>> cp = Cartisian_Product(strategies,neprofiles);
-                    foreach (PF p in playerInfo)
+                    List<List<string>> cp = Cartisian_Product(strategies, wrapper_TwoThree.neprofiles);
+                   
+                    foreach (PF p in wrapper_TwoThree.playerInfo)
                     {
                         p.CP = cp;
                     }
                     for (int i = 0; i < maxplayers; i++)//remove the players from the queue
                     {
-                        Player_GameFrame_Queue.Remove(opengames[i]);
+                        wrapper_TwoThree.Player_GameFrame_Queue.Remove(opengames[i]);
                     }
                 }
-                foreach(PF p in playerInfo)
+                foreach(PF p in wrapper_TwoThree.playerInfo)//return this player's PF
                 {
                     if (p.username == username)
                         return p;
                 }
-                return new PF();
+                return new PF();//dummy
             }
+        }//RETURNS PF containing CP AND FINISHES
+        public List<NE_Profile> PreferencesGetter(string preferences , string username, List<NE_Profile> Max_Payoff)//gets the prefrences of each individual playre
+        {
+            foreach(var player in wrapper_TwoThree.playerInfo)
+            {
+                if(player.username==username)
+                {
+                    player.preferences=preferences;
+                }
+            }
+            bool check = false;
+            foreach(var player in wrapper_TwoThree.playerInfo)
+            {
+                if (player.preferences=="")
+                    check = true;
+            }
+            if(check==false)//all the players have their preferences filled
+            {
+                List<string> allpprefrences = new List<string>();
+                for(int i=0;i<wrapper_TwoThree.playerInfo.Count;i++)
+                {
+                    allpprefrences.Add(wrapper_TwoThree.playerInfo.Find(item => (item.orderInGame == i)).preferences);//order players' prefrences 
+                }
+                PayOffs_generater(allpprefrences, wrapper_TwoThree.neprofiles);//splits preferences of each player and calls utility function and stores them in P
+                
+
+                Max_Payoff = new List<NE_Profile>();//Max payyoffs
+                List<PF> OrderedPlayers = new List<PF>();
+                for (int i = 0; i < wrapper_TwoThree.playerInfo.Count; i++)
+                {
+                    OrderedPlayers.Add(wrapper_TwoThree.playerInfo.Find(item => (item.orderInGame == i)));//order players
+                }
+                int p3_numStrategy = 0;
+                if (OrderedPlayers.Count == 2)
+                {
+                    p3_numStrategy = 1;
+                }
+                else p3_numStrategy = OrderedPlayers[2].strategies.Count;
+                
+                for (int i = 0; i < OrderedPlayers[0].strategies.Count; i++)//loop: rows/p2
+                {
+                    for (int j = 0; j < OrderedPlayers[1].strategies.Count * p3_numStrategy; j = j + OrderedPlayers[1].strategies.Count)
+                    {
+                        List<NE_Profile> tempRes = P2search_Max_Row(j, i, OrderedPlayers[1].strategies.Count, wrapper_TwoThree.neprofiles); // calls function and get MaxPayoff_row
+                        Max_Payoff.AddRange(tempRes); // merging the results of the called function with Max_Payoff matrix
+                    }
+                }
+                for (int j = 0; j < OrderedPlayers[1].strategies.Count * p3_numStrategy; j++)//loop col/p1
+                {
+                    List<NE_Profile> tempRes = P1search_Max_Col(j, OrderedPlayers[1].strategies.Count, wrapper_TwoThree.neprofiles);// calls function and get MaxPayoff_col
+                    Max_Payoff.AddRange(tempRes);// merging the results of the called function with Max_Payoff matrix
+                }
+
+                int k = 0;// k is the index of the first element in the list and it's unchangable //NO TASTE
+                bool flag_pair = false; // indicates if there is at least one Nash
+                List<NE_Profile> PairedMax;//for p1_p12 results
+                NE_Profile element_maxPayoff;//temp for the first element of maxpayoff
+                List<NE_Profile> Paired_p1_p2 = new List<NE_Profile>();//to be used to find the max for p3
+                                                                       //List<NE_Profile> Finale = new List<NE_Profile>();//NASH EQUILIBRIUM PRIFLES ARE STORED HERE
+                while (Max_Payoff.Count > 0)//pairing the results
+                {
+                    element_maxPayoff = new NE_Profile(Max_Payoff[k].payoff1, Max_Payoff[k].payoff2, /*Max_Payoff[k].payoff3,*/ Max_Payoff[k].row, Max_Payoff[k].col);//first node in list
+                    PairedMax = Max_Payoff.FindAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row)).ToList<NE_Profile>();//Finding all matching profiles
+                    Max_Payoff.RemoveAll(n => (n.col == element_maxPayoff.col && n.row == element_maxPayoff.row));//removed paired nodes
+                    if (PairedMax.Count > 1)
+                    {
+                        Paired_p1_p2.Add(PairedMax[0]);//NOOO Duplication
+                        flag_pair = true;//at least one Nash was found
+                    }
+                }
+
+                List<int> temp = new List<int>();
+                if (!flag_pair)// no NE
+                    return new List<NE_Profile>();
+                return Paired_p1_p2;
+            }
+            return null;
         }
         #endregion
     }

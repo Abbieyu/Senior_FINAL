@@ -58,7 +58,7 @@ namespace SeniorServer
         [OperationContract]
         int JoinGame(string desiredgame, string username, List<string> strategies);
         [OperationContract]
-        List<NE_Profile> PreferencesGetter(string preferences, string username, List<NE_Profile> Max_Payoff);
+        Dictionary<NE_Profile,bool> PreferencesGetter(string preferences, string username, List<NE_Profile> Max_Payoff);
         #endregion
     }
 

@@ -32,8 +32,6 @@ namespace SeniorServer
         #endregion
         #region 3Players
         List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies);
-        [OperationContract]
-        List<int> Three_PlayerWrapper();
         #endregion
         #region Admin Functions
         [OperationContract]

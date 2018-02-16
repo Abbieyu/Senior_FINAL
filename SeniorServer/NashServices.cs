@@ -699,18 +699,21 @@ namespace SeniorServer
             }
             return null;
         }
-        public void LogNashPointsinDB(int GID, )//adds founded nash points to database (npprofile,npstrategy, nppayoff)
-        {
-            //Add npprofile
-            //GId , add func from db
+        public void LogNashPointsinDB(int GID, List<PF> OrderedPlayers, List<NE_Profile> NashPoints )//adds founded nash points to database (npprofile,npstrategy, nppayoff)
+        {//underconstruction
             var DBsvc = new DBFunctionsClient();
-            NashPointProfileModel nppoint = new NashPointProfileModel();
-            nppoint.GID = GID;
-            int NPID = DBsvc.AddNashPointProfile(nppoint);
-            //Add npstrategy
-            //get -> username , strategy id , NPID
-
-            //Add nppayoff
+            foreach (var np in NashPoints)
+            {
+                //Add npprofile
+             //GId , add func from db
+                NashPointProfileModel nppoint = new NashPointProfileModel();
+                nppoint.GID = GID;
+                int NPID = DBsvc.AddNashPointProfile(nppoint);
+                //Add npstrategy
+                //get -> username , strategy id , NPID
+                //wrapper_TwoThree.playerInfo;
+            //Add nppayoff nppayoff1 -> player 1 ....
+            }
         }
         #endregion
     }

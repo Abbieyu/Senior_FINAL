@@ -27,6 +27,7 @@
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="40058dfe-a059-40c0-b116-3f5c6eb18bb8" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="6b93e0e3-5760-45f9-a10a-ef3a345e7a03" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
     <MetadataFile FileName="SeniorDBServer.xsd" MetadataType="Schema" ID="57ec22e3-56a3-45ec-9c55-d502558df4be" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
+    <MetadataFile FileName="SeniorServer.xsd" MetadataType="Schema" ID="c576fb69-7df8-444d-bbbe-d9debc8f0ffb" SourceId="1" SourceUrl="http://localhost:8999/SeniorServer.NashServices.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

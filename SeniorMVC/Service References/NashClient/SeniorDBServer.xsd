@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/SeniorDBServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SeniorDBServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="UserModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AdminFlag" type="ser:char" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="UserModel" nillable="true" type="tns:UserModel" />
-  <xs:complexType name="ArrayOfGameFrameModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameFrameModel" nillable="true" type="tns:GameFrameModel" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGameFrameModel" nillable="true" type="tns:ArrayOfGameFrameModel" />
   <xs:complexType name="GameFrameModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="MaxPlayers" type="xs:int" />
@@ -25,4 +11,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GameFrameModel" nillable="true" type="tns:GameFrameModel" />
+  <xs:complexType name="ArrayOfGameFrameModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GameFrameModel" nillable="true" type="tns:GameFrameModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGameFrameModel" nillable="true" type="tns:ArrayOfGameFrameModel" />
+  <xs:complexType name="UserModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AdminFlag" type="ser:char" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserModel" nillable="true" type="tns:UserModel" />
 </xs:schema>

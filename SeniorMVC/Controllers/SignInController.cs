@@ -38,7 +38,7 @@ namespace SeniorMVC.Controllers
             NashClient.NsashServicesClient nash = new NashClient.NsashServicesClient();
             NashClient.UserModel user = new NashClient.UserModel();
             //user.Username = username;
-            user.Username = "asdf";
+            //user.Username = "asdf";
             //user.Password = password;
             user.Username = Request["Username"].ToString();
             user.Password = Request["Password"].ToString();

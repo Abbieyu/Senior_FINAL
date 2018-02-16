@@ -15,83 +15,6 @@ namespace SeniorMVC.NashClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserModel", Namespace="http://schemas.datacontract.org/2004/07/SeniorDBServer")]
-    [System.SerializableAttribute()]
-    public partial class UserModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private char AdminFlagField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public char AdminFlag {
-            get {
-                return this.AdminFlagField;
-            }
-            set {
-                if ((this.AdminFlagField.Equals(value) != true)) {
-                    this.AdminFlagField = value;
-                    this.RaisePropertyChanged("AdminFlag");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GameFrameModel", Namespace="http://schemas.datacontract.org/2004/07/SeniorDBServer")]
     [System.SerializableAttribute()]
     public partial class GameFrameModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -199,6 +122,237 @@ namespace SeniorMVC.NashClient {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserModel", Namespace="http://schemas.datacontract.org/2004/07/SeniorDBServer")]
+    [System.SerializableAttribute()]
+    public partial class UserModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private char AdminFlagField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public char AdminFlag {
+            get {
+                return this.AdminFlagField;
+            }
+            set {
+                if ((this.AdminFlagField.Equals(value) != true)) {
+                    this.AdminFlagField = value;
+                    this.RaisePropertyChanged("AdminFlag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PF", Namespace="http://schemas.datacontract.org/2004/07/SeniorServer")]
+    [System.SerializableAttribute()]
+    public partial class PF : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[][] CPField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int orderInGameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string preferencesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] strategiesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[][] CP {
+            get {
+                return this.CPField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CPField, value) != true)) {
+                    this.CPField = value;
+                    this.RaisePropertyChanged("CP");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GID {
+            get {
+                return this.GIDField;
+            }
+            set {
+                if ((this.GIDField.Equals(value) != true)) {
+                    this.GIDField = value;
+                    this.RaisePropertyChanged("GID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int orderInGame {
+            get {
+                return this.orderInGameField;
+            }
+            set {
+                if ((this.orderInGameField.Equals(value) != true)) {
+                    this.orderInGameField = value;
+                    this.RaisePropertyChanged("orderInGame");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string preferences {
+            get {
+                return this.preferencesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.preferencesField, value) != true)) {
+                    this.preferencesField = value;
+                    this.RaisePropertyChanged("preferences");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] strategies {
+            get {
+                return this.strategiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.strategiesField, value) != true)) {
+                    this.strategiesField = value;
+                    this.RaisePropertyChanged("strategies");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NE_Profile", Namespace="http://schemas.datacontract.org/2004/07/SeniorServer")]
+    [System.SerializableAttribute()]
+    public partial class NE_Profile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NashClient.INsashServices")]
     public interface INsashServices {
@@ -209,17 +363,29 @@ namespace SeniorMVC.NashClient {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/NPlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/NPlayerWrapperResponse")]
         System.Threading.Tasks.Task<string[]> NPlayerWrapperAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Two_PlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/Two_PlayerWrapperResponse")]
-        int[] Two_PlayerWrapper();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/DeleteGameFrame", ReplyAction="http://tempuri.org/INsashServices/DeleteGameFrameResponse")]
+        string DeleteGameFrame(string title);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Two_PlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/Two_PlayerWrapperResponse")]
-        System.Threading.Tasks.Task<int[]> Two_PlayerWrapperAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/DeleteGameFrame", ReplyAction="http://tempuri.org/INsashServices/DeleteGameFrameResponse")]
+        System.Threading.Tasks.Task<string> DeleteGameFrameAsync(string title);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Three_PlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/Three_PlayerWrapperResponse")]
-        int[] Three_PlayerWrapper();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/AddGameFrame", ReplyAction="http://tempuri.org/INsashServices/AddGameFrameResponse")]
+        string AddGameFrame(SeniorMVC.NashClient.GameFrameModel gf);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/Three_PlayerWrapper", ReplyAction="http://tempuri.org/INsashServices/Three_PlayerWrapperResponse")]
-        System.Threading.Tasks.Task<int[]> Three_PlayerWrapperAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/AddGameFrame", ReplyAction="http://tempuri.org/INsashServices/AddGameFrameResponse")]
+        System.Threading.Tasks.Task<string> AddGameFrameAsync(SeniorMVC.NashClient.GameFrameModel gf);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/DisplayFreeGameFrames", ReplyAction="http://tempuri.org/INsashServices/DisplayFreeGameFramesResponse")]
+        SeniorMVC.NashClient.GameFrameModel[] DisplayFreeGameFrames();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/DisplayFreeGameFrames", ReplyAction="http://tempuri.org/INsashServices/DisplayFreeGameFramesResponse")]
+        System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrameModel[]> DisplayFreeGameFramesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/EditGameFrame", ReplyAction="http://tempuri.org/INsashServices/EditGameFrameResponse")]
+        string EditGameFrame(SeniorMVC.NashClient.GameFrameModel edited);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/EditGameFrame", ReplyAction="http://tempuri.org/INsashServices/EditGameFrameResponse")]
+        System.Threading.Tasks.Task<string> EditGameFrameAsync(SeniorMVC.NashClient.GameFrameModel edited);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/SignIn", ReplyAction="http://tempuri.org/INsashServices/SignInResponse")]
         SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s);
@@ -240,10 +406,22 @@ namespace SeniorMVC.NashClient {
         System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrameModel[]> ChooseGameAsync(int nop);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/CheckGameStatus", ReplyAction="http://tempuri.org/INsashServices/CheckGameStatusResponse")]
-        int CheckGameStatus(string desiredgame, string username);
+        SeniorMVC.NashClient.PF CheckGameStatus(string desiredgame, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/CheckGameStatus", ReplyAction="http://tempuri.org/INsashServices/CheckGameStatusResponse")]
-        System.Threading.Tasks.Task<int> CheckGameStatusAsync(string desiredgame, string username);
+        System.Threading.Tasks.Task<SeniorMVC.NashClient.PF> CheckGameStatusAsync(string desiredgame, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/JoinGame", ReplyAction="http://tempuri.org/INsashServices/JoinGameResponse")]
+        int JoinGame(string desiredgame, string username, string[] strategies);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/JoinGame", ReplyAction="http://tempuri.org/INsashServices/JoinGameResponse")]
+        System.Threading.Tasks.Task<int> JoinGameAsync(string desiredgame, string username, string[] strategies);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/PreferencesGetter", ReplyAction="http://tempuri.org/INsashServices/PreferencesGetterResponse")]
+        System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool> PreferencesGetter(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/PreferencesGetter", ReplyAction="http://tempuri.org/INsashServices/PreferencesGetterResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool>> PreferencesGetterAsync(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -281,20 +459,36 @@ namespace SeniorMVC.NashClient {
             return base.Channel.NPlayerWrapperAsync();
         }
         
-        public int[] Two_PlayerWrapper() {
-            return base.Channel.Two_PlayerWrapper();
+        public string DeleteGameFrame(string title) {
+            return base.Channel.DeleteGameFrame(title);
         }
         
-        public System.Threading.Tasks.Task<int[]> Two_PlayerWrapperAsync() {
-            return base.Channel.Two_PlayerWrapperAsync();
+        public System.Threading.Tasks.Task<string> DeleteGameFrameAsync(string title) {
+            return base.Channel.DeleteGameFrameAsync(title);
         }
         
-        public int[] Three_PlayerWrapper() {
-            return base.Channel.Three_PlayerWrapper();
+        public string AddGameFrame(SeniorMVC.NashClient.GameFrameModel gf) {
+            return base.Channel.AddGameFrame(gf);
         }
         
-        public System.Threading.Tasks.Task<int[]> Three_PlayerWrapperAsync() {
-            return base.Channel.Three_PlayerWrapperAsync();
+        public System.Threading.Tasks.Task<string> AddGameFrameAsync(SeniorMVC.NashClient.GameFrameModel gf) {
+            return base.Channel.AddGameFrameAsync(gf);
+        }
+        
+        public SeniorMVC.NashClient.GameFrameModel[] DisplayFreeGameFrames() {
+            return base.Channel.DisplayFreeGameFrames();
+        }
+        
+        public System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrameModel[]> DisplayFreeGameFramesAsync() {
+            return base.Channel.DisplayFreeGameFramesAsync();
+        }
+        
+        public string EditGameFrame(SeniorMVC.NashClient.GameFrameModel edited) {
+            return base.Channel.EditGameFrame(edited);
+        }
+        
+        public System.Threading.Tasks.Task<string> EditGameFrameAsync(SeniorMVC.NashClient.GameFrameModel edited) {
+            return base.Channel.EditGameFrameAsync(edited);
         }
         
         public SeniorMVC.NashClient.UserModel SignIn(SeniorMVC.NashClient.UserModel s) {
@@ -321,12 +515,28 @@ namespace SeniorMVC.NashClient {
             return base.Channel.ChooseGameAsync(nop);
         }
         
-        public int CheckGameStatus(string desiredgame, string username) {
+        public SeniorMVC.NashClient.PF CheckGameStatus(string desiredgame, string username) {
             return base.Channel.CheckGameStatus(desiredgame, username);
         }
         
-        public System.Threading.Tasks.Task<int> CheckGameStatusAsync(string desiredgame, string username) {
+        public System.Threading.Tasks.Task<SeniorMVC.NashClient.PF> CheckGameStatusAsync(string desiredgame, string username) {
             return base.Channel.CheckGameStatusAsync(desiredgame, username);
+        }
+        
+        public int JoinGame(string desiredgame, string username, string[] strategies) {
+            return base.Channel.JoinGame(desiredgame, username, strategies);
+        }
+        
+        public System.Threading.Tasks.Task<int> JoinGameAsync(string desiredgame, string username, string[] strategies) {
+            return base.Channel.JoinGameAsync(desiredgame, username, strategies);
+        }
+        
+        public System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool> PreferencesGetter(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff) {
+            return base.Channel.PreferencesGetter(preferences, username, Max_Payoff);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool>> PreferencesGetterAsync(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff) {
+            return base.Channel.PreferencesGetterAsync(preferences, username, Max_Payoff);
         }
     }
 }

@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleCrypto, Version=26.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -60,6 +64,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\SeniorDBServer.GameFrameModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.GameModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.GamePlayerModel.datasource" />
@@ -68,17 +73,17 @@
     <None Include="Properties\DataSources\SeniorDBServer.NPPayoffModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.NPStrategyModel.datasource" />
     <None Include="Properties\DataSources\SeniorDBServer.UserModel.datasource" />
-    <None Include="Service References\SeniorDBServiceRef\DBFunctions.wsdl" />
+    <None Include="Service References\SeniorDBServiceRef\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SeniorDBServiceRef\SeniorDBServer.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer1.xsd">
+    <None Include="Service References\SeniorDBServiceRef\service.wsdl" />
+    <None Include="Service References\SeniorDBServiceRef\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer3.xsd">
+    <None Include="Service References\SeniorDBServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -93,9 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SeniorDBServiceRef\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SeniorDBServiceRef\SeniorDBServer.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SeniorDBServiceRef\configuration91.svcinfo" />

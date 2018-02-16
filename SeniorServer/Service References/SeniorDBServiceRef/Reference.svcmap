@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9904825c-c801-4e38-a6d2-4acce899bc47" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cfab852c-6224-457e-b7cd-39a9f5846f0d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,15 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8889/SeniorDBServer.DBFunctions.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SeniorDBServer.xsd" MetadataType="Schema" ID="5245e43a-9ef0-4753-822d-fefe6810f835" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?xsd=xsd3" />
-    <MetadataFile FileName="SeniorDBServer.disco" MetadataType="Disco" ID="7bea5f47-013a-4449-9498-5e2e0667e434" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?disco" />
-    <MetadataFile FileName="DBFunctions.wsdl" MetadataType="Wsdl" ID="a46ea58a-8b35-4b64-9bfd-4c7652998077" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?wsdl" />
-    <MetadataFile FileName="SeniorDBServer1.xsd" MetadataType="Schema" ID="c0c54bc3-21f2-4bb8-b987-8babf1d30b96" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?xsd=xsd0" />
-    <MetadataFile FileName="SeniorDBServer2.xsd" MetadataType="Schema" ID="ca9e1f4a-48c9-44bc-947a-53f0f997b1f8" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?xsd=xsd1" />
-    <MetadataFile FileName="SeniorDBServer3.xsd" MetadataType="Schema" ID="a60cc433-702b-4ff2-8aee-f211e26165e4" SourceId="1" SourceUrl="http://localhost:8889/SeniorDBServer.DBFunctions.svc?xsd=xsd2" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2b96ff36-3a6f-4be6-a12d-e6fbf1ff3e9e" SourceId="1" SourceUrl="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="da66beec-b10f-4755-9880-9526e973607f" SourceId="1" SourceUrl="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d64c72c7-81a2-41c9-a366-f9bee3fd88c4" SourceId="1" SourceUrl="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" />
+    <MetadataFile FileName="SeniorDBServer.xsd" MetadataType="Schema" ID="62061d60-d85f-4b3b-9b79-3862f2fd2e2b" SourceId="1" SourceUrl="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a62aee48-3f11-4852-942c-bc26556000aa" SourceId="1" SourceUrl="http://localhost:8998/SeniorDBServer.DBFunctions.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

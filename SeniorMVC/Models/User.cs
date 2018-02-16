@@ -11,7 +11,7 @@ namespace SeniorMVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,16 @@ namespace SeniorMVC.Models
         {
             this.Games = new HashSet<Game>();
         }
-    
+        [Required]
+        [StringLength(20)]
         public string Username { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 9)]
         public string Password { get; set; }
+        public string PasswordSalt { get; set; }
         public string AdminFlag { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
     }

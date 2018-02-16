@@ -1,4 +1,4 @@
-﻿@model SeniorMVC.Models.UserMVC
+﻿@model SeniorMVC.Models.User
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/SignIn_Layout1.cshtml";
@@ -192,16 +192,18 @@
             <div class="row">
                 <div class="span6">
                     <div class="form-box">
-                        <form action="@Url.Action("LogIn", "SignIn")" method="post">
-
+                        <form action="@Url.Action("LOGIN", "SignIn")" method="post">
+                            @Html.ValidationSummary(true, "Login Failed, check details");  
                             <div class="form-body">
                                 <fieldset>
                                     <legend>Login Below:</legend>
-                                    <label>Email Address</label>
+                                    <label>Username</label>
                                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(u => u.Username)
                                     <label>Password</label>
                                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-
+                                    @Html.ValidationMessageFor(u => u.Password)
+                                    
                                     <button type="submit" class="btn-style">Submit</button>
                                 </fieldset>
                             </div>
@@ -219,24 +221,23 @@
                 </div>
                 <div class="span6">
                     <div class="form-box">
-                        <form method="Post" action="@Url.Action("Register","SignIn")">
+                        <form method="Post" action="@Url.Action("REGISTER","SignIn")">
+                            @Html.ValidationSummary(true, "Registeration Failed, fields.");  
                             <div class="form-body">
                                 <fieldset>
                                     <legend>First time here? Sign up now!</legend>
                                     <div class="row-fluid">
                                         <div class="span6">
                                             @Html.LabelFor(m => m.Username)
-                                            @Html.PasswordFor(m => m.Username, new { @class = "form-control" })
+                                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(u => u.Username)
                                         </div>
-                                        <div class="span6">
-                                            <label>Last Name</label>
-                                            <input type="text" placeholder="Last Name" class="input-block-level">
-                                        </div>
+                                    
                                     </div>
-                                    <label>Email Address</label>
-                                    <input type="text" placeholder="Enter your E-mail ID" class="input-block-level">
+   
                                     @Html.LabelFor(m => m.Password)
-                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(u => u.Password)
                                     <button type="submit" class="btn-style">Sign Up</button>
                                 </fieldset>
                             </div>

@@ -601,3 +601,16 @@
     @*</body>*@
 
 </html>
+<div style="width:auto; background-color:aqua">
+    @if (Request.IsAuthenticated)
+    {
+        <strong>@Html.Encode(User.Identity.Name)</strong>
+            @Html.ActionLink("Log Out", "Logout", "User")
+    }
+    else
+    {
+        @Html.ActionLink("REGISTER", "REGISTER", "User")
+        <span> | </span>
+            @Html.ActionLink("LOGIN", "LOGIN", "User")
+    }
+</div>  

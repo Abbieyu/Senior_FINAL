@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="I6h2tbKiKFgs0aJmuDMoyWZC2bI=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="FDw2rJqd6r6s1H7gWoef+luUXys=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_INsashServices">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_INsashServices" contract="NashClient.INsashServices" bindingType="basicHttpBinding" address="http://localhost:8999/SeniorServer.NashServices.svc/" bindingConfiguration="BasicHttpBinding_INsashServices">
+    <endpoint name="BasicHttpBinding_INsashServices" contract="NashClient.INsashServices" bindingType="basicHttpBinding" address="http://localhost:8090/SeniorServer.NashServices.svc/" bindingConfiguration="BasicHttpBinding_INsashServices">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8999/SeniorServer.NashServices.svc/</serializedValue>
+          <serializedValue>http://localhost:8090/SeniorServer.NashServices.svc/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -81,11 +81,23 @@ namespace SeniorServer.SeniorDBServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveUser", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveUserResponse")]
         System.Threading.Tasks.Task<SeniorDBServer.UserModel> RetreiveUserAsync(string username, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveUSerbyUN", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveUSerbyUNResponse")]
+        SeniorDBServer.UserModel RetreiveUSerbyUN(string Username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/RetreiveUSerbyUN", ReplyAction="http://tempuri.org/IDBFunctions/RetreiveUSerbyUNResponse")]
+        System.Threading.Tasks.Task<SeniorDBServer.UserModel> RetreiveUSerbyUNAsync(string Username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateUser", ReplyAction="http://tempuri.org/IDBFunctions/UpdateUserResponse")]
         int UpdateUser(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/UpdateUser", ReplyAction="http://tempuri.org/IDBFunctions/UpdateUserResponse")]
         System.Threading.Tasks.Task<int> UpdateUserAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddAdmin", ReplyAction="http://tempuri.org/IDBFunctions/AddAdminResponse")]
+        int AddAdmin(SeniorDBServer.UserModel user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddAdmin", ReplyAction="http://tempuri.org/IDBFunctions/AddAdminResponse")]
+        System.Threading.Tasks.Task<int> AddAdminAsync(SeniorDBServer.UserModel user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDBFunctions/AddGamePlayer", ReplyAction="http://tempuri.org/IDBFunctions/AddGamePlayerResponse")]
         int AddGamePlayer(SeniorDBServer.GamePlayerModel player);
@@ -311,12 +323,28 @@ namespace SeniorServer.SeniorDBServiceRef {
             return base.Channel.RetreiveUserAsync(username, password);
         }
         
+        public SeniorDBServer.UserModel RetreiveUSerbyUN(string Username) {
+            return base.Channel.RetreiveUSerbyUN(Username);
+        }
+        
+        public System.Threading.Tasks.Task<SeniorDBServer.UserModel> RetreiveUSerbyUNAsync(string Username) {
+            return base.Channel.RetreiveUSerbyUNAsync(Username);
+        }
+        
         public int UpdateUser(string username, string password) {
             return base.Channel.UpdateUser(username, password);
         }
         
         public System.Threading.Tasks.Task<int> UpdateUserAsync(string username, string password) {
             return base.Channel.UpdateUserAsync(username, password);
+        }
+        
+        public int AddAdmin(SeniorDBServer.UserModel user) {
+            return base.Channel.AddAdmin(user);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddAdminAsync(SeniorDBServer.UserModel user) {
+            return base.Channel.AddAdminAsync(user);
         }
         
         public int AddGamePlayer(SeniorDBServer.GamePlayerModel player) {

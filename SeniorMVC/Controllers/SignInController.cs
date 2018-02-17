@@ -58,54 +58,69 @@ namespace SeniorMVC.Controllers
         //    return View();
         //}
 
+        //[Authorize]
         [HttpPost]
         public ActionResult LOGIN(Models.User userr)
         {
-            //if (ModelState.IsValid)  
-            //{  
-            if (IsValid(userr.Username, userr.Password))
-            {
-                FormsAuthentication.SetAuthCookie(Request["Username"].ToString(), false);
-                return RedirectToAction("Dasboard", "SignIn");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Login details are wrong.");
-            }
-            return View(userr);
+            //if (ModelState.IsValid)
+            //{
+            string AF = "";
+                if (IsValid(userr.Username, userr.Password , out AF))
+                {
+                    FormsAuthentication.SetAuthCookie(Request["Username"].ToString(), false);
+                if (AF == "Y")
+                { return RedirectToAction("AdminDashboard", "AdminDash"); }
+
+                else
+                    return RedirectToAction("UserDashboard" , "User");
+               }
+                else
+                {
+                    ModelState.AddModelError("", "Login details are wrong.");
+                }
+           // }
+                return View(ModelState);
+            
         }
 
-        public ActionResult Dashboard()
+        public ActionResult AdminDashboard()
         {
             return View();
         }
 
+        
         [HttpPost]
-        public ActionResult REGISTER(Models.User user)
+        public ActionResult REGISTER()//Models.User user)
         {
             try
             {
                 //     if (ModelState.IsValid)
                 //   {
-                using (var db = new SeniorMVC.Models.Final_Senior_DBEntities1())
-                {
+                //using (var db = new SeniorMVC.Models.Final_Senior_DBEntities1())
+                //{
+                    var prox = new NashClient.NsashServicesClient();
                     var crypto = new SimpleCrypto.PBKDF2();
-                    var encrypPass = crypto.Compute(user.Password);
-                    var newUser = db.Users.Create();
-                    newUser.Username = user.Username;
+                
+                    var encrypPass = crypto.Compute(Request["Password"].ToString());
+                    var newUser = new UserModel();
+                    newUser.Username = Request["Username"].ToString();
                     newUser.Password = encrypPass;
                     newUser.PasswordSalt = crypto.Salt;
-                    db.Users.Add(newUser);
-                    db.SaveChanges();
-                    return RedirectToAction("LOGIN", "SignIn");
-                }
+                    //db.Users.Add(newUser);
+                    //db.SaveChanges();
+                    string result = prox.Register(newUser);
+                //, "SignIn");
+                if (result == "done!")
+                    return RedirectToAction("Index");
+                else RedirectToAction("Index");
+                //   }
                 // }
-            
+
                 //else
                 //{
                 //    ModelState.AddModelError("", "Data is not correct");
                 //}
-            
+
             }
             catch (DbEntityValidationException e)
             {
@@ -119,7 +134,7 @@ namespace SeniorMVC.Controllers
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                throw;
+                return View("Error");
             }
             return View();
         }
@@ -130,22 +145,31 @@ namespace SeniorMVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private bool IsValid(string username, string password)
+
+        private bool IsValid(string username, string password , out string AF)
         {
             var crypto = new SimpleCrypto.PBKDF2();
             bool IsValid = false;
 
-            using (var db = new SeniorMVC.Models.Final_Senior_DBEntities1())
-            {
-                var user = db.Users.FirstOrDefault(u => u.Username == username);
+            //using (var db = new SeniorMVC.Models.Final_Senior_DBEntities1())
+            //{
+            //    var user = db.Users.FirstOrDefault(u => u.Username == username);
+            var prox = new NashClient.NsashServicesClient();
+            UserModel usermodel = new UserModel();
+            usermodel.Username = username;
+            AF = "N";
+            var user = prox.SignIn(usermodel);
+            if (user.AdminFlag == 'Y')
+                AF = "Y";
                 if (user != null)
                 {
-                    if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                string enc = crypto.Compute(password, user.PasswordSalt);
+                    if (user.Password.Trim() == enc)
                     {
                         IsValid = true;
                     }
                 }
-            }
+            
             return IsValid;
         }
     }

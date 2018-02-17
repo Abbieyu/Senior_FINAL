@@ -70,15 +70,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SeniorLinq.cs">
-      <DependentUpon>SeniorLinq.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="DBFunctions.cs" />
     <Compile Include="SeniorLinq.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SeniorLinq.dbml</DependentUpon>
     </Compile>
-    <Compile Include="DBFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,12 +96,12 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="SeniorLinq.dbml.layout">
       <DependentUpon>SeniorLinq.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

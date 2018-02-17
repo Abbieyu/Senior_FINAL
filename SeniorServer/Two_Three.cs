@@ -13,6 +13,6 @@ namespace SeniorServer
                                                                                                 //    public Dictionary<int, int> StrategiesPointer = new Dictionary<int, int>();//index , GID
         public List<PF> playerInfo = new List<PF>();
         public List<NE_Profile> neprofiles = new List<NE_Profile>();
-
+        public GameFrame N_Players_Game = new GameFrame();
     }
 }

@@ -158,4 +158,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PreferencesGetterNplayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="preferences" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PreferencesGetterNplayerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SeniorServer" minOccurs="0" name="PreferencesGetterNplayerResult" nillable="true" type="q13:GameFrame" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

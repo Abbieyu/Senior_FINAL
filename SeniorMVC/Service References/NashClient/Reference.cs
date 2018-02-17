@@ -138,6 +138,9 @@ namespace SeniorMVC.NashClient {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordSaltField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -172,6 +175,19 @@ namespace SeniorMVC.NashClient {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PasswordSalt {
+            get {
+                return this.PasswordSaltField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordSaltField, value) != true)) {
+                    this.PasswordSaltField = value;
+                    this.RaisePropertyChanged("PasswordSalt");
                 }
             }
         }
@@ -353,6 +369,35 @@ namespace SeniorMVC.NashClient {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameFrame", Namespace="http://schemas.datacontract.org/2004/07/SeniorServer")]
+    [System.SerializableAttribute()]
+    public partial class GameFrame : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NashClient.INsashServices")]
     public interface INsashServices {
@@ -422,6 +467,12 @@ namespace SeniorMVC.NashClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/PreferencesGetter", ReplyAction="http://tempuri.org/INsashServices/PreferencesGetterResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool>> PreferencesGetterAsync(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/PreferencesGetterNplayer", ReplyAction="http://tempuri.org/INsashServices/PreferencesGetterNplayerResponse")]
+        SeniorMVC.NashClient.GameFrame PreferencesGetterNplayer(string preferences, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INsashServices/PreferencesGetterNplayer", ReplyAction="http://tempuri.org/INsashServices/PreferencesGetterNplayerResponse")]
+        System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrame> PreferencesGetterNplayerAsync(string preferences, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -537,6 +588,14 @@ namespace SeniorMVC.NashClient {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<SeniorMVC.NashClient.NE_Profile, bool>> PreferencesGetterAsync(string preferences, string username, SeniorMVC.NashClient.NE_Profile[] Max_Payoff) {
             return base.Channel.PreferencesGetterAsync(preferences, username, Max_Payoff);
+        }
+        
+        public SeniorMVC.NashClient.GameFrame PreferencesGetterNplayer(string preferences, string username) {
+            return base.Channel.PreferencesGetterNplayer(preferences, username);
+        }
+        
+        public System.Threading.Tasks.Task<SeniorMVC.NashClient.GameFrame> PreferencesGetterNplayerAsync(string preferences, string username) {
+            return base.Channel.PreferencesGetterNplayerAsync(preferences, username);
         }
     }
 }

@@ -33,5 +33,16 @@ namespace SeniorDBServer.Properties {
                 return ((string)(this["Final_Senior_DBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\projectsV13;Initial Catalog=Final_Senior_DB;Integrated Secu" +
+            "rity=True;MultipleActiveResultSets=True;Application Name=EntityFramework")]
+        public string Final_Senior_DBConnectionString1 {
+            get {
+                return ((string)(this["Final_Senior_DBConnectionString1"]));
+            }
+        }
     }
 }

@@ -153,6 +153,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RetreiveUSerbyUN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RetreiveUSerbyUNResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveUSerbyUNResult" nillable="true" type="q9:UserModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateUser">
     <xs:complexType>
       <xs:sequence>
@@ -168,10 +182,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddAdmin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="user" nillable="true" type="q10:UserModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAdminResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddAdminResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddGamePlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="player" nillable="true" type="q9:GamePlayerModel" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="player" nillable="true" type="q11:GamePlayerModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -192,7 +220,7 @@
   <xs:element name="RetreiveGamePlayersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGamePlayersResult" nillable="true" type="q10:ArrayOfGamePlayerModel" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGamePlayersResult" nillable="true" type="q12:ArrayOfGamePlayerModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -206,7 +234,7 @@
   <xs:element name="RetreivePlayerGamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RetreivePlayerGamesResult" nillable="true" type="q11:ArrayOfint" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RetreivePlayerGamesResult" nillable="true" type="q13:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +246,7 @@
   <xs:element name="RetreiveAllGamePlayersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamePlayersResult" nillable="true" type="q12:ArrayOfGamePlayerModel" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamePlayersResult" nillable="true" type="q14:ArrayOfGamePlayerModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -232,14 +260,14 @@
   <xs:element name="RetreiveAllGamePlayersByPlayerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamePlayersByPlayerResult" nillable="true" type="q13:ArrayOfGamePlayerModel" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamePlayersByPlayerResult" nillable="true" type="q15:ArrayOfGamePlayerModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddGame">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="game" nillable="true" type="q14:GameModel" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="game" nillable="true" type="q16:GameModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -274,7 +302,7 @@
   <xs:element name="RetreiveGameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGameResult" nillable="true" type="q15:GameModel" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGameResult" nillable="true" type="q17:GameModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -286,7 +314,7 @@
   <xs:element name="RetreiveAllGamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamesResult" nillable="true" type="q16:ArrayOfGameModel" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveAllGamesResult" nillable="true" type="q18:ArrayOfGameModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -308,7 +336,7 @@
   <xs:element name="AddGFStrategy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="gfstrategy" nillable="true" type="q17:GFStrategyModel" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="gfstrategy" nillable="true" type="q19:GFStrategyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -329,14 +357,14 @@
   <xs:element name="RetreiveGFStrategyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGFStrategyResult" nillable="true" type="q18:GFStrategyModel" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveGFStrategyResult" nillable="true" type="q20:GFStrategyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddNPStrategy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="npstrategy" nillable="true" type="q19:NPStrategyModel" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="npstrategy" nillable="true" type="q21:NPStrategyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -358,14 +386,14 @@
   <xs:element name="RetreiveNPStrategyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNPStrategyResult" nillable="true" type="q20:NPStrategyModel" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNPStrategyResult" nillable="true" type="q22:NPStrategyModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddNashPointProfile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="NP" nillable="true" type="q21:NashPointProfileModel" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="NP" nillable="true" type="q23:NashPointProfileModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -386,14 +414,14 @@
   <xs:element name="RetreiveNashPointProfileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNashPointProfileResult" nillable="true" type="q22:NashPointProfileModel" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNashPointProfileResult" nillable="true" type="q24:NashPointProfileModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddNPPayoff">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="payoff" nillable="true" type="q23:NPPayoffModel" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="payoff" nillable="true" type="q25:NPPayoffModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -415,7 +443,7 @@
   <xs:element name="RetreiveNPPayoffResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNPPayoffResult" nillable="true" type="q24:NPPayoffModel" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SeniorDBServer" minOccurs="0" name="RetreiveNPPayoffResult" nillable="true" type="q26:NPPayoffModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -38,7 +38,11 @@ namespace SeniorDBServer
         [OperationContract]
         UserModel RetreiveUser(string username, string password);
         [OperationContract]
+        UserModel RetreiveUSerbyUN(string Username);
+        [OperationContract]
         int UpdateUser(string username, string password);
+        [OperationContract]
+        int AddAdmin(UserModel user);
         #endregion
         #region GamePlayer
         [OperationContract]
@@ -115,11 +119,7 @@ namespace SeniorDBServer
         #endregion
     }
 
-    [DataContract]
-    public class TEST
-    {
-        public int test { get; set; }
-    }
+
 
     [DataContract]
     public class GameFrameModel
@@ -144,6 +144,8 @@ namespace SeniorDBServer
         public string Password { set; get; }
         [DataMember]
         public char AdminFlag { set; get; }
+        [DataMember]
+        public string PasswordSalt { set; get; }
     }
     [DataContract]
     public class GamePlayerModel

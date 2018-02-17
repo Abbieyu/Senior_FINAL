@@ -49,6 +49,7 @@ namespace SeniorServer
         UserModel SignIn(UserModel s);
         [OperationContract]
         string Register(UserModel usermodel);
+
         [OperationContract]
         List<GameFrameModel> ChooseGame(int nop);
         [OperationContract]
@@ -57,6 +58,8 @@ namespace SeniorServer
         int JoinGame(string desiredgame, string username, List<string> strategies);
         [OperationContract]
         Dictionary<NE_Profile,bool> PreferencesGetter(string preferences, string username, List<NE_Profile> Max_Payoff);
+        [OperationContract]
+        GameFrame PreferencesGetterNplayer(string preferences, string username);
         #endregion
     }
 

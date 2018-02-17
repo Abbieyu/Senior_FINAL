@@ -57,7 +57,7 @@ namespace SeniorDBServer
                 GameModel gm = new GameModel();
                 gm.GID = query.GID;
                 gm.Title = query.Title;
-                gm.NPlayers = query.NPlayers;
+                gm.NPlayers = (int)query.NPlayers;
                 return gm;
             }
             return null;
@@ -94,7 +94,7 @@ namespace SeniorDBServer
             {
                 GameModel Model1 = new GameModel();
                 Model1.GID = query[i].GID;
-                Model1.NPlayers = query[i].NPlayers;
+                Model1.NPlayers = (int)query[i].NPlayers;
                 Model1.Title = query[i].Title;
                 gamemodels.Add(Model1);
             }
@@ -284,7 +284,10 @@ namespace SeniorDBServer
         public int AddGamePlayer(GamePlayerModel player) // returns -1 if the username already exists//-2 if there is no game // 1 success
         {
             var cont = new SeniorLinqDataContext();
-            var query1 = (from gameplayers in cont.Gameplayers where gameplayers.Username == player.UserName select gameplayers).SingleOrDefault();
+            var query2 = (from gps in cont.Users where gps.Username == player.UserName select gps).SingleOrDefault();
+            if (query2 == null)
+                return -1;
+            var query1 = (from gameplayers in cont.Gameplayers where gameplayers.Username == player.UserName && gameplayers.GID == player.GID select gameplayers).SingleOrDefault();//make sure that the game doesn't exists
             if (query1 == null)
             {
                 var gamechecker = (from game in cont.Games where game.GID == player.GID select game).SingleOrDefault();
@@ -528,14 +531,33 @@ namespace SeniorDBServer
             temp.Username = user.Username;
             //string tp = user.Password;
            // temp.Password = tp;
-            temp.Password = user.Password;// % 10).ToString();
-            temp.AdminFlag = user.AdminFlag;
+            temp.Password = user.Password;
+            temp.AdminFlag = 'N';
+            temp.PasswordSalt = user.PasswordSalt;
             cont.Users.InsertOnSubmit(temp);
             cont.SubmitChanges();
             var query = (from u in cont.Users where temp.Username == u.Username select u.Username).SingleOrDefault();
           //  if (query != null)
                 return 1;
            // return -1;
+        }
+
+        public int AddAdmin(UserModel user)
+        {
+            var cont = new SeniorLinqDataContext();
+            User temp = new User();
+            temp.Username = user.Username;
+            //string tp = user.Password;
+            // temp.Password = tp;
+            temp.Password = user.Password;
+            temp.AdminFlag = 'Y';
+            temp.PasswordSalt = user.PasswordSalt;
+            cont.Users.InsertOnSubmit(temp);
+            cont.SubmitChanges();
+            var query = (from u in cont.Users where temp.Username == u.Username select u.Username).SingleOrDefault();
+            //  if (query != null)
+            return 1;
+            // return -1;
         }
         //public int DeleteUser(string username)
         //{
@@ -555,6 +577,20 @@ namespace SeniorDBServer
             UserModel user = new UserModel();
             user.Username = query.Username;
             user.Password = query.Password;
+            user.PasswordSalt = query.PasswordSalt;
+            user.AdminFlag = (char)query.AdminFlag;
+            return user;
+        }
+        public UserModel RetreiveUSerbyUN(string Username)
+        {
+            var cont = new SeniorLinqDataContext();
+            var query = (from us in cont.Users where us.Username == Username select us).SingleOrDefault();
+            if (query == null)
+                return new UserModel();
+            UserModel user = new UserModel();
+            user.Username = query.Username;
+            user.Password = query.Password;
+            user.PasswordSalt = query.PasswordSalt;
             user.AdminFlag = (char)query.AdminFlag;
             return user;
         }

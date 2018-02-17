@@ -22,4 +22,8 @@
     <xs:sequence />
   </xs:complexType>
   <xs:element name="NE_Profile" nillable="true" type="tns:NE_Profile" />
+  <xs:complexType name="GameFrame">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GameFrame" nillable="true" type="tns:GameFrame" />
 </xs:schema>

@@ -18,7 +18,6 @@ namespace SeniorDBServer
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
-	using System.Runtime.Serialization;
 	using System.ComponentModel;
 	using System;
 	
@@ -31,9 +30,9 @@ namespace SeniorDBServer
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertGame(Game instance);
-    partial void UpdateGame(Game instance);
-    partial void DeleteGame(Game instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     partial void InsertGameFrame(GameFrame instance);
     partial void UpdateGameFrame(GameFrame instance);
     partial void DeleteGameFrame(GameFrame instance);
@@ -43,22 +42,22 @@ namespace SeniorDBServer
     partial void InsertGFStrategy(GFStrategy instance);
     partial void UpdateGFStrategy(GFStrategy instance);
     partial void DeleteGFStrategy(GFStrategy instance);
+    partial void InsertNashPointProfile(NashPointProfile instance);
+    partial void UpdateNashPointProfile(NashPointProfile instance);
+    partial void DeleteNashPointProfile(NashPointProfile instance);
     partial void InsertNPPayoff(NPPayoff instance);
     partial void UpdateNPPayoff(NPPayoff instance);
     partial void DeleteNPPayoff(NPPayoff instance);
     partial void InsertNPStrategy(NPStrategy instance);
     partial void UpdateNPStrategy(NPStrategy instance);
     partial void DeleteNPStrategy(NPStrategy instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertNashPointProfile(NashPointProfile instance);
-    partial void UpdateNashPointProfile(NashPointProfile instance);
-    partial void DeleteNashPointProfile(NashPointProfile instance);
+    partial void InsertGame(Game instance);
+    partial void UpdateGame(Game instance);
+    partial void DeleteGame(Game instance);
     #endregion
 		
 		public SeniorLinqDataContext() : 
-				base(global::SeniorDBServer.Properties.Settings.Default.Final_Senior_DBConnectionString, mappingSource)
+				base(global::SeniorDBServer.Properties.Settings.Default.Final_Senior_DBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -87,11 +86,11 @@ namespace SeniorDBServer
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Game> Games
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<Game>();
+				return this.GetTable<User>();
 			}
 		}
 		
@@ -119,6 +118,14 @@ namespace SeniorDBServer
 			}
 		}
 		
+		public System.Data.Linq.Table<NashPointProfile> NashPointProfiles
+		{
+			get
+			{
+				return this.GetTable<NashPointProfile>();
+			}
+		}
+		
 		public System.Data.Linq.Table<NPPayoff> NPPayoffs
 		{
 			get
@@ -135,139 +142,142 @@ namespace SeniorDBServer
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<Game> Games
 		{
 			get
 			{
-				return this.GetTable<User>();
-			}
-		}
-		
-		public System.Data.Linq.Table<NashPointProfile> NashPointProfiles
-		{
-			get
-			{
-				return this.GetTable<NashPointProfile>();
+				return this.GetTable<Game>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Game")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Game : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _GID;
+		private string _Username;
 		
-		private string _Title;
+		private string _Password;
 		
-		private int _NPlayers;
+		private System.Nullable<char> _AdminFlag;
+		
+		private string _PasswordSalt;
 		
 		private EntitySet<Gameplayer> _Gameplayers;
 		
-		private EntitySet<NashPointProfile> _NashPointProfiles;
+		private EntitySet<NPPayoff> _NPPayoffs;
 		
-		private EntityRef<GameFrame> _GameFrame;
-		
-		private bool serializing;
+		private EntitySet<NPStrategy> _NPStrategies;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnGIDChanging(int value);
-    partial void OnGIDChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnNPlayersChanging(int value);
-    partial void OnNPlayersChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnAdminFlagChanging(System.Nullable<char> value);
+    partial void OnAdminFlagChanged();
+    partial void OnPasswordSaltChanging(string value);
+    partial void OnPasswordSaltChanged();
     #endregion
 		
-		public Game()
+		public User()
 		{
-			this.Initialize();
+			this._Gameplayers = new EntitySet<Gameplayer>(new Action<Gameplayer>(this.attach_Gameplayers), new Action<Gameplayer>(this.detach_Gameplayers));
+			this._NPPayoffs = new EntitySet<NPPayoff>(new Action<NPPayoff>(this.attach_NPPayoffs), new Action<NPPayoff>(this.detach_NPPayoffs));
+			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int GID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Username
 		{
 			get
 			{
-				return this._GID;
+				return this._Username;
 			}
 			set
 			{
-				if ((this._GID != value))
+				if ((this._Username != value))
 				{
-					this.OnGIDChanging(value);
+					this.OnUsernameChanging(value);
 					this.SendPropertyChanging();
-					this._GID = value;
-					this.SendPropertyChanged("GID");
-					this.OnGIDChanged();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NChar(30) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public string Title
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string Password
 		{
 			get
 			{
-				return this._Title;
+				return this._Password;
 			}
 			set
 			{
-				if ((this._Title != value))
+				if ((this._Password != value))
 				{
-					if (this._GameFrame.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTitleChanging(value);
+					this.OnPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPlayers", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public int NPlayers
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminFlag", DbType="NChar(1)")]
+		public System.Nullable<char> AdminFlag
 		{
 			get
 			{
-				return this._NPlayers;
+				return this._AdminFlag;
 			}
 			set
 			{
-				if ((this._NPlayers != value))
+				if ((this._AdminFlag != value))
 				{
-					this.OnNPlayersChanging(value);
+					this.OnAdminFlagChanging(value);
 					this.SendPropertyChanging();
-					this._NPlayers = value;
-					this.SendPropertyChanged("NPlayers");
-					this.OnNPlayersChanged();
+					this._AdminFlag = value;
+					this.SendPropertyChanged("AdminFlag");
+					this.OnAdminFlagChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Gameplayer", Storage="_Gameplayers", ThisKey="GID", OtherKey="GID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="VarChar(120) NOT NULL", CanBeNull=false)]
+		public string PasswordSalt
+		{
+			get
+			{
+				return this._PasswordSalt;
+			}
+			set
+			{
+				if ((this._PasswordSalt != value))
+				{
+					this.OnPasswordSaltChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordSalt = value;
+					this.SendPropertyChanged("PasswordSalt");
+					this.OnPasswordSaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Gameplayer", Storage="_Gameplayers", ThisKey="Username", OtherKey="Username")]
 		public EntitySet<Gameplayer> Gameplayers
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Gameplayers.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Gameplayers;
 			}
 			set
@@ -276,56 +286,29 @@ namespace SeniorDBServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_NashPointProfile", Storage="_NashPointProfiles", ThisKey="GID", OtherKey="GID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
-		public EntitySet<NashPointProfile> NashPointProfiles
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_NPPayoff", Storage="_NPPayoffs", ThisKey="Username", OtherKey="Username")]
+		public EntitySet<NPPayoff> NPPayoffs
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._NashPointProfiles.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._NashPointProfiles;
+				return this._NPPayoffs;
 			}
 			set
 			{
-				this._NashPointProfiles.Assign(value);
+				this._NPPayoffs.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GameFrame_Game", Storage="_GameFrame", ThisKey="Title", OtherKey="Title", IsForeignKey=true)]
-		public GameFrame GameFrame
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_NPStrategy", Storage="_NPStrategies", ThisKey="Username", OtherKey="Username")]
+		public EntitySet<NPStrategy> NPStrategies
 		{
 			get
 			{
-				return this._GameFrame.Entity;
+				return this._NPStrategies;
 			}
 			set
 			{
-				GameFrame previousValue = this._GameFrame.Entity;
-				if (((previousValue != value) 
-							|| (this._GameFrame.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GameFrame.Entity = null;
-						previousValue.Games.Remove(this);
-					}
-					this._GameFrame.Entity = value;
-					if ((value != null))
-					{
-						value.Games.Add(this);
-						this._Title = value.Title;
-					}
-					else
-					{
-						this._Title = default(string);
-					}
-					this.SendPropertyChanged("GameFrame");
-				}
+				this._NPStrategies.Assign(value);
 			}
 		}
 		
@@ -352,59 +335,41 @@ namespace SeniorDBServer
 		private void attach_Gameplayers(Gameplayer entity)
 		{
 			this.SendPropertyChanging();
-			entity.Game = this;
+			entity.User = this;
 		}
 		
 		private void detach_Gameplayers(Gameplayer entity)
 		{
 			this.SendPropertyChanging();
-			entity.Game = null;
+			entity.User = null;
 		}
 		
-		private void attach_NashPointProfiles(NashPointProfile entity)
+		private void attach_NPPayoffs(NPPayoff entity)
 		{
 			this.SendPropertyChanging();
-			entity.Game = this;
+			entity.User = this;
 		}
 		
-		private void detach_NashPointProfiles(NashPointProfile entity)
+		private void detach_NPPayoffs(NPPayoff entity)
 		{
 			this.SendPropertyChanging();
-			entity.Game = null;
+			entity.User = null;
 		}
 		
-		private void Initialize()
+		private void attach_NPStrategies(NPStrategy entity)
 		{
-			this._Gameplayers = new EntitySet<Gameplayer>(new Action<Gameplayer>(this.attach_Gameplayers), new Action<Gameplayer>(this.detach_Gameplayers));
-			this._NashPointProfiles = new EntitySet<NashPointProfile>(new Action<NashPointProfile>(this.attach_NashPointProfiles), new Action<NashPointProfile>(this.detach_NashPointProfiles));
-			this._GameFrame = default(EntityRef<GameFrame>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.User = this;
 		}
 		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
+		private void detach_NPStrategies(NPStrategy entity)
 		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GameFrame")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class GameFrame : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -420,11 +385,9 @@ namespace SeniorDBServer
 		
 		private int _MaxStrategies;
 		
-		private EntitySet<Game> _Games;
-		
 		private EntitySet<GFStrategy> _GFStrategies;
 		
-		private bool serializing;
+		private EntitySet<Game> _Games;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -444,11 +407,12 @@ namespace SeniorDBServer
 		
 		public GameFrame()
 		{
-			this.Initialize();
+			this._GFStrategies = new EntitySet<GFStrategy>(new Action<GFStrategy>(this.attach_GFStrategies), new Action<GFStrategy>(this.detach_GFStrategies));
+			this._Games = new EntitySet<Game>(new Action<Game>(this.attach_Games), new Action<Game>(this.detach_Games));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string Title
 		{
 			get
@@ -469,7 +433,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinPlayers", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int MinPlayers
 		{
 			get
@@ -490,7 +453,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxPlayers", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public int MaxPlayers
 		{
 			get
@@ -511,7 +473,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinStrategies", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public int MinStrategies
 		{
 			get
@@ -532,7 +493,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxStrategies", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public int MaxStrategies
 		{
 			get
@@ -552,41 +512,29 @@ namespace SeniorDBServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GameFrame_Game", Storage="_Games", ThisKey="Title", OtherKey="Title")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
-		public EntitySet<Game> Games
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Games.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Games;
-			}
-			set
-			{
-				this._Games.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GameFrame_GFStrategy", Storage="_GFStrategies", ThisKey="Title", OtherKey="Title")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<GFStrategy> GFStrategies
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._GFStrategies.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._GFStrategies;
 			}
 			set
 			{
 				this._GFStrategies.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GameFrame_Game", Storage="_Games", ThisKey="Title", OtherKey="Title")]
+		public EntitySet<Game> Games
+		{
+			get
+			{
+				return this._Games;
+			}
+			set
+			{
+				this._Games.Assign(value);
 			}
 		}
 		
@@ -610,18 +558,6 @@ namespace SeniorDBServer
 			}
 		}
 		
-		private void attach_Games(Game entity)
-		{
-			this.SendPropertyChanging();
-			entity.GameFrame = this;
-		}
-		
-		private void detach_Games(Game entity)
-		{
-			this.SendPropertyChanging();
-			entity.GameFrame = null;
-		}
-		
 		private void attach_GFStrategies(GFStrategy entity)
 		{
 			this.SendPropertyChanging();
@@ -634,37 +570,20 @@ namespace SeniorDBServer
 			entity.GameFrame = null;
 		}
 		
-		private void Initialize()
+		private void attach_Games(Game entity)
 		{
-			this._Games = new EntitySet<Game>(new Action<Game>(this.attach_Games), new Action<Game>(this.detach_Games));
-			this._GFStrategies = new EntitySet<GFStrategy>(new Action<GFStrategy>(this.attach_GFStrategies), new Action<GFStrategy>(this.detach_GFStrategies));
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.GameFrame = this;
 		}
 		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
+		private void detach_Games(Game entity)
 		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
+			this.SendPropertyChanging();
+			entity.GameFrame = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gameplayer")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Gameplayer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -674,15 +593,9 @@ namespace SeniorDBServer
 		
 		private string _Username;
 		
-		private EntitySet<NPPayoff> _NPPayoffs;
-		
-		private EntitySet<NPStrategy> _NPStrategies;
-		
-		private EntityRef<Game> _Game;
-		
 		private EntityRef<User> _User;
 		
-		private bool serializing;
+		private EntityRef<Game> _Game;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -696,11 +609,12 @@ namespace SeniorDBServer
 		
 		public Gameplayer()
 		{
-			this.Initialize();
+			this._User = default(EntityRef<User>);
+			this._Game = default(EntityRef<Game>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int GID
 		{
 			get
@@ -724,8 +638,7 @@ namespace SeniorDBServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string Username
 		{
 			get
@@ -745,78 +658,6 @@ namespace SeniorDBServer
 					this._Username = value;
 					this.SendPropertyChanged("Username");
 					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gameplayer_NPPayoff", Storage="_NPPayoffs", ThisKey="Username", OtherKey="Username")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3, EmitDefaultValue=false)]
-		public EntitySet<NPPayoff> NPPayoffs
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._NPPayoffs.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._NPPayoffs;
-			}
-			set
-			{
-				this._NPPayoffs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gameplayer_NPStrategy", Storage="_NPStrategies", ThisKey="Username", OtherKey="Username")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
-		public EntitySet<NPStrategy> NPStrategies
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._NPStrategies.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._NPStrategies;
-			}
-			set
-			{
-				this._NPStrategies.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Gameplayer", Storage="_Game", ThisKey="GID", OtherKey="GID", IsForeignKey=true)]
-		public Game Game
-		{
-			get
-			{
-				return this._Game.Entity;
-			}
-			set
-			{
-				Game previousValue = this._Game.Entity;
-				if (((previousValue != value) 
-							|| (this._Game.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Game.Entity = null;
-						previousValue.Gameplayers.Remove(this);
-					}
-					this._Game.Entity = value;
-					if ((value != null))
-					{
-						value.Gameplayers.Add(this);
-						this._GID = value.GID;
-					}
-					else
-					{
-						this._GID = default(int);
-					}
-					this.SendPropertyChanged("Game");
 				}
 			}
 		}
@@ -855,6 +696,40 @@ namespace SeniorDBServer
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Gameplayer", Storage="_Game", ThisKey="GID", OtherKey="GID", IsForeignKey=true)]
+		public Game Game
+		{
+			get
+			{
+				return this._Game.Entity;
+			}
+			set
+			{
+				Game previousValue = this._Game.Entity;
+				if (((previousValue != value) 
+							|| (this._Game.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Game.Entity = null;
+						previousValue.Gameplayers.Remove(this);
+					}
+					this._Game.Entity = value;
+					if ((value != null))
+					{
+						value.Gameplayers.Add(this);
+						this._GID = value.GID;
+					}
+					else
+					{
+						this._GID = default(int);
+					}
+					this.SendPropertyChanged("Game");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -874,64 +749,9 @@ namespace SeniorDBServer
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_NPPayoffs(NPPayoff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gameplayer = this;
-		}
-		
-		private void detach_NPPayoffs(NPPayoff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gameplayer = null;
-		}
-		
-		private void attach_NPStrategies(NPStrategy entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gameplayer = this;
-		}
-		
-		private void detach_NPStrategies(NPStrategy entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gameplayer = null;
-		}
-		
-		private void Initialize()
-		{
-			this._NPPayoffs = new EntitySet<NPPayoff>(new Action<NPPayoff>(this.attach_NPPayoffs), new Action<NPPayoff>(this.detach_NPPayoffs));
-			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
-			this._Game = default(EntityRef<Game>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GFStrategy")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class GFStrategy : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -947,8 +767,6 @@ namespace SeniorDBServer
 		
 		private EntityRef<GameFrame> _GameFrame;
 		
-		private bool serializing;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -963,11 +781,12 @@ namespace SeniorDBServer
 		
 		public GFStrategy()
 		{
-			this.Initialize();
+			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
+			this._GameFrame = default(EntityRef<GameFrame>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NChar(30) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
 		public string Title
 		{
 			get
@@ -992,7 +811,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StrategyId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int StrategyId
 		{
 			get
@@ -1012,8 +830,7 @@ namespace SeniorDBServer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
 		public string Description
 		{
 			get
@@ -1034,16 +851,10 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GFStrategy_NPStrategy", Storage="_NPStrategies", ThisKey="StrategyId", OtherKey="StrategyId")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<NPStrategy> NPStrategies
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._NPStrategies.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._NPStrategies;
 			}
 			set
@@ -1117,696 +928,9 @@ namespace SeniorDBServer
 			this.SendPropertyChanging();
 			entity.GFStrategy = null;
 		}
-		
-		private void Initialize()
-		{
-			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
-			this._GameFrame = default(EntityRef<GameFrame>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPPayoff")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class NPPayoff : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _NPID;
-		
-		private int _PayoffId;
-		
-		private string _Username;
-		
-		private int _Payoff;
-		
-		private EntityRef<Gameplayer> _Gameplayer;
-		
-		private EntityRef<NashPointProfile> _NashPointProfile;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNPIDChanging(int value);
-    partial void OnNPIDChanged();
-    partial void OnPayoffIdChanging(int value);
-    partial void OnPayoffIdChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPayoffChanging(int value);
-    partial void OnPayoffChanged();
-    #endregion
-		
-		public NPPayoff()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPID", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int NPID
-		{
-			get
-			{
-				return this._NPID;
-			}
-			set
-			{
-				if ((this._NPID != value))
-				{
-					if (this._NashPointProfile.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnNPIDChanging(value);
-					this.SendPropertyChanging();
-					this._NPID = value;
-					this.SendPropertyChanged("NPID");
-					this.OnNPIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayoffId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public int PayoffId
-		{
-			get
-			{
-				return this._PayoffId;
-			}
-			set
-			{
-				if ((this._PayoffId != value))
-				{
-					this.OnPayoffIdChanging(value);
-					this.SendPropertyChanging();
-					this._PayoffId = value;
-					this.SendPropertyChanged("PayoffId");
-					this.OnPayoffIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					if (this._Gameplayer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payoff", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public int Payoff
-		{
-			get
-			{
-				return this._Payoff;
-			}
-			set
-			{
-				if ((this._Payoff != value))
-				{
-					this.OnPayoffChanging(value);
-					this.SendPropertyChanging();
-					this._Payoff = value;
-					this.SendPropertyChanged("Payoff");
-					this.OnPayoffChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gameplayer_NPPayoff", Storage="_Gameplayer", ThisKey="Username", OtherKey="Username", IsForeignKey=true)]
-		public Gameplayer Gameplayer
-		{
-			get
-			{
-				return this._Gameplayer.Entity;
-			}
-			set
-			{
-				Gameplayer previousValue = this._Gameplayer.Entity;
-				if (((previousValue != value) 
-							|| (this._Gameplayer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gameplayer.Entity = null;
-						previousValue.NPPayoffs.Remove(this);
-					}
-					this._Gameplayer.Entity = value;
-					if ((value != null))
-					{
-						value.NPPayoffs.Add(this);
-						this._Username = value.Username;
-					}
-					else
-					{
-						this._Username = default(string);
-					}
-					this.SendPropertyChanged("Gameplayer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPPayoff", Storage="_NashPointProfile", ThisKey="NPID", OtherKey="NPID", IsForeignKey=true)]
-		public NashPointProfile NashPointProfile
-		{
-			get
-			{
-				return this._NashPointProfile.Entity;
-			}
-			set
-			{
-				NashPointProfile previousValue = this._NashPointProfile.Entity;
-				if (((previousValue != value) 
-							|| (this._NashPointProfile.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NashPointProfile.Entity = null;
-						previousValue.NPPayoffs.Remove(this);
-					}
-					this._NashPointProfile.Entity = value;
-					if ((value != null))
-					{
-						value.NPPayoffs.Add(this);
-						this._NPID = value.NPID;
-					}
-					else
-					{
-						this._NPID = default(int);
-					}
-					this.SendPropertyChanged("NashPointProfile");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._Gameplayer = default(EntityRef<Gameplayer>);
-			this._NashPointProfile = default(EntityRef<NashPointProfile>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPStrategy")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class NPStrategy : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _NPID;
-		
-		private string _Username;
-		
-		private int _StrategyId;
-		
-		private EntityRef<GFStrategy> _GFStrategy;
-		
-		private EntityRef<Gameplayer> _Gameplayer;
-		
-		private EntityRef<NashPointProfile> _NashPointProfile;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNPIDChanging(int value);
-    partial void OnNPIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnStrategyIdChanging(int value);
-    partial void OnStrategyIdChanged();
-    #endregion
-		
-		public NPStrategy()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPID", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int NPID
-		{
-			get
-			{
-				return this._NPID;
-			}
-			set
-			{
-				if ((this._NPID != value))
-				{
-					if (this._NashPointProfile.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnNPIDChanging(value);
-					this.SendPropertyChanging();
-					this._NPID = value;
-					this.SendPropertyChanged("NPID");
-					this.OnNPIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					if (this._Gameplayer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StrategyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public int StrategyId
-		{
-			get
-			{
-				return this._StrategyId;
-			}
-			set
-			{
-				if ((this._StrategyId != value))
-				{
-					if (this._GFStrategy.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStrategyIdChanging(value);
-					this.SendPropertyChanging();
-					this._StrategyId = value;
-					this.SendPropertyChanged("StrategyId");
-					this.OnStrategyIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GFStrategy_NPStrategy", Storage="_GFStrategy", ThisKey="StrategyId", OtherKey="StrategyId", IsForeignKey=true)]
-		public GFStrategy GFStrategy
-		{
-			get
-			{
-				return this._GFStrategy.Entity;
-			}
-			set
-			{
-				GFStrategy previousValue = this._GFStrategy.Entity;
-				if (((previousValue != value) 
-							|| (this._GFStrategy.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GFStrategy.Entity = null;
-						previousValue.NPStrategies.Remove(this);
-					}
-					this._GFStrategy.Entity = value;
-					if ((value != null))
-					{
-						value.NPStrategies.Add(this);
-						this._StrategyId = value.StrategyId;
-					}
-					else
-					{
-						this._StrategyId = default(int);
-					}
-					this.SendPropertyChanged("GFStrategy");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gameplayer_NPStrategy", Storage="_Gameplayer", ThisKey="Username", OtherKey="Username", IsForeignKey=true)]
-		public Gameplayer Gameplayer
-		{
-			get
-			{
-				return this._Gameplayer.Entity;
-			}
-			set
-			{
-				Gameplayer previousValue = this._Gameplayer.Entity;
-				if (((previousValue != value) 
-							|| (this._Gameplayer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Gameplayer.Entity = null;
-						previousValue.NPStrategies.Remove(this);
-					}
-					this._Gameplayer.Entity = value;
-					if ((value != null))
-					{
-						value.NPStrategies.Add(this);
-						this._Username = value.Username;
-					}
-					else
-					{
-						this._Username = default(string);
-					}
-					this.SendPropertyChanged("Gameplayer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPStrategy", Storage="_NashPointProfile", ThisKey="NPID", OtherKey="NPID", IsForeignKey=true)]
-		public NashPointProfile NashPointProfile
-		{
-			get
-			{
-				return this._NashPointProfile.Entity;
-			}
-			set
-			{
-				NashPointProfile previousValue = this._NashPointProfile.Entity;
-				if (((previousValue != value) 
-							|| (this._NashPointProfile.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NashPointProfile.Entity = null;
-						previousValue.NPStrategies.Remove(this);
-					}
-					this._NashPointProfile.Entity = value;
-					if ((value != null))
-					{
-						value.NPStrategies.Add(this);
-						this._NPID = value.NPID;
-					}
-					else
-					{
-						this._NPID = default(int);
-					}
-					this.SendPropertyChanged("NashPointProfile");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._GFStrategy = default(EntityRef<GFStrategy>);
-			this._Gameplayer = default(EntityRef<Gameplayer>);
-			this._NashPointProfile = default(EntityRef<NashPointProfile>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Username;
-		
-		private string _Password;
-		
-		private System.Nullable<char> _AdminFlag;
-		
-		private EntitySet<Gameplayer> _Gameplayers;
-		
-		private bool serializing;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnAdminFlagChanging(System.Nullable<char> value);
-    partial void OnAdminFlagChanged();
-    #endregion
-		
-		public User()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminFlag", DbType="NChar(1)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public System.Nullable<char> AdminFlag
-		{
-			get
-			{
-				return this._AdminFlag;
-			}
-			set
-			{
-				if ((this._AdminFlag != value))
-				{
-					this.OnAdminFlagChanging(value);
-					this.SendPropertyChanging();
-					this._AdminFlag = value;
-					this.SendPropertyChanged("AdminFlag");
-					this.OnAdminFlagChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Gameplayer", Storage="_Gameplayers", ThisKey="Username", OtherKey="Username")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
-		public EntitySet<Gameplayer> Gameplayers
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Gameplayers.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Gameplayers;
-			}
-			set
-			{
-				this._Gameplayers.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Gameplayers(Gameplayer entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Gameplayers(Gameplayer entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void Initialize()
-		{
-			this._Gameplayers = new EntitySet<Gameplayer>(new Action<Gameplayer>(this.attach_Gameplayers), new Action<Gameplayer>(this.detach_Gameplayers));
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NashPointProfile")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class NashPointProfile : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1822,8 +946,6 @@ namespace SeniorDBServer
 		
 		private EntityRef<Game> _Game;
 		
-		private bool serializing;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1836,11 +958,13 @@ namespace SeniorDBServer
 		
 		public NashPointProfile()
 		{
-			this.Initialize();
+			this._NPPayoffs = new EntitySet<NPPayoff>(new Action<NPPayoff>(this.attach_NPPayoffs), new Action<NPPayoff>(this.detach_NPPayoffs));
+			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
+			this._Game = default(EntityRef<Game>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GID", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int GID
 		{
 			get
@@ -1865,7 +989,6 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public int NPID
 		{
 			get
@@ -1886,16 +1009,10 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPPayoff", Storage="_NPPayoffs", ThisKey="NPID", OtherKey="NPID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3, EmitDefaultValue=false)]
 		public EntitySet<NPPayoff> NPPayoffs
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._NPPayoffs.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._NPPayoffs;
 			}
 			set
@@ -1905,16 +1022,10 @@ namespace SeniorDBServer
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPStrategy", Storage="_NPStrategies", ThisKey="NPID", OtherKey="NPID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<NPStrategy> NPStrategies
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._NPStrategies.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._NPStrategies;
 			}
 			set
@@ -2000,34 +1111,661 @@ namespace SeniorDBServer
 			this.SendPropertyChanging();
 			entity.NashPointProfile = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPPayoff")]
+	public partial class NPPayoff : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void Initialize()
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NPID;
+		
+		private int _PayoffId;
+		
+		private string _Username;
+		
+		private int _Payoff;
+		
+		private EntityRef<NashPointProfile> _NashPointProfile;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNPIDChanging(int value);
+    partial void OnNPIDChanged();
+    partial void OnPayoffIdChanging(int value);
+    partial void OnPayoffIdChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPayoffChanging(int value);
+    partial void OnPayoffChanged();
+    #endregion
+		
+		public NPPayoff()
 		{
-			this._NPPayoffs = new EntitySet<NPPayoff>(new Action<NPPayoff>(this.attach_NPPayoffs), new Action<NPPayoff>(this.detach_NPPayoffs));
-			this._NPStrategies = new EntitySet<NPStrategy>(new Action<NPStrategy>(this.attach_NPStrategies), new Action<NPStrategy>(this.detach_NPStrategies));
-			this._Game = default(EntityRef<Game>);
+			this._NashPointProfile = default(EntityRef<NashPointProfile>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPID", DbType="Int NOT NULL")]
+		public int NPID
 		{
-			this.Initialize();
+			get
+			{
+				return this._NPID;
+			}
+			set
+			{
+				if ((this._NPID != value))
+				{
+					if (this._NashPointProfile.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNPIDChanging(value);
+					this.SendPropertyChanging();
+					this._NPID = value;
+					this.SendPropertyChanged("NPID");
+					this.OnNPIDChanged();
+				}
+			}
 		}
 		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayoffId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PayoffId
 		{
-			this.serializing = true;
+			get
+			{
+				return this._PayoffId;
+			}
+			set
+			{
+				if ((this._PayoffId != value))
+				{
+					this.OnPayoffIdChanging(value);
+					this.SendPropertyChanging();
+					this._PayoffId = value;
+					this.SendPropertyChanged("PayoffId");
+					this.OnPayoffIdChanged();
+				}
+			}
 		}
 		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Username
 		{
-			this.serializing = false;
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Payoff", DbType="Int NOT NULL")]
+		public int Payoff
+		{
+			get
+			{
+				return this._Payoff;
+			}
+			set
+			{
+				if ((this._Payoff != value))
+				{
+					this.OnPayoffChanging(value);
+					this.SendPropertyChanging();
+					this._Payoff = value;
+					this.SendPropertyChanged("Payoff");
+					this.OnPayoffChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPPayoff", Storage="_NashPointProfile", ThisKey="NPID", OtherKey="NPID", IsForeignKey=true)]
+		public NashPointProfile NashPointProfile
+		{
+			get
+			{
+				return this._NashPointProfile.Entity;
+			}
+			set
+			{
+				NashPointProfile previousValue = this._NashPointProfile.Entity;
+				if (((previousValue != value) 
+							|| (this._NashPointProfile.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NashPointProfile.Entity = null;
+						previousValue.NPPayoffs.Remove(this);
+					}
+					this._NashPointProfile.Entity = value;
+					if ((value != null))
+					{
+						value.NPPayoffs.Add(this);
+						this._NPID = value.NPID;
+					}
+					else
+					{
+						this._NPID = default(int);
+					}
+					this.SendPropertyChanged("NashPointProfile");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_NPPayoff", Storage="_User", ThisKey="Username", OtherKey="Username", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.NPPayoffs.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.NPPayoffs.Add(this);
+						this._Username = value.Username;
+					}
+					else
+					{
+						this._Username = default(string);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NPStrategy")]
+	public partial class NPStrategy : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NPID;
+		
+		private string _Username;
+		
+		private int _StrategyId;
+		
+		private EntityRef<GFStrategy> _GFStrategy;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<NashPointProfile> _NashPointProfile;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNPIDChanging(int value);
+    partial void OnNPIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnStrategyIdChanging(int value);
+    partial void OnStrategyIdChanged();
+    #endregion
+		
+		public NPStrategy()
+		{
+			this._GFStrategy = default(EntityRef<GFStrategy>);
+			this._User = default(EntityRef<User>);
+			this._NashPointProfile = default(EntityRef<NashPointProfile>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPID", DbType="Int NOT NULL")]
+		public int NPID
+		{
+			get
+			{
+				return this._NPID;
+			}
+			set
+			{
+				if ((this._NPID != value))
+				{
+					if (this._NashPointProfile.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNPIDChanging(value);
+					this.SendPropertyChanging();
+					this._NPID = value;
+					this.SendPropertyChanged("NPID");
+					this.OnNPIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StrategyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int StrategyId
+		{
+			get
+			{
+				return this._StrategyId;
+			}
+			set
+			{
+				if ((this._StrategyId != value))
+				{
+					if (this._GFStrategy.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStrategyIdChanging(value);
+					this.SendPropertyChanging();
+					this._StrategyId = value;
+					this.SendPropertyChanged("StrategyId");
+					this.OnStrategyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GFStrategy_NPStrategy", Storage="_GFStrategy", ThisKey="StrategyId", OtherKey="StrategyId", IsForeignKey=true)]
+		public GFStrategy GFStrategy
+		{
+			get
+			{
+				return this._GFStrategy.Entity;
+			}
+			set
+			{
+				GFStrategy previousValue = this._GFStrategy.Entity;
+				if (((previousValue != value) 
+							|| (this._GFStrategy.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GFStrategy.Entity = null;
+						previousValue.NPStrategies.Remove(this);
+					}
+					this._GFStrategy.Entity = value;
+					if ((value != null))
+					{
+						value.NPStrategies.Add(this);
+						this._StrategyId = value.StrategyId;
+					}
+					else
+					{
+						this._StrategyId = default(int);
+					}
+					this.SendPropertyChanged("GFStrategy");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_NPStrategy", Storage="_User", ThisKey="Username", OtherKey="Username", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.NPStrategies.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.NPStrategies.Add(this);
+						this._Username = value.Username;
+					}
+					else
+					{
+						this._Username = default(string);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NashPointProfile_NPStrategy", Storage="_NashPointProfile", ThisKey="NPID", OtherKey="NPID", IsForeignKey=true)]
+		public NashPointProfile NashPointProfile
+		{
+			get
+			{
+				return this._NashPointProfile.Entity;
+			}
+			set
+			{
+				NashPointProfile previousValue = this._NashPointProfile.Entity;
+				if (((previousValue != value) 
+							|| (this._NashPointProfile.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NashPointProfile.Entity = null;
+						previousValue.NPStrategies.Remove(this);
+					}
+					this._NashPointProfile.Entity = value;
+					if ((value != null))
+					{
+						value.NPStrategies.Add(this);
+						this._NPID = value.NPID;
+					}
+					else
+					{
+						this._NPID = default(int);
+					}
+					this.SendPropertyChanged("NashPointProfile");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Game")]
+	public partial class Game : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _GID;
+		
+		private string _Title;
+		
+		private System.Nullable<int> _NPlayers;
+		
+		private EntitySet<Gameplayer> _Gameplayers;
+		
+		private EntitySet<NashPointProfile> _NashPointProfiles;
+		
+		private EntityRef<GameFrame> _GameFrame;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGIDChanging(int value);
+    partial void OnGIDChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnNPlayersChanging(System.Nullable<int> value);
+    partial void OnNPlayersChanged();
+    #endregion
+		
+		public Game()
+		{
+			this._Gameplayers = new EntitySet<Gameplayer>(new Action<Gameplayer>(this.attach_Gameplayers), new Action<Gameplayer>(this.detach_Gameplayers));
+			this._NashPointProfiles = new EntitySet<NashPointProfile>(new Action<NashPointProfile>(this.attach_NashPointProfiles), new Action<NashPointProfile>(this.detach_NashPointProfiles));
+			this._GameFrame = default(EntityRef<GameFrame>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int GID
+		{
+			get
+			{
+				return this._GID;
+			}
+			set
+			{
+				if ((this._GID != value))
+				{
+					this.OnGIDChanging(value);
+					this.SendPropertyChanging();
+					this._GID = value;
+					this.SendPropertyChanged("GID");
+					this.OnGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					if (this._GameFrame.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NPlayers", DbType="Int")]
+		public System.Nullable<int> NPlayers
+		{
+			get
+			{
+				return this._NPlayers;
+			}
+			set
+			{
+				if ((this._NPlayers != value))
+				{
+					this.OnNPlayersChanging(value);
+					this.SendPropertyChanging();
+					this._NPlayers = value;
+					this.SendPropertyChanged("NPlayers");
+					this.OnNPlayersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Gameplayer", Storage="_Gameplayers", ThisKey="GID", OtherKey="GID")]
+		public EntitySet<Gameplayer> Gameplayers
+		{
+			get
+			{
+				return this._Gameplayers;
+			}
+			set
+			{
+				this._Gameplayers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_NashPointProfile", Storage="_NashPointProfiles", ThisKey="GID", OtherKey="GID")]
+		public EntitySet<NashPointProfile> NashPointProfiles
+		{
+			get
+			{
+				return this._NashPointProfiles;
+			}
+			set
+			{
+				this._NashPointProfiles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GameFrame_Game", Storage="_GameFrame", ThisKey="Title", OtherKey="Title", IsForeignKey=true)]
+		public GameFrame GameFrame
+		{
+			get
+			{
+				return this._GameFrame.Entity;
+			}
+			set
+			{
+				GameFrame previousValue = this._GameFrame.Entity;
+				if (((previousValue != value) 
+							|| (this._GameFrame.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GameFrame.Entity = null;
+						previousValue.Games.Remove(this);
+					}
+					this._GameFrame.Entity = value;
+					if ((value != null))
+					{
+						value.Games.Add(this);
+						this._Title = value.Title;
+					}
+					else
+					{
+						this._Title = default(string);
+					}
+					this.SendPropertyChanged("GameFrame");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Gameplayers(Gameplayer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_Gameplayers(Gameplayer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
+		}
+		
+		private void attach_NashPointProfiles(NashPointProfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = this;
+		}
+		
+		private void detach_NashPointProfiles(NashPointProfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.Game = null;
 		}
 	}
 }

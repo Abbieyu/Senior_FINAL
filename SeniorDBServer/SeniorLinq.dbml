@@ -1,71 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Final_Senior_DB" Class="SeniorLinqDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\ProjectsV13;Initial Catalog=Final_Senior_DB;Integrated Security=True;Pooling=False;TrustServerCertificate=True" SettingsObjectName="SeniorDBServer.Properties.Settings" SettingsPropertyName="Final_Senior_DBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Game" Member="Games">
-    <Type Name="Game">
-      <Column Name="GID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="NPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Game_Gameplayer" Member="Gameplayers" ThisKey="GID" OtherKey="GID" Type="Gameplayer" />
-      <Association Name="Game_NashPointProfile" Member="NashPointProfiles" ThisKey="GID" OtherKey="GID" Type="NashPointProfile" />
-      <Association Name="GameFrame_Game" Member="GameFrame" ThisKey="Title" OtherKey="Title" Type="GameFrame" IsForeignKey="true" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Final_Senior_DB" Class="SeniorLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\projectsV13;Initial Catalog=Final_Senior_DB;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="SeniorDBServer.Properties.Settings" SettingsPropertyName="Final_Senior_DBConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Username" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Column Name="AdminFlag" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Gameplayer" Member="Gameplayers" ThisKey="Username" OtherKey="Username" Type="Gameplayer" />
+      <Association Name="User_NPPayoff" Member="NPPayoffs" ThisKey="Username" OtherKey="Username" Type="NPPayoff" />
+      <Association Name="User_NPStrategy" Member="NPStrategies" ThisKey="Username" OtherKey="Username" Type="NPStrategy" />
     </Type>
   </Table>
   <Table Name="dbo.GameFrame" Member="GameFrames">
     <Type Name="GameFrame">
-      <Column Name="Title" Type="System.String" DbType="NChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="MinPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MaxPlayers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MinStrategies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MaxStrategies" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="GameFrame_Game" Member="Games" ThisKey="Title" OtherKey="Title" Type="Game" />
       <Association Name="GameFrame_GFStrategy" Member="GFStrategies" ThisKey="Title" OtherKey="Title" Type="GFStrategy" />
+      <Association Name="GameFrame_Game" Member="Games" ThisKey="Title" OtherKey="Title" Type="Game" />
     </Type>
   </Table>
   <Table Name="dbo.Gameplayer" Member="Gameplayers">
     <Type Name="Gameplayer">
       <Column Name="GID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Gameplayer_NPPayoff" Member="NPPayoffs" ThisKey="Username" OtherKey="Username" Type="NPPayoff" />
-      <Association Name="Gameplayer_NPStrategy" Member="NPStrategies" ThisKey="Username" OtherKey="Username" Type="NPStrategy" />
-      <Association Name="Game_Gameplayer" Member="Game" ThisKey="GID" OtherKey="GID" Type="Game" IsForeignKey="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="User_Gameplayer" Member="User" ThisKey="Username" OtherKey="Username" Type="User" IsForeignKey="true" />
+      <Association Name="Game_Gameplayer" Member="Game" ThisKey="GID" OtherKey="GID" Type="Game" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.GFStrategy" Member="GFStrategies">
     <Type Name="GFStrategy">
-      <Column Name="Title" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="StrategyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="GFStrategy_NPStrategy" Member="NPStrategies" ThisKey="StrategyId" OtherKey="StrategyId" Type="NPStrategy" />
       <Association Name="GameFrame_GFStrategy" Member="GameFrame" ThisKey="Title" OtherKey="Title" Type="GameFrame" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.NPPayoff" Member="NPPayoffs">
-    <Type Name="NPPayoff">
-      <Column Name="NPID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PayoffId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Payoff" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Gameplayer_NPPayoff" Member="Gameplayer" ThisKey="Username" OtherKey="Username" Type="Gameplayer" IsForeignKey="true" />
-      <Association Name="NashPointProfile_NPPayoff" Member="NashPointProfile" ThisKey="NPID" OtherKey="NPID" Type="NashPointProfile" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.NPStrategy" Member="NPStrategies">
-    <Type Name="NPStrategy">
-      <Column Name="NPID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="StrategyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="GFStrategy_NPStrategy" Member="GFStrategy" ThisKey="StrategyId" OtherKey="StrategyId" Type="GFStrategy" IsForeignKey="true" />
-      <Association Name="Gameplayer_NPStrategy" Member="Gameplayer" ThisKey="Username" OtherKey="Username" Type="Gameplayer" IsForeignKey="true" />
-      <Association Name="NashPointProfile_NPStrategy" Member="NashPointProfile" ThisKey="NPID" OtherKey="NPID" Type="NashPointProfile" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="Username" Type="System.String" DbType="NChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="AdminFlag" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
-      <Association Name="User_Gameplayer" Member="Gameplayers" ThisKey="Username" OtherKey="Username" Type="Gameplayer" />
     </Type>
   </Table>
   <Table Name="dbo.NashPointProfile" Member="NashPointProfiles">
@@ -75,6 +46,36 @@
       <Association Name="NashPointProfile_NPPayoff" Member="NPPayoffs" ThisKey="NPID" OtherKey="NPID" Type="NPPayoff" />
       <Association Name="NashPointProfile_NPStrategy" Member="NPStrategies" ThisKey="NPID" OtherKey="NPID" Type="NPStrategy" />
       <Association Name="Game_NashPointProfile" Member="Game" ThisKey="GID" OtherKey="GID" Type="Game" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NPPayoff" Member="NPPayoffs">
+    <Type Name="NPPayoff">
+      <Column Name="NPID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayoffId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Payoff" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="NashPointProfile_NPPayoff" Member="NashPointProfile" ThisKey="NPID" OtherKey="NPID" Type="NashPointProfile" IsForeignKey="true" />
+      <Association Name="User_NPPayoff" Member="User" ThisKey="Username" OtherKey="Username" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NPStrategy" Member="NPStrategies">
+    <Type Name="NPStrategy">
+      <Column Name="NPID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StrategyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="GFStrategy_NPStrategy" Member="GFStrategy" ThisKey="StrategyId" OtherKey="StrategyId" Type="GFStrategy" IsForeignKey="true" />
+      <Association Name="User_NPStrategy" Member="User" ThisKey="Username" OtherKey="Username" Type="User" IsForeignKey="true" />
+      <Association Name="NashPointProfile_NPStrategy" Member="NashPointProfile" ThisKey="NPID" OtherKey="NPID" Type="NashPointProfile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Game" Member="Games">
+    <Type Name="Game">
+      <Column Name="GID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="NPlayers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Game_Gameplayer" Member="Gameplayers" ThisKey="GID" OtherKey="GID" Type="Gameplayer" />
+      <Association Name="Game_NashPointProfile" Member="NashPointProfiles" ThisKey="GID" OtherKey="GID" Type="NashPointProfile" />
+      <Association Name="GameFrame_Game" Member="GameFrame" ThisKey="Title" OtherKey="Title" Type="GameFrame" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

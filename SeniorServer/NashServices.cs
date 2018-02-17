@@ -15,7 +15,7 @@ namespace SeniorServer
     {
         Two_Three wrapper_TwoThree = new Two_Three();
 
-     
+        
         #region 3Players
         public List<NE_Profile> P3search_Max_Cell(List<NE_Profile> p, List<NE_Profile> maxPayoff, int p2NumStrategies, int p3NumStrategies)
         {
@@ -427,7 +427,7 @@ namespace SeniorServer
         public UserModel SignIn(UserModel user)
         {
             var prox = new SeniorDBServiceRef.DBFunctionsClient();
-            UserModel usern = prox.RetreiveUser(user.Username, user.Password);
+            UserModel usern = prox.RetreiveUSerbyUN(user.Username);///, user.Password);
             return usern;
 
         }
@@ -533,7 +533,11 @@ namespace SeniorServer
                
                 if (opengames.Count < minplayers)//if the required number of players is not reached
                     return null;
-                if (opengames.Count >= minplayers)//if the opengames count equals the number of players required for the game then add a new game and return the ID
+                if (opengames.Count > maxplayers)//if opengames has a number of players that exceeds the max of the game, remove the exceeding players
+                {
+                    opengames.RemoveRange(maxplayers, opengames.Count - maxplayers);//remove players from index max until reaching (opengames.Count - maxplayers)-count
+                }
+                if (opengames.Count >= minplayers && opengames.Count <= maxplayers)//if the opengames count equals the number of players required for the game then add a new game and return the ID
                 {
                     GameModel newGame = new GameModel();
                     newGame.NPlayers = minplayers;
@@ -542,7 +546,7 @@ namespace SeniorServer
                     List<List<string>> strategies = new List<List<string>>();
                     List<string> tempstrategies = new List<string>();
                     int counterfororderofplayers = 0;
-                    for (int i=0;i<maxplayers;i++)// search the queue to add the players
+                    for (int i=0;i<opengames.Count;i++)// search the queue to add the players
                     {
                         GamePlayerModel player = new GamePlayerModel();
                         PF ppp = new PF();
@@ -558,14 +562,22 @@ namespace SeniorServer
                         ppp.strategies.AddRange(tempstrategies);
                         wrapper_TwoThree.playerInfo.Add(ppp);
                     }
-                    
-                    List<List<string>> cp = Cartisian_Product(strategies, wrapper_TwoThree.neprofiles);
-                   
+
+                    List<List<string>> cp = new List<List<string>>();// Cartisian_Product(strategies, wrapper_TwoThree.neprofiles);
+
+                    if (wrapper_TwoThree.playerInfo.Count > 3)//1: Start N_Player_Game
+                    {
+                        wrapper_TwoThree.N_Players_Game.Game_Initializr(wrapper_TwoThree.playerInfo.Count, strategies);//Strategies are ordered
+                        cp.AddRange(wrapper_TwoThree.N_Players_Game.get_SetOfCStategy);//Add cartesian product
+                    }
+                    else
+                        cp = Cartisian_Product(strategies, wrapper_TwoThree.neprofiles);
+
                     foreach (PF p in wrapper_TwoThree.playerInfo)
                     {
                         p.CP = cp;
                     }
-                    for (int i = 0; i < maxplayers; i++)//remove the players from the queue
+                    for (int i = 0; i < opengames.Count; i++)//remove the players from the queue
                     {
                         wrapper_TwoThree.Player_GameFrame_Queue.Remove(opengames[i]);
                     }
@@ -584,9 +596,12 @@ namespace SeniorServer
             {
                 if(player.username==username)
                 {
-                    player.preferences=preferences;
+                    if (player.preferences.Count() == 0)
+                        player.preferences = preferences;
+                    else return new Dictionary<NE_Profile, bool>();
                 }
             }
+
             bool check = false;
             foreach(var player in wrapper_TwoThree.playerInfo)
             {
@@ -675,7 +690,12 @@ namespace SeniorServer
                         }//p2p3
                         if (flag_finale == false)
                             Returned_List.Add(profile, flag_finale);
+
                     }//end foreach profile
+                    wrapper_TwoThree.N_Players_Game = new GameFrame();
+                    wrapper_TwoThree.neprofiles.Clear();
+                    wrapper_TwoThree.playerInfo.Clear();
+                    return Returned_List;
                 }
                 //2p returned list
                 bool flag_p2p3 = false;//true if point is a NE
@@ -693,8 +713,9 @@ namespace SeniorServer
                         Returned_List.Add(profile, flag_p2p3);
                 }//end foreach profile 2p
 
-                    wrapper_TwoThree.neprofiles.Clear();//clear for the next
-
+                wrapper_TwoThree.N_Players_Game = new GameFrame();
+                wrapper_TwoThree.neprofiles.Clear();
+                wrapper_TwoThree.playerInfo.Clear();
                 return Returned_List;
             }
             return null;
@@ -715,6 +736,62 @@ namespace SeniorServer
             //Add nppayoff nppayoff1 -> player 1 ....
             }
         }
+
+        public GameFrame PreferencesGetterNplayer(string preferences, string username)//gets the prefrences of each individual player
+        {
+            foreach (var player in wrapper_TwoThree.playerInfo)
+            {
+                if (player.username == username)//fill the player's 
+                {
+                    if (player.preferences.Count() == 0)
+                        player.preferences = preferences;
+                    else return new GameFrame();
+                }
+            }
+            bool check = false;//all players entered thier preferences
+            foreach (var player in wrapper_TwoThree.playerInfo)
+            {
+                if (player.preferences == "")
+                    check = true;
+            }
+            if (check == false)//all the players have their preferences filled
+            {
+                //2: Generate Payoffs in n game and copy prev computed info from wrapper to returned GameFrame
+                GameFrame ReturnedGame = new GameFrame();
+                ReturnedGame.Game_Initializr(wrapper_TwoThree.N_Players_Game.get_NumOfPlayer, wrapper_TwoThree.N_Players_Game.get_SetOfPlayersStrategies);
+
+                List<string> allpprefrences = new List<string>();
+                for (int i = 0; i < wrapper_TwoThree.playerInfo.Count; i++)
+                {
+                    allpprefrences.Add(wrapper_TwoThree.playerInfo.Find(item => (item.orderInGame == i)).preferences);//order players' prefrences 
+                }
+                //3: Generate Payoffs in n game
+                ReturnedGame.PayOffs_generater(allpprefrences);//Generate the outcomes of player's preferences
+
+                //nonum : not sure if this will be in use
+                List<PF> OrderedPlayers = new List<PF>();
+                for (int i = 0; i < wrapper_TwoThree.playerInfo.Count; i++)
+                {
+                    OrderedPlayers.Add(wrapper_TwoThree.playerInfo.Find(item => (item.orderInGame == i)));//order players
+                }
+                //4: Compute Nash Equili
+                ReturnedGame.Fill_Nash_Equilibrium_Set();
+
+                //5: Adding the points to database and clearing all used lists in game.
+
+                //Add ash points to database
+                //��LogNashPointsinDB_Nplayers(wrapper_TwoThree.playerInfo[0].GID, OrderedPlayers,)
+                //Clear for the next game
+                wrapper_TwoThree.N_Players_Game = new GameFrame();
+                wrapper_TwoThree.playerInfo.Clear();
+                wrapper_TwoThree.neprofiles.Clear();//clear for the next
+
+                //6:return gameframe -> each player can know her payoffs and strategies by her orderingame index
+                return ReturnedGame;
+            }
+            return null;
+        }
+
         #endregion
     }
 }

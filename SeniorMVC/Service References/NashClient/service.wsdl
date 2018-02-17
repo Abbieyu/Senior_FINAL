@@ -75,6 +75,12 @@
   <wsdl:message name="INsashServices_PreferencesGetter_OutputMessage">
     <wsdl:part name="parameters" element="tns:PreferencesGetterResponse" />
   </wsdl:message>
+  <wsdl:message name="INsashServices_PreferencesGetterNplayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:PreferencesGetterNplayer" />
+  </wsdl:message>
+  <wsdl:message name="INsashServices_PreferencesGetterNplayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PreferencesGetterNplayerResponse" />
+  </wsdl:message>
   <wsdl:portType name="INsashServices">
     <wsdl:operation name="NPlayerWrapper">
       <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/NPlayerWrapper" message="tns:INsashServices_NPlayerWrapper_InputMessage" />
@@ -119,6 +125,10 @@
     <wsdl:operation name="PreferencesGetter">
       <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/PreferencesGetter" message="tns:INsashServices_PreferencesGetter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INsashServices/PreferencesGetterResponse" message="tns:INsashServices_PreferencesGetter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PreferencesGetterNplayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/INsashServices/PreferencesGetterNplayer" message="tns:INsashServices_PreferencesGetterNplayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INsashServices/PreferencesGetterNplayerResponse" message="tns:INsashServices_PreferencesGetterNplayer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INsashServices" type="tns:INsashServices">
@@ -215,6 +225,15 @@
     </wsdl:operation>
     <wsdl:operation name="PreferencesGetter">
       <soap:operation soapAction="http://tempuri.org/INsashServices/PreferencesGetter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreferencesGetterNplayer">
+      <soap:operation soapAction="http://tempuri.org/INsashServices/PreferencesGetterNplayer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
